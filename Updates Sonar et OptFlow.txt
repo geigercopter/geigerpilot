@@ -1,0 +1,17 @@
+OPTFLOW : Deltas remarquables entre ArduCopter et MegaPirateNG
+
+Dans sensors.pde
+
+Arducopter :
+    if( optflow.init(false, &timer_scheduler, &spi_semaphore, &spi3_semaphore) == false ) {
+MegapirateNG :
+    if( optflow.init(true, &timer_scheduler) == false ) {
+
+
+
+
+######
+Exemple ligne debug :
+
+    //Serial.printf("Thin:%4.2f  sincos:%4.2f  temp:%4.2f  roll_axis:%4.2f  Out:%4.2f   \n", 1.0*throttle, 1.0*cos_pitch_x * cos_roll_x, 1.0*temp, 1.0*roll_axis, 1.0*constrain((float)value * temp, 0, 1000));
+

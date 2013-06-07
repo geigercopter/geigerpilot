@@ -1,0 +1,2347 @@
+Index: ArduCopter/ArduCopter.pde
+===================================================================
+--- ArduCopter/ArduCopter.pde	(wersja 298)
++++ ArduCopter/ArduCopter.pde	(kopia robocza)
+@@ -70,11 +70,13 @@
+ // Libraries
+ #include <FastSerial.h>
+ #include <AP_Common.h>
++#include <AP_Semaphore.h>
+ #include <AP_Menu.h>
+ #include <Arduino_Mega_ISR_Registry.h>
+ #include <APM_RC.h>         // ArduPilot Mega RC Library
+ #include <AP_GPS.h>         // ArduPilot GPS library
+ #include <I2C.h>			// Arduino I2C lib
++#include <SPI3.h>
+ #include <AP_AnalogSource.h>
+ #include <AP_Baro.h>
+ #include <AP_Compass.h>     // ArduPilot Mega Magnetometer Library
+@@ -99,6 +101,7 @@
+ #include <AP_MotorsHeli.h>	// AP Motors library for Heli
+ #include <AP_MotorsMatrix.h>	// AP Motors library for Heli
+ #include <AP_RangeFinder.h>	// Range finder library
++#include <AP_OpticalFlow.h>     // Optical flow library
+ #include <Filter.h>			// Filter library
+ #include <AP_Buffer.h>          // APM FIFO Buffer
+ #include <ModeFilter.h>		// Mode Filter from Filter library
+@@ -273,7 +276,7 @@
+ 	#endif
+ 
+  #if OPTFLOW == ENABLED
+-    AP_OpticalFlow_ADNS3080 optflow;
++    AP_OpticalFlow_ADNS3080 optflow(OPTFLOW_CS_PIN);
+  #endif
+ 
+ 	// real GPS selection
+Index: ArduCopter/APM_Config.h
+===================================================================
+--- ArduCopter/APM_Config.h	(wersja 298)
++++ ArduCopter/APM_Config.h	(kopia robocza)
+@@ -48,6 +48,8 @@
+ 
+ #define MAX_SONAR_RANGE 400
+ 
++#define OPTFLOW ENABLED
++
+ // This OSD works on the Serial1 port
+ #define OSD_PROTOCOL OSD_PROTOCOL_NONE
+ /*
+@@ -58,7 +60,7 @@
+ */
+ 
+ // For BlackVortex, just set PIRATES_SENSOR_BOARD as PIRATES_BLACKVORTEX, GPS will be selected automatically
+-#define GPS_PROTOCOL GPS_PROTOCOL_NONE 
++#define GPS_PROTOCOL GPS_PROTOCOL_NONE
+ //GPS_PROTOCOL_NONE
+ /*
+ 	GPS_PROTOCOL_NONE 	without GPS
+@@ -138,4 +140,4 @@
+ // #define LOITER_REPOSITIONING    ENABLED                         // Experimental Do Not Use
+ // #define LOITER_RP               ROLL_PITCH_LOITER_PR                        // Experimental Do Not Use
+ 
+-#endif //__ARDUCOPTER_APMCONFIG_H__
+\ Brak znaku nowej linii na końcu pliku
++#endif //__ARDUCOPTER_APMCONFIG_H__
+Index: ArduCopter/sensors.pde
+===================================================================
+--- ArduCopter/sensors.pde	(wersja 298)
++++ ArduCopter/sensors.pde	(kopia robocza)
+@@ -91,7 +91,7 @@
+ static void init_optflow()
+ {
+ #if OPTFLOW == ENABLED
+-    if( optflow.init(false, &timer_scheduler, &spi_semaphore, &spi3_semaphore) == false ) {
++    if( optflow.init(true, &timer_scheduler) == false ) {
+ 	    g.optflow_enabled = false;
+         cliSerial->print_P(PSTR("\nFailed to Init OptFlow "));
+         Log_Write_Error(ERROR_SUBSYSTEM_OPTFLOW,ERROR_CODE_FAILED_TO_INITIALISE);
+Index: libraries/AP_Semaphore/AP_Semaphore.cpp
+===================================================================
+--- libraries/AP_Semaphore/AP_Semaphore.cpp	(wersja 0)
++++ libraries/AP_Semaphore/AP_Semaphore.cpp	(wersja 0)
+@@ -0,0 +1,80 @@
++/// -*- tab-width: 4; Mode: C++; c-basic-offset: 4; indent-tabs-mode: nil -*-
++
++#include "AP_Semaphore.h"
++
++extern "C" {
++#include <inttypes.h>
++#include <stdint.h>
++#include <avr/interrupt.h>
++}
++#if defined(ARDUINO) && ARDUINO >= 100
++ #include "Arduino.h"
++#else
++ #include "WConstants.h"
++#endif
++
++// Constructor
++AP_Semaphore::AP_Semaphore()
++{
++}
++
++// get - to claim ownership of the semaphore 
++bool AP_Semaphore::get(void* caller)
++{
++    bool result = false;
++    uint8_t oldSREG = SREG;
++    cli();
++    if( !_taken ) {
++        _taken = true;
++        _owner = caller;
++        result = true;
++    }
++    SREG = oldSREG;
++    return result;
++}
++
++// release - to give up ownership of the semaphore
++// returns true if successfully released
++bool AP_Semaphore::release(void* caller)
++{
++    ap_semaphore_callback callback_fn;
++
++    // check legitimacy of release call
++    if( caller != _owner ) {
++        return false;
++    }
++
++    // if another process is waiting immediately call it's call back function
++    if( _waiting_callback != NULL ) {
++
++        // give ownership to waiting process
++        _owner = _waiting_owner;
++        callback_fn = _waiting_callback;
++
++        // clear waiting process
++        _waiting_callback = NULL;
++        _waiting_owner = NULL;
++
++        // callback
++        callback_fn();
++    }
++
++    // give up the semaphore
++    _taken = false;
++    return true;
++}
++
++// call_on_release - returns true if caller successfully added to the queue to be called back
++bool AP_Semaphore::call_on_release(void* caller, ap_semaphore_callback callback_fn)
++{
++    bool result = false;
++    uint8_t oldSREG = SREG;
++    cli();
++    if( _waiting_owner == NULL ) {
++        _waiting_owner = caller;
++        _waiting_callback = callback_fn;
++        result = true;
++    }
++    SREG = oldSREG;
++    return result;
++}
+
+Zmiany atrybutów dla: libraries/AP_Semaphore/AP_Semaphore.cpp
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/AP_Semaphore/AP_Semaphore.h
+===================================================================
+--- libraries/AP_Semaphore/AP_Semaphore.h	(wersja 0)
++++ libraries/AP_Semaphore/AP_Semaphore.h	(wersja 0)
+@@ -0,0 +1,39 @@
++// -*- tab-width: 4; Mode: C++; c-basic-offset: 4; indent-tabs-mode: t -*-
++
++/// @file	AP_Semaphore.h
++/// @brief	class to ensure conflicts over shared resources are avoided
++
++#ifndef __AP_SEMAPHORE_H__
++#define __AP_SEMAPHORE_H__
++
++#include <FastSerial.h>
++#include <AP_Common.h>
++#include <AP_Math.h>        // ArduPilot Mega Vector/Matrix math Library
++
++// the callback type for call_on_release. They are passed in a pointer to the semaphore
++typedef void (*ap_semaphore_callback)();
++
++/// @class      AP_Semaphore
++class AP_Semaphore {
++public:
++
++    // Constructor
++    AP_Semaphore();
++
++    // get - to claim ownership of the semaphore
++    virtual bool get(void* caller);
++
++    // release - to give up ownership of the semaphore
++    virtual bool release(void* caller);
++
++    // call_on_release - returns true if caller successfully added to the queue to be called back
++    virtual bool call_on_release(void* caller, ap_semaphore_callback callback_fn);
++
++protected:
++    bool        _taken;
++    void*       _owner;
++    void*       _waiting_owner;
++    ap_semaphore_callback     _waiting_callback;       // call back procedure of process waiting for sempahore
++};
++
++#endif  // __AP_SEMAPHORE_H__
+
+Zmiany atrybutów dla: libraries/AP_Semaphore/AP_Semaphore.h
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/AP_Semaphore/examples/AP_Semaphore_test/AP_Semaphore_test.pde
+===================================================================
+--- libraries/AP_Semaphore/examples/AP_Semaphore_test/AP_Semaphore_test.pde	(wersja 0)
++++ libraries/AP_Semaphore/examples/AP_Semaphore_test/AP_Semaphore_test.pde	(wersja 0)
+@@ -0,0 +1,103 @@
++
++#include <FastSerial.h>
++#include <AP_Math.h>
++#include <AP_Common.h>
++#include <AP_Semaphore.h>
++
++FastSerialPort0(Serial);
++
++AP_Semaphore my_semaphore;
++AP_Semaphore AP_Semaphore_spi3;
++
++int16_t dummy1, dummy2, dummy3; // used to provide points to semaphore library
++
++// call back for dummy1
++void callback_1() {
++    Serial.println("dummy2 called back!");
++}
++
++// call back for dummy3
++void callback_3() {
++    Serial.println("dummy3 called back!");
++}
++
++void setup(void)
++{
++    // initialise serial port
++    Serial.begin(115200);
++
++    // print welcome message
++    Serial.println("AP_Semaphore_test ver 1.0");
++}
++
++void print_true_false(bool true_false) {
++    if( true_false ) {
++        Serial.println("success");
++    } else {
++        Serial.println("failed");
++    }
++}
++
++void loop(void)
++{
++    bool ret;
++
++    // quick test of spi semaphore
++    ret = AP_Semaphore_spi3.get(&dummy3);
++    Serial.print("dummy3 gets SPI semaphore: ");
++    print_true_false(ret);
++
++    // dummy1 gets semaphore    
++    Serial.print("dummy1 gets semaphore: ");
++    ret = my_semaphore.get(&dummy1);
++    print_true_false(ret);
++
++    // dummy2 tries to get semaphore (fails)
++    Serial.print("dummy2 gets semaphore: ");
++    ret = my_semaphore.get(&dummy2);
++    print_true_false(ret);
++
++    // dummy2 tries to release semaphore (fails)
++    Serial.print("dummy2 releases semaphore (that it doesn't have): ");
++    ret = my_semaphore.release(&dummy2);
++    print_true_false(ret);
++
++    // dummy1 releases semaphore
++    Serial.print("dummy1 releases semaphore: ");
++    ret = my_semaphore.release(&dummy1);
++    print_true_false(ret);
++
++    // dummy2 tries to get semaphore (succeeds)
++    Serial.print("dummy2 gets semaphore: ");
++    ret = my_semaphore.get(&dummy2);
++    print_true_false(ret);
++
++    // dummy1 tries to get semphore (fails)
++    Serial.print("dummy1 gets semaphore: ");
++    ret = my_semaphore.get(&dummy1);
++    print_true_false(ret);
++    
++    // dummy1 asks for call back (succeeds)
++    Serial.print("dummy1 asks for call back on release: ");
++    ret = my_semaphore.call_on_release(&dummy1, callback_1);
++    print_true_false(ret);
++    
++    // dummy3 asks for call back (fails)
++    Serial.print("dummy3 asks for call back on release: ");
++    ret = my_semaphore.call_on_release(&dummy3, callback_3);
++    print_true_false(ret);
++
++    // dummy2 releases semaphore
++    // dummy1's call back should be called
++    Serial.print("dummy2 releases semaphore: ");
++    ret = my_semaphore.release(&dummy2);
++    print_true_false(ret);
++
++    Serial.println("--------------------");
++
++    // nobody has semaphore
++
++    // delay
++    delay(10000);
++}
++
+Index: libraries/AP_Semaphore/examples/AP_Semaphore_test/Makefile
+===================================================================
+--- libraries/AP_Semaphore/examples/AP_Semaphore_test/Makefile	(wersja 0)
++++ libraries/AP_Semaphore/examples/AP_Semaphore_test/Makefile	(wersja 0)
+@@ -0,0 +1,2 @@
++BOARD	=	mega2560
++include ../../../AP_Common/Arduino.mk
+
+Zmiany atrybutów dla: libraries/AP_Semaphore/examples/AP_Semaphore_test/Makefile
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/SPI3/SPI3.cpp
+===================================================================
+--- libraries/SPI3/SPI3.cpp	(wersja 0)
++++ libraries/SPI3/SPI3.cpp	(wersja 0)
+@@ -0,0 +1,112 @@
++/*
++ *       SPI3.cpp - SPI library using UART3 for Ardupilot Mega
++ *       Code by Randy Mackay, DIYDrones.com 
++ *       but mostly based on standard Arduino SPI class by Cristian Maglie <c.maglie@bug.st>
++ *
++ *       This library is free software; you can redistribute it and/or
++ *   modify it under the terms of the GNU Lesser General Public
++ *   License as published by the Free Software Foundation; either
++ *   version 2.1 of the License, or (at your option) any later version.
++ *
++ */
++
++#include "pins_arduino.h"
++#include "SPI3.h"
++
++SPI3Class SPI3;
++bool SPI3Class::_initialised = false;
++
++void SPI3Class::begin() {
++
++    // check if begin has been run already
++    if( _initialised ) {
++        return;
++    }
++
++    // Set direction register for SCK and MOSI pin.
++    pinMode(SPI3_SCK, OUTPUT);
++    pinMode(SPI3_MOSI, OUTPUT);
++    pinMode(SPI3_MISO, INPUT);
++
++    // Setup Serial Port3 in SPI mode (MSPI), Mode 0, Clock: 8Mhz
++    UBRR3 = 0;
++    DDRJ |= (1<<PJ2);   // SPI clock XCK3 (PJ2) as output. This enable SPI Master mode
++
++    // put UART3 into SPI master mode, default mode and LSB bit order 
++    UCSR3C = SPI3_USART_SPI_MASTER | SPI3_DEFAULT_MODE;
++
++    // Enable receiver and transmitter.
++    UCSR3B = (1<<RXEN3)|(1<<TXEN3);
++
++    // Set Baud rate
++    UBRR3 = SPI3_DEFAULT_SPEED;    // SPI running at 2Mhz by default
++
++    // initialisation complete
++    _initialised = true;
++}
++
++// end - switch UART3 back to asyncronous UART
++// Note: this is untested
++void SPI3Class::end() {
++    uint8_t temp = UCSR3C;
++
++    // check spi bus has been initialised
++    if( !_initialised ) {
++        return;
++    }
++
++    // put UART3 into ASync UART mode
++    temp = (temp & ~SPI3_USART_MASK) | SPI3_USART_ASYNC_UART;
++    UCSR3C = temp;
++
++    // reinitialisation will be required
++    _initialised = false;
++}
++
++uint8_t SPI3Class::transfer(uint8_t data) {
++    // check spi bus has been initialised
++    if( !_initialised ) {
++        return 0;
++    }
++
++    /* Wait for empty transmit buffer */
++    while ( !( UCSR3A & (1<<UDRE3)) ) ;
++
++    /* Put data into buffer, sends the data */
++    UDR3 = data;
++
++    /* Wait for data to be received */
++    while ( !(UCSR3A & (1<<RXC3)) ) ;
++
++    /* Get and return received data from buffer */
++    return UDR3;
++}
++
++void SPI3Class::setBitOrder(uint8_t bitOrder)
++{
++    // check spi bus has been initialised
++    if( !_initialised ) {
++        return;
++    }
++
++    if(bitOrder == SPI3_LSBFIRST) {
++        UCSR3C |= _BV(2);
++    } else {
++        UCSR3C &= ~(_BV(2));
++    }
++}
++
++void SPI3Class::setDataMode(uint8_t mode)
++{
++    if( _initialised ) {
++        UCSR3C = (UCSR3C & ~SPI3_MODE_MASK) | mode;
++    }
++}
++
++void SPI3Class::setSpeed(uint8_t rate)
++{
++    if( _initialised ) {
++        UBRR3 = rate;
++    }
++}
++
+
+Zmiany atrybutów dla: libraries/SPI3/SPI3.cpp
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/SPI3/SPI3.h
+===================================================================
+--- libraries/SPI3/SPI3.h	(wersja 0)
++++ libraries/SPI3/SPI3.h	(wersja 0)
+@@ -0,0 +1,69 @@
++/*
++ *       SPI3.cpp - SPI library using UART3 for Ardupilot Mega
++ *       Code by Randy Mackay. DIYDrones.com
++ *
++ *       This library is free software; you can redistribute it and/or
++ *   modify it under the terms of the GNU Lesser General Public
++ *   License as published by the Free Software Foundation; either
++ *   version 2.1 of the License, or (at your option) any later version.
++ *
++ */
++
++#ifndef _SPI3_H_INCLUDED
++#define _SPI3_H_INCLUDED
++
++#include <FastSerial.h>
++#include <avr/pgmspace.h>
++
++// SPI3's standard pins on Atmega2560
++#define SPI3_SCK        PJ2
++#define SPI3_MOSI       14
++#define SPI3_MISO       15
++
++// used to change UART into SPI mode
++#define SPI3_USART_MASK         0xC0      // UMSEL31 | UMSEL30
++#define SPI3_USART_ASYNC_UART   0x00      // UMSEL31 = 0, UMSEL30 = 0
++#define SPI3_USART_SYNC_UART    0x40      // UMSEL31 = 0, UMSEL30 = 1
++#define SPI3_USART_SPI_MASTER   0xC0      // UMSEL31 = 1, UMSEL30 = 1
++
++// spi bus speeds.  these assume a 16Mhz clock
++#define SPI3_SPEED_8MHZ 0x00
++#define SPI3_SPEED_2MHZ 0x04
++
++// default speed
++#define SPI3_DEFAULT_SPEED SPI3_SPEED_2MHZ // 2 megahertz
++
++// SPI mode definitions
++#define SPI3_MODE_MASK 0x03
++#define SPI3_MODE0 0x00
++#define SPI3_MODE1 0x01
++#define SPI3_MODE2 0x02
++#define SPI3_MODE3 0x03
++#define SPI3_DEFAULT_MODE SPI3_MODE0
++
++#define SPI3_CLOCK_MASK 0x03  // SPR1 = bit 1, SPR0 = bit 0 on SPCR
++#define SPI3_2XCLOCK_MASK 0x01  // SPI2X = bit 0 on SPSR
++
++// SPI bit order
++#define SPI3_MSBFIRST 0x00
++#define SPI3_LSBFIRST 0x01
++
++class SPI3Class {
++public:
++
++    static void begin();
++    static void end();
++    static uint8_t transfer(byte data);
++
++    // SPI Configuration methods
++    static void setBitOrder(uint8_t bitOrder);
++    static void setDataMode(uint8_t mode);
++    static void setSpeed(uint8_t rate);
++
++private:
++    static bool _initialised;
++};
++
++extern SPI3Class SPI3;
++
++#endif
+
+Zmiany atrybutów dla: libraries/SPI3/SPI3.h
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/SPI3/keywords.txt
+===================================================================
+--- libraries/SPI3/keywords.txt	(wersja 0)
++++ libraries/SPI3/keywords.txt	(wersja 0)
+@@ -0,0 +1,36 @@
++#######################################
++# Syntax Coloring Map SPI
++#######################################
++
++#######################################
++# Datatypes (KEYWORD1)
++#######################################
++
++SPI3	KEYWORD1
++
++#######################################
++# Methods and Functions (KEYWORD2)
++#######################################
++begin	KEYWORD2
++end	KEYWORD2
++transfer	KEYWORD2
++setBitOrder	KEYWORD2
++setDataMode	KEYWORD2
++setSpeed	KEYWORD2
++
++
++#######################################
++# Constants (LITERAL1)
++#######################################
++SPI3_CLOCK_DIV4	LITERAL1
++SPI3_CLOCK_DIV16	LITERAL1
++SPI3_CLOCK_DIV64	LITERAL1
++SPI3_CLOCK_DIV128	LITERAL1
++SPI3_CLOCK_DIV2	LITERAL1
++SPI3_CLOCK_DIV8	LITERAL1
++SPI_CLOCK_DIV32	LITERAL1
++SPI3_CLOCK_DIV64	LITERAL1
++SPI3_MODE0	LITERAL1
++SPI3_MODE1	LITERAL1
++SPI3_MODE2	LITERAL1
++SPI3_MODE3	LITERAL1
+\ Brak znaku nowej linii na końcu pliku
+
+Zmiany atrybutów dla: libraries/SPI3/keywords.txt
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/SPI3/examples/SPI3_test/SPI3_test.pde
+===================================================================
+--- libraries/SPI3/examples/SPI3_test/SPI3_test.pde	(wersja 0)
++++ libraries/SPI3/examples/SPI3_test/SPI3_test.pde	(wersja 0)
+@@ -0,0 +1,46 @@
++/*
++ *  Example of AP_OpticalFlow library.
++ *  Code by Randy Mackay. DIYDrones.com
++ */
++
++#include <FastSerial.h>
++#include <AP_Common.h>
++#include <AP_Math.h>            // ArduPilot Mega Vector/Matrix math Library
++#include <SPI3.h>                // Arduino SPI library
++
++////////////////////////////////////////////////////////////////////////////////
++// Serial ports
++////////////////////////////////////////////////////////////////////////////////
++//
++// Note that FastSerial port buffers are allocated at ::begin time,
++// so there is not much of a penalty to defining ports that we don't
++// use.
++//
++FastSerialPort0(Serial);        // FTDI/console
++
++void setup()
++{
++    Serial.begin(115200);
++    Serial.println("ArduPilot Mega SPI3 library test ver 0.1");
++
++    delay(1000);
++
++    // initialise SPI3 bus
++    SPI3.begin();
++    SPI3.setBitOrder(SPI3_MSBFIRST);
++    SPI3.setDataMode(SPI3_MODE0);
++    SPI3.setSpeed(SPI3_SPEED_2MHZ);
++
++    delay(1000);
++}
++
++void loop()
++{
++    int value;
++
++    // wait for user to enter something
++    while( !Serial.available() ) {
++        value = Serial.read();
++        delay(20);
++    }
++}
+Index: libraries/AP_OpticalFlow/AP_OpticalFlow.cpp
+===================================================================
+--- libraries/AP_OpticalFlow/AP_OpticalFlow.cpp	(wersja 0)
++++ libraries/AP_OpticalFlow/AP_OpticalFlow.cpp	(wersja 0)
+@@ -0,0 +1,131 @@
++/*
++ *       ADC.cpp - Analog Digital Converter Base Class for Ardupilot Mega
++ *       Code by James Goppert. DIYDrones.com
++ *
++ *       This library is free software; you can redistribute it and/or
++ *   modify it under the terms of the GNU Lesser General Public
++ *   License as published by the Free Software Foundation; either
++ *   version 2.1 of the License, or (at your option) any later version.
++ */
++
++#include "AP_OpticalFlow.h"
++
++#define FORTYFIVE_DEGREES 0.78539816
++
++AP_OpticalFlow* AP_OpticalFlow::_sensor = NULL;  // pointer to the last instantiated optical flow sensor.  Will be turned into a table if we ever add support for more than one sensor
++uint8_t AP_OpticalFlow::_num_calls; // number of times we have been called by 1khz timer process.  We use this to throttle read down to 20hz
++
++// init - initCommAPI parameter controls whether I2C/SPI interface is initialised (set to false if other devices are on the I2C/SPI bus and have already initialised the interface)
++bool
++AP_OpticalFlow::init(bool initCommAPI, AP_PeriodicProcess *scheduler, AP_Semaphore* spi_semaphore, AP_Semaphore* spi3_semaphore)
++{
++    _orientation = ROTATION_NONE;
++    update_conversion_factors();
++    return true;      // just return true by default
++}
++
++// set_orientation - Rotation vector to transform sensor readings to the body frame.
++void
++AP_OpticalFlow::set_orientation(enum Rotation rotation)
++{
++    _orientation = rotation;
++}
++
++// parent method called at 1khz by periodic process
++// this is slowed down to 20hz and each instance's update function is called (only one instance is supported at the moment)
++bool
++AP_OpticalFlow::read(uint32_t now)
++{
++    _num_calls++;
++
++    if( _num_calls >= AP_OPTICALFLOW_NUM_CALLS_FOR_20HZ ) {
++        _num_calls = 0;
++        // call to update all attached sensors
++        if( _sensor != NULL ) {
++            _sensor->update(now);
++            return true;
++        }
++    }
++    return false;
++};
++
++// read value from the sensor.  Should be overridden by derived class
++void
++AP_OpticalFlow::update(uint32_t now)
++{
++}
++
++// reads a value from the sensor (will be sensor specific)
++byte
++AP_OpticalFlow::read_register(byte address)
++{
++    return 0;
++}
++
++// writes a value to one of the sensor's register (will be sensor specific)
++void
++AP_OpticalFlow::write_register(byte address, byte value)
++{
++}
++
++// rotate raw values to arrive at final x,y,dx and dy values
++void
++AP_OpticalFlow::apply_orientation_matrix()
++{
++    Vector3f rot_vector;
++    rot_vector(raw_dx, raw_dy, 0);
++
++    // next rotate dx and dy
++    rot_vector.rotate(_orientation);
++
++    dx = rot_vector.x;
++    dy = rot_vector.y;
++
++    // add rotated values to totals (perhaps this is pointless as we need to take into account yaw, roll, pitch)
++    x += dx;
++    y += dy;
++}
++
++// updatse conversion factors that are dependent upon field_of_view
++void
++AP_OpticalFlow::update_conversion_factors()
++{
++    conv_factor = (1.0 / (float)(num_pixels * scaler)) * 2.0 * tan(field_of_view / 2.0);        // multiply this number by altitude and pixel change to get horizontal move (in same units as altitude)
++    // 0.00615
++    radians_to_pixels = (num_pixels * scaler) / field_of_view;
++    // 162.99
++}
++
++// updates internal lon and lat with estimation based on optical flow
++void
++AP_OpticalFlow::update_position(float roll, float pitch, float cos_yaw_x, float sin_yaw_y, float altitude)
++{
++    float diff_roll     = roll  - _last_roll;
++    float diff_pitch    = pitch - _last_pitch;
++
++    // only update position if surface quality is good and angle is not over 45 degrees
++    if( surface_quality >= 10 && fabs(roll) <= FORTYFIVE_DEGREES && fabs(pitch) <= FORTYFIVE_DEGREES ) {
++        altitude = max(altitude, 0);
++        // calculate expected x,y diff due to roll and pitch change
++        exp_change_x = diff_roll * radians_to_pixels;
++        exp_change_y = -diff_pitch * radians_to_pixels;
++
++        // real estimated raw change from mouse
++        change_x = dx - exp_change_x;
++        change_y = dy - exp_change_y;
++
++        float avg_altitude = (altitude + _last_altitude)*0.5;
++
++        // convert raw change to horizontal movement in cm
++        x_cm = -change_x * avg_altitude * conv_factor;            // perhaps this altitude should actually be the distance to the ground?  i.e. if we are very rolled over it should be longer?
++        y_cm = -change_y * avg_altitude * conv_factor;            // for example if you are leaned over at 45 deg the ground will appear farther away and motion from opt flow sensor will be less
++
++        // convert x/y movements into lon/lat movement
++        vlon = x_cm * sin_yaw_y + y_cm * cos_yaw_x;
++        vlat = y_cm * sin_yaw_y - x_cm * cos_yaw_x;
++    }
++
++    _last_altitude = altitude;
++    _last_roll = roll;
++    _last_pitch = pitch;
++}
+
+Zmiany atrybutów dla: libraries/AP_OpticalFlow/AP_OpticalFlow.cpp
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/AP_OpticalFlow/AP_OpticalFlow_ADNS3080.cpp
+===================================================================
+--- libraries/AP_OpticalFlow/AP_OpticalFlow_ADNS3080.cpp	(wersja 0)
++++ libraries/AP_OpticalFlow/AP_OpticalFlow_ADNS3080.cpp	(wersja 0)
+@@ -0,0 +1,560 @@
++/*
++ *       AP_OpticalFlow_ADNS3080.cpp - ADNS3080 OpticalFlow Library for Ardupilot Mega
++ *       Code by Randy Mackay. DIYDrones.com
++ *
++ *       This library is free software; you can redistribute it and/or
++ *   modify it under the terms of the GNU Lesser General Public
++ *   License as published by the Free Software Foundation; either
++ *   version 2.1 of the License, or (at your option) any later version.
++ *
++ */
++
++#include "AP_OpticalFlow_ADNS3080.h"
++#include "SPI.h"
++#include "SPI3.h"
++#include "AP_Semaphore.h"
++
++#if defined(ARDUINO) && ARDUINO >= 100
++ #include "Arduino.h"
++#else
++ #include "WProgram.h"
++#endif
++
++#define AP_SPI_TIMEOUT 1000
++
++// We use Serial Port 2 in SPI Mode
++#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
++ #define ADNS3080_SPI_MISO        50      // PB3
++ #define ADNS3080_SPI_MOSI        51      // PB2
++ #define ADNS3080_SPI_SCK         52      // PB1
++#else  // normal arduino SPI pins...these need to be checked
++ #define ADNS3080_SPI_MISO        12      // MISO
++ #define ADNS3080_SPI_MOSI        11      // MOSI
++ #define ADNS3080_SPI_SCK         13      // SCK
++#endif
++
++union NumericIntType
++{
++    int16_t intValue;
++    uint16_t uintValue;
++    uint8_t byteValue[2];
++};
++
++// Constructors ////////////////////////////////////////////////////////////////
++AP_OpticalFlow_ADNS3080::AP_OpticalFlow_ADNS3080(int16_t cs_pin, int16_t reset_pin) :
++    _cs_pin(cs_pin),
++    _reset_pin(reset_pin),
++    _spi_bus(ADNS3080_SPI_UNKNOWN),
++    _spi_semaphore(NULL)
++{
++    num_pixels = ADNS3080_PIXELS_X;
++    field_of_view = AP_OPTICALFLOW_ADNS3080_08_FOV;
++    scaler = AP_OPTICALFLOW_ADNS3080_SCALER;
++}
++
++// Public Methods //////////////////////////////////////////////////////////////
++// init - initialise sensor
++// assumes SPI bus has been initialised but will attempt to initialise nonstandard SPI3 bus if required
++bool
++AP_OpticalFlow_ADNS3080::init(bool initCommAPI, AP_PeriodicProcess *scheduler, AP_Semaphore* spi_semaphore, AP_Semaphore* spi3_semaphore)
++{
++    int8_t retry = 0;
++    bool retvalue = false;
++
++    // suspend timer while we set-up SPI communication
++    scheduler->suspend_timer();
++
++    pinMode(_cs_pin,OUTPUT);
++    if( _reset_pin != 0)
++        pinMode(ADNS3080_RESET,OUTPUT);
++
++    digitalWrite(_cs_pin,HIGH);                     // disable device (Chip select is active low)
++
++    // reset the device
++    reset();
++
++    // start the SPI library:
++    if( initCommAPI ) {
++        pinMode(ADNS3080_SPI_MOSI,OUTPUT);
++        pinMode(ADNS3080_SPI_MISO,INPUT);
++        pinMode(ADNS3080_SPI_SCK,OUTPUT);
++        SPI.begin();
++        SPI.setClockDivider(SPI_CLOCK_DIV8); // 2MHZ SPI rate
++    }
++
++    // check 3 times for the sensor on standard SPI bus
++    _spi_bus = ADNS3080_SPIBUS_1;
++    _spi_semaphore = spi_semaphore;
++    while( retvalue == false && retry < 3 ) {
++        if( read_register(ADNS3080_PRODUCT_ID) == 0x17 ) {
++            retvalue = true;
++        }
++        retry++;
++    }
++
++    // if not found, check 3 times on SPI3
++    if( !retvalue ) {
++
++        // start the SPI3 library:
++        if( initCommAPI ) {
++            SPI3.begin();
++            SPI3.setDataMode(SPI3_MODE3); // Mode3
++            SPI3.setSpeed(SPI3_SPEED_2MHZ); // 2MHZ SPI rate
++        }
++
++        _spi_bus = ADNS3080_SPIBUS_3;
++        _spi_semaphore = spi3_semaphore;
++        retry = 0;
++        while( retvalue == false && retry < 3 ) {
++            if( read_register(ADNS3080_PRODUCT_ID) == 0x17 ) {
++                retvalue = true;
++            }
++            retry++;
++        }
++    }
++
++    // resume timer
++    scheduler->resume_timer();
++
++    // if device is working register the global static read function to be called at 1khz
++    if( retvalue ) {
++        scheduler->register_process( AP_OpticalFlow_ADNS3080::read );
++    }else{
++        _spi_bus = ADNS3080_SPI_UNKNOWN;
++    }
++
++    return retvalue;
++}
++
++//
++// backup_spi_settings - checks current SPI settings (clock speed, etc), sets values to what we need
++//
++void
++AP_OpticalFlow_ADNS3080::backup_spi_settings()
++{
++    if( _spi_bus == ADNS3080_SPIBUS_1 ) {
++        // store current spi mode and data rate
++        orig_spi_settings_spcr = SPCR & (CPOL | CPHA | SPR1 | SPR0);
++
++        // set to our required values
++        SPI.setDataMode(SPI_MODE3);
++        SPI.setClockDivider(SPI_CLOCK_DIV8); // 2MHZ SPI rate
++
++    }else if( _spi_bus == ADNS3080_SPIBUS_3 ) {
++        /* Wait for empty transmit buffer */
++        while ( !( UCSR3A & (1<<UDRE3)) ) ;
++
++        // store current spi values
++        orig_spi3_settings_ucsr3c = UCSR3C;
++        orig_spi3_settings_ubrr3 = UBRR3;
++
++        // set to our required values
++        SPI3.setDataMode(SPI3_MODE3);
++        SPI3.setSpeed(SPI3_SPEED_2MHZ); // 2MHZ SPI rate
++    }
++}
++
++// restore_spi_settings - restores SPI settings (clock speed, etc) to what their values were before the sensor used the bus
++void
++AP_OpticalFlow_ADNS3080::restore_spi_settings()
++{
++    byte temp;
++
++    if( _spi_bus == ADNS3080_SPIBUS_1 ) {
++        // split off the two bits we need to write
++        temp = SPCR & ~(CPOL | CPHA | SPR1 | SPR0);
++        temp |= orig_spi_settings_spcr;
++
++        // write back the bits
++        SPCR = temp;
++    }else if( _spi_bus == ADNS3080_SPIBUS_3 ) {
++        /* Wait for empty transmit buffer */
++        while ( !( UCSR3A & (1<<UDRE3)) ) ;
++
++        // restore UCSRC3C (spi mode) and UBBR3 (speed)
++        UCSR3C = orig_spi3_settings_ucsr3c;
++        UBRR3 = orig_spi3_settings_ubrr3;
++    }
++}
++
++// Read a register from the sensor
++byte
++AP_OpticalFlow_ADNS3080::read_register(byte address)
++{
++    uint8_t result = 0;
++
++    // get spi semaphore if required
++    if( _spi_semaphore != NULL ) {
++        // if failed to get semaphore then just quietly fail
++        if( !_spi_semaphore->get(this) ) {
++            return 0;
++        }
++    }
++
++    backup_spi_settings();
++
++    // take the chip select low to select the device
++    digitalWrite(_cs_pin, LOW);
++
++    if( _spi_bus == ADNS3080_SPIBUS_1 ) {
++        SPI.transfer(address);   // send the device the register you want to read:
++        delayMicroseconds(50);          // small delay
++        result = SPI.transfer(0x00);    // send a value of 0 to read the first byte returned:
++    }else if( _spi_bus == ADNS3080_SPIBUS_3 ) {
++        SPI3.transfer(address);   // send the device the register you want to read:
++        delayMicroseconds(50);          // small delay
++        result = SPI3.transfer(0x00);    // send a value of 0 to read the first byte returned:
++    }
++
++    // take the chip select high to de-select:
++    digitalWrite(_cs_pin, HIGH);
++
++    restore_spi_settings();
++
++    // get spi semaphore if required
++    if( _spi_semaphore != NULL ) {
++        _spi_semaphore->release(this);
++    }
++
++    return result;
++}
++
++// write a value to one of the sensor's registers
++void
++AP_OpticalFlow_ADNS3080::write_register(byte address, byte value)
++{
++    // get spi semaphore if required
++    if( _spi_semaphore != NULL ) {
++        // if failed to get semaphore then just quietly fail
++        if( !_spi_semaphore->get(this) ) {
++            return;
++        }
++    }
++
++    backup_spi_settings();
++
++    // take the chip select low to select the device
++    digitalWrite(_cs_pin, LOW);
++
++    if( _spi_bus == ADNS3080_SPIBUS_1 ) {
++        SPI.transfer(address | 0x80 );   // send register address
++        delayMicroseconds(50);                  // small delay
++        SPI.transfer(value);             // send data
++    }else if( _spi_bus == ADNS3080_SPIBUS_3 ) {
++        SPI3.transfer(address | 0x80 );   // send register address
++        delayMicroseconds(50);                  // small delay
++        SPI3.transfer(value);             // send data
++    }
++
++    // take the chip select high to de-select:
++    digitalWrite(_cs_pin, HIGH);
++
++    restore_spi_settings();
++
++    // get spi3 semaphore if required
++    if( _spi_semaphore != NULL ) {
++        _spi_semaphore->release(this);
++    }
++}
++
++// reset sensor by holding a pin high (or is it low?) for 10us.
++void
++AP_OpticalFlow_ADNS3080::reset()
++{
++    // return immediately if the reset pin is not defined
++    if( _reset_pin == 0)
++        return;
++
++    digitalWrite(_reset_pin,HIGH);                 // reset sensor
++    delayMicroseconds(10);
++    digitalWrite(_reset_pin,LOW);                      // return sensor to normal
++}
++
++// read latest values from sensor and fill in x,y and totals
++void
++AP_OpticalFlow_ADNS3080::update(uint32_t now)
++{
++    byte motion_reg;
++    surface_quality = (uint16_t)read_register(ADNS3080_SQUAL);
++    delayMicroseconds(50);      // small delay
++
++    // check for movement, update x,y values
++    motion_reg = read_register(ADNS3080_MOTION);
++    _overflow = ((motion_reg & 0x10) != 0);      // check if we've had an overflow
++    if( (motion_reg & 0x80) != 0 ) {
++        raw_dx = ((int8_t)read_register(ADNS3080_DELTA_X));
++        delayMicroseconds(50);          // small delay
++        raw_dy = ((int8_t)read_register(ADNS3080_DELTA_Y));
++        _motion = true;
++    }else{
++        raw_dx = 0;
++        raw_dy = 0;
++    }
++
++    last_update = millis();
++
++    apply_orientation_matrix();
++}
++
++void
++AP_OpticalFlow_ADNS3080::disable_serial_pullup()
++{
++    byte regVal = read_register(ADNS3080_EXTENDED_CONFIG);
++    regVal = (regVal | ADNS3080_SERIALNPU_OFF);
++    delayMicroseconds(50);      // small delay
++    write_register(ADNS3080_EXTENDED_CONFIG, regVal);
++}
++
++// get_led_always_on - returns true if LED is always on, false if only on when required
++bool
++AP_OpticalFlow_ADNS3080::get_led_always_on()
++{
++    return ( (read_register(ADNS3080_CONFIGURATION_BITS) & 0x40) > 0 );
++}
++
++// set_led_always_on - set parameter to true if you want LED always on, otherwise false for only when required
++void
++AP_OpticalFlow_ADNS3080::set_led_always_on( bool alwaysOn )
++{
++    byte regVal = read_register(ADNS3080_CONFIGURATION_BITS);
++    regVal = (regVal & 0xbf) | (alwaysOn << 6);
++    delayMicroseconds(50);      // small delay
++    write_register(ADNS3080_CONFIGURATION_BITS, regVal);
++}
++
++// returns resolution (either 400 or 1600 counts per inch)
++int16_t
++AP_OpticalFlow_ADNS3080::get_resolution()
++{
++    if( (read_register(ADNS3080_CONFIGURATION_BITS) & 0x10) == 0 )
++        return 400;
++    else
++        return 1600;
++}
++
++// set parameter to 400 or 1600 counts per inch
++void
++AP_OpticalFlow_ADNS3080::set_resolution(uint16_t resolution)
++{
++    byte regVal = read_register(ADNS3080_CONFIGURATION_BITS);
++
++    if( resolution == ADNS3080_RESOLUTION_400 ) {
++        regVal &= ~0x10;
++        scaler = AP_OPTICALFLOW_ADNS3080_SCALER;
++    }else if( resolution == ADNS3080_RESOLUTION_1600) {
++        regVal |= 0x10;
++        scaler = AP_OPTICALFLOW_ADNS3080_SCALER * 4;
++    }
++
++    delayMicroseconds(50);      // small delay
++    write_register(ADNS3080_CONFIGURATION_BITS, regVal);
++
++    // this will affect conversion factors so update them
++    update_conversion_factors();
++}
++
++// get_frame_rate_auto - return whether frame rate is set to "auto" or manual
++bool
++AP_OpticalFlow_ADNS3080::get_frame_rate_auto()
++{
++    byte regVal = read_register(ADNS3080_EXTENDED_CONFIG);
++    if( (regVal & 0x01) != 0 ) {
++        return false;
++    }else{
++        return true;
++    }
++}
++
++// set_frame_rate_auto - set frame rate to auto (true) or manual (false)
++void
++AP_OpticalFlow_ADNS3080::set_frame_rate_auto(bool auto_frame_rate)
++{
++    byte regVal = read_register(ADNS3080_EXTENDED_CONFIG);
++    delayMicroseconds(50);      // small delay
++    if( auto_frame_rate == true ) {
++        // set specific frame period
++        write_register(ADNS3080_FRAME_PERIOD_MAX_BOUND_LOWER,0xE0);
++        delayMicroseconds(50);          // small delay
++        write_register(ADNS3080_FRAME_PERIOD_MAX_BOUND_UPPER,0x1A);
++        delayMicroseconds(50);          // small delay
++
++        // decide what value to update in extended config
++        regVal = (regVal & ~0x01);
++    }else{
++        // decide what value to update in extended config
++        regVal = (regVal & ~0x01) | 0x01;
++    }
++    write_register(ADNS3080_EXTENDED_CONFIG, regVal);
++}
++
++// get frame period
++uint16_t
++AP_OpticalFlow_ADNS3080::get_frame_period()
++{
++    NumericIntType aNum;
++    aNum.byteValue[1] = read_register(ADNS3080_FRAME_PERIOD_UPPER);
++    delayMicroseconds(50);      // small delay
++    aNum.byteValue[0] = read_register(ADNS3080_FRAME_PERIOD_LOWER);
++    return aNum.uintValue;
++}
++
++// set frame period
++void
++AP_OpticalFlow_ADNS3080::set_frame_period(uint16_t period)
++{
++    NumericIntType aNum;
++    aNum.uintValue = period;
++
++    // set frame rate to manual
++    set_frame_rate_auto(false);
++    delayMicroseconds(50);      // small delay
++
++    // set specific frame period
++    write_register(ADNS3080_FRAME_PERIOD_MAX_BOUND_LOWER,aNum.byteValue[0]);
++    delayMicroseconds(50);      // small delay
++    write_register(ADNS3080_FRAME_PERIOD_MAX_BOUND_UPPER,aNum.byteValue[1]);
++
++}
++
++uint16_t
++AP_OpticalFlow_ADNS3080::get_frame_rate()
++{
++    uint32_t clockSpeed = ADNS3080_CLOCK_SPEED;
++    uint16_t rate = clockSpeed / get_frame_period();
++    return rate;
++}
++
++void
++AP_OpticalFlow_ADNS3080::set_frame_rate(uint16_t rate)
++{
++    uint32_t clockSpeed = ADNS3080_CLOCK_SPEED;
++    uint16_t period = (uint16_t)(clockSpeed / (uint32_t)rate);
++
++    set_frame_period(period);
++}
++
++// get_shutter_speed_auto - returns true if shutter speed is adjusted automatically, false if manual
++bool
++AP_OpticalFlow_ADNS3080::get_shutter_speed_auto()
++{
++    uint8_t regVal = read_register(ADNS3080_EXTENDED_CONFIG);
++    if( (regVal & 0x02) > 0 ) {
++        return false;
++    }else{
++        return true;
++    }
++}
++
++// set_shutter_speed_auto - set shutter speed to auto (true), or manual (false)
++void
++AP_OpticalFlow_ADNS3080::set_shutter_speed_auto(bool auto_shutter_speed)
++{
++    uint8_t regVal = read_register(ADNS3080_EXTENDED_CONFIG);
++    delayMicroseconds(50);      // small delay
++    if( auto_shutter_speed ) {
++        // return shutter speed max to default
++        write_register(ADNS3080_SHUTTER_MAX_BOUND_LOWER,0x8c);
++        delayMicroseconds(50);          // small delay
++        write_register(ADNS3080_SHUTTER_MAX_BOUND_UPPER,0x20);
++        delayMicroseconds(50);          // small delay
++
++        // determine value to put into extended config
++        regVal &= ~0x02;
++    }else{
++        // determine value to put into extended config
++        regVal |= 0x02;
++    }
++    write_register(ADNS3080_EXTENDED_CONFIG, regVal);
++    delayMicroseconds(50);      // small delay
++}
++
++// get_shutter_speed_auto - returns true if shutter speed is adjusted automatically, false if manual
++uint16_t
++AP_OpticalFlow_ADNS3080::get_shutter_speed()
++{
++    NumericIntType aNum;
++    aNum.byteValue[1] = read_register(ADNS3080_SHUTTER_UPPER);
++    delayMicroseconds(50);      // small delay
++    aNum.byteValue[0] = read_register(ADNS3080_SHUTTER_LOWER);
++    return aNum.uintValue;
++}
++
++
++// set_shutter_speed_auto - set shutter speed to auto (true), or manual (false)
++void
++AP_OpticalFlow_ADNS3080::set_shutter_speed(uint16_t shutter_speed)
++{
++    NumericIntType aNum;
++    aNum.uintValue = shutter_speed;
++
++    // set shutter speed to manual
++    set_shutter_speed_auto(false);
++    delayMicroseconds(50);      // small delay
++
++    // set specific shutter speed
++    write_register(ADNS3080_SHUTTER_MAX_BOUND_LOWER,aNum.byteValue[0]);
++    delayMicroseconds(50);      // small delay
++    write_register(ADNS3080_SHUTTER_MAX_BOUND_UPPER,aNum.byteValue[1]);
++    delayMicroseconds(50);      // small delay
++
++    // larger delay
++    delay(50);
++
++    // need to update frame period to cause shutter value to take effect
++    aNum.byteValue[1] = read_register(ADNS3080_FRAME_PERIOD_UPPER);
++    delayMicroseconds(50);      // small delay
++    aNum.byteValue[0] = read_register(ADNS3080_FRAME_PERIOD_LOWER);
++    delayMicroseconds(50);      // small delay
++    write_register(ADNS3080_FRAME_PERIOD_MAX_BOUND_LOWER,aNum.byteValue[0]);
++    delayMicroseconds(50);      // small delay
++    write_register(ADNS3080_FRAME_PERIOD_MAX_BOUND_UPPER,aNum.byteValue[1]);
++    delayMicroseconds(50);      // small delay
++}
++
++// clear_motion - will cause the Delta_X, Delta_Y, and internal motion registers to be cleared
++void
++AP_OpticalFlow_ADNS3080::clear_motion()
++{
++    write_register(ADNS3080_MOTION_CLEAR,0xFF);  // writing anything to this register will clear the sensor's motion registers
++    x = 0;
++    y = 0;
++    dx = 0;
++    dy = 0;
++    _motion = false;
++}
++
++// get_pixel_data - captures an image from the sensor and stores it to the pixe_data array
++void
++AP_OpticalFlow_ADNS3080::print_pixel_data()
++{
++    int16_t i,j;
++    bool isFirstPixel = true;
++    uint8_t regValue;
++    uint8_t pixelValue;
++
++    // write to frame capture register to force capture of frame
++    write_register(ADNS3080_FRAME_CAPTURE,0x83);
++
++    // wait 3 frame periods + 10 nanoseconds for frame to be captured
++    delayMicroseconds(1510);      // min frame speed is 2000 frames/second so 1 frame = 500 nano seconds.  so 500 x 3 + 10 = 1510
++
++    // display the pixel data
++    for( i=0; i<ADNS3080_PIXELS_Y; i++ ) {
++        for( j=0; j<ADNS3080_PIXELS_X; j++ ) {
++            regValue = read_register(ADNS3080_FRAME_CAPTURE);
++            if( isFirstPixel && (regValue & 0x40) == 0 ) {
++                Serial.print_P(PSTR("failed to find first pixel"));
++            }
++            isFirstPixel = false;
++            pixelValue = ( regValue << 2);
++            Serial.print(pixelValue,DEC);
++            if( j!= ADNS3080_PIXELS_X-1 )
++                Serial.print_P(PSTR(","));
++            delayMicroseconds(50);
++        }
++        Serial.println();
++    }
++
++    // hardware reset to restore sensor to normal operation
++    reset();
++}
+
+Zmiany atrybutów dla: libraries/AP_OpticalFlow/AP_OpticalFlow_ADNS3080.cpp
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/AP_OpticalFlow/keywords.txt
+===================================================================
+--- libraries/AP_OpticalFlow/keywords.txt	(wersja 0)
++++ libraries/AP_OpticalFlow/keywords.txt	(wersja 0)
+@@ -0,0 +1,26 @@
++AP_OpticalFlow	KEYWORD1
++AP_OpticalFlow_ADNS3080	KEYWORD1
++AP_OpticalFlow_ADNS3080_APM2	KEYWORD1
++init	KEYWORD2
++read	KEYWORD2
++update	KEYWORD2
++read_register	KEYWORD2
++write_register	KEYWORD2
++reset	KEYWORD2
++motion	KEYWORD2
++get_led_always_on	KEYWORD2
++set_led_always_on	KEYWORD2
++get_resolution	KEYWORD2
++set_resolution	KEYWORD2
++get_frame_rate_auto	KEYWORD2
++set_frame_rate_auto	KEYWORD2
++get_frame_period	KEYWORD2
++set_frame_period	KEYWORD2
++get_frame_rate	KEYWORD2
++set_frame_rate	KEYWORD2
++get_shutter_speed_auto	KEYWORD2
++set_shutter_speed_auto	KEYWORD2
++get_shutter_speed	KEYWORD2
++set_shutter_speed	KEYWORD2
++clear_motion	KEYWORD2
++print_pixel_data	KEYWORD2
+\ Brak znaku nowej linii na końcu pliku
+
+Zmiany atrybutów dla: libraries/AP_OpticalFlow/keywords.txt
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/AP_OpticalFlow/AP_OpticalFlow.h
+===================================================================
+--- libraries/AP_OpticalFlow/AP_OpticalFlow.h	(wersja 0)
++++ libraries/AP_OpticalFlow/AP_OpticalFlow.h	(wersja 0)
+@@ -0,0 +1,77 @@
++#ifndef AP_OPTICALFLOW_H
++#define AP_OPTICALFLOW_H
++
++/*
++ *       AP_OpticalFlow.cpp - OpticalFlow Base Class for Ardupilot Mega
++ *       Code by Randy Mackay. DIYDrones.com
++ *
++ *       This library is free software; you can redistribute it and/or
++ *   modify it under the terms of the GNU Lesser General Public
++ *   License as published by the Free Software Foundation; either
++ *   version 2.1 of the License, or (at your option) any later version.
++ *
++ *       Methods:
++ *               init()           : initializate sensor and library.
++ *               read             : reads latest value from OpticalFlow and stores values in x,y, surface_quality parameter
++ *               read_register()  : reads a value from the sensor (will be sensor specific)
++ *               write_register() : writes a value to one of the sensor's register (will be sensor specific)
++ */
++
++#include <FastSerial.h>
++#include <AP_Math.h>
++#include <AP_Common.h>
++#include <AP_PeriodicProcess.h>
++#include <AP_Semaphore.h>
++
++#define AP_OPTICALFLOW_NUM_CALLS_FOR_10HZ     100         // timer process runs at 1khz.  100 iterations = 10hz
++#define AP_OPTICALFLOW_NUM_CALLS_FOR_20HZ     50          // timer process runs at 1khz.  50 iterations = 20hz
++#define AP_OPTICALFLOW_NUM_CALLS_FOR_50HZ     20          // timer process runs at 1khz.  20 iterations = 50hz
++
++class AP_OpticalFlow
++{
++public:
++    int                     raw_dx, raw_dy; // raw sensor change in x and y position (i.e. unrotated)
++    int                     surface_quality; // image quality (below 15 you really can't trust the x,y values returned)
++    int                     x,y; // total x,y position
++    int                     dx,dy; // rotated change in x and y position
++    float                   vlon, vlat; // position as offsets from original position
++    unsigned long           last_update; // millis() time of last update
++    float                   field_of_view; // field of view in Radians
++    float                   scaler; // number returned from sensor when moved one pixel
++    int                     num_pixels; // number of pixels of resolution in the sensor
++    // temp variables - delete me!
++    float                   exp_change_x, exp_change_y;
++    float                   change_x, change_y;
++    float                   x_cm, y_cm;
++
++    AP_OpticalFlow() {
++        _sensor = this;
++    };
++    ~AP_OpticalFlow() {
++        _sensor = NULL;
++    };
++    virtual bool                    init(bool initCommAPI, AP_PeriodicProcess *scheduler, AP_Semaphore* spi_semaphore = NULL, AP_Semaphore* spi3_semaphore = NULL); // parameter controls whether I2C/SPI interface is initialised (set to false if other devices are on the I2C/SPI bus and have already initialised the interface)
++    virtual byte                    read_register(byte address);
++    virtual void                    write_register(byte address, byte value);
++    virtual void                    set_orientation(enum Rotation rotation); // Rotation vector to transform sensor readings to the body frame.
++    virtual void                    set_field_of_view(const float fov) { field_of_view = fov; update_conversion_factors(); };   // sets field of view of sensor
++    static bool                     read(uint32_t now);   // called by timer process to read sensor data from all attached sensors
++    virtual void                    update(uint32_t now); // read latest values from sensor and fill in x,y and totals.
++    virtual void                    update_position(float roll, float pitch, float cos_yaw_x, float sin_yaw_y, float altitude); // updates internal lon and lat with estimation based on optical flow
++
++protected:
++    static AP_OpticalFlow *         _sensor; // pointer to the last instantiated optical flow sensor.  Will be turned into a table if we ever add support for more than one sensor
++    enum Rotation                   _orientation;
++    float                           conv_factor; // multiply this number by altitude and pixel change to get horizontal move (in same units as altitude)
++    float                           radians_to_pixels;
++    float                           _last_roll, _last_pitch, _last_altitude;
++    virtual void                    apply_orientation_matrix(); // rotate raw values to arrive at final x,y,dx and dy values
++    virtual void                    update_conversion_factors();
++
++private:
++    static uint8_t                         _num_calls; // number of times we have been called by 1khz timer process.  We use this to throttle read down to 20hz
++};
++
++#include "AP_OpticalFlow_ADNS3080.h"
++
++#endif
+
+Zmiany atrybutów dla: libraries/AP_OpticalFlow/AP_OpticalFlow.h
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/AP_OpticalFlow/AP_OpticalFlow_ADNS3080.h
+===================================================================
+--- libraries/AP_OpticalFlow/AP_OpticalFlow_ADNS3080.h	(wersja 0)
++++ libraries/AP_OpticalFlow/AP_OpticalFlow_ADNS3080.h	(wersja 0)
+@@ -0,0 +1,145 @@
++#ifndef __AP_OPTICALFLOW_ADNS3080_H__
++#define __AP_OPTICALFLOW_ADNS3080_H__
++
++#include <AP_Semaphore.h>
++#include "AP_OpticalFlow.h"
++
++// default pin settings
++#define ADNS3080_CHIP_SELECT 34  // PC3
++#define ADNS3080_RESET       0   // reset pin is unattached by default
++
++// orientations for ADNS3080 sensor
++#define AP_OPTICALFLOW_ADNS3080_PINS_FORWARD ROTATION_YAW_180
++#define AP_OPTICALFLOW_ADNS3080_PINS_FORWARD_RIGHT ROTATION_YAW_135
++#define AP_OPTICALFLOW_ADNS3080_PINS_RIGHT ROTATION_YAW_90
++#define AP_OPTICALFLOW_ADNS3080_PINS_BACK_RIGHT ROTATION_YAW_45
++#define AP_OPTICALFLOW_ADNS3080_PINS_BACK ROTATION_NONE
++#define AP_OPTICALFLOW_ADNS3080_PINS_BACK_LEFT ROTATION_YAW_315
++#define AP_OPTICALFLOW_ADNS3080_PINS_LEFT ROTATION_YAW_270
++#define AP_OPTICALFLOW_ADNS3080_PINS_FORWARD_LEFT ROTATION_YAW_225
++
++// field of view of ADNS3080 sensor lenses
++#define AP_OPTICALFLOW_ADNS3080_08_FOV 0.202458  // 11.6 degrees
++
++// scaler - value returned when sensor is moved equivalent of 1 pixel
++#define AP_OPTICALFLOW_ADNS3080_SCALER  1.1
++
++// ADNS3080 hardware config
++#define ADNS3080_PIXELS_X                 30
++#define ADNS3080_PIXELS_Y                 30
++#define ADNS3080_CLOCK_SPEED                      24000000
++
++// Register Map for the ADNS3080 Optical OpticalFlow Sensor
++#define ADNS3080_PRODUCT_ID            0x00
++#define ADNS3080_REVISION_ID           0x01
++#define ADNS3080_MOTION                0x02
++#define ADNS3080_DELTA_X               0x03
++#define ADNS3080_DELTA_Y               0x04
++#define ADNS3080_SQUAL                 0x05
++#define ADNS3080_PIXEL_SUM             0x06
++#define ADNS3080_MAXIMUM_PIXEL         0x07
++#define ADNS3080_CONFIGURATION_BITS    0x0a
++#define ADNS3080_EXTENDED_CONFIG       0x0b
++#define ADNS3080_DATA_OUT_LOWER        0x0c
++#define ADNS3080_DATA_OUT_UPPER        0x0d
++#define ADNS3080_SHUTTER_LOWER         0x0e
++#define ADNS3080_SHUTTER_UPPER         0x0f
++#define ADNS3080_FRAME_PERIOD_LOWER    0x10
++#define ADNS3080_FRAME_PERIOD_UPPER    0x11
++#define ADNS3080_MOTION_CLEAR          0x12
++#define ADNS3080_FRAME_CAPTURE         0x13
++#define ADNS3080_SROM_ENABLE           0x14
++#define ADNS3080_FRAME_PERIOD_MAX_BOUND_LOWER      0x19
++#define ADNS3080_FRAME_PERIOD_MAX_BOUND_UPPER      0x1a
++#define ADNS3080_FRAME_PERIOD_MIN_BOUND_LOWER      0x1b
++#define ADNS3080_FRAME_PERIOD_MIN_BOUND_UPPER      0x1c
++#define ADNS3080_SHUTTER_MAX_BOUND_LOWER           0x1e
++#define ADNS3080_SHUTTER_MAX_BOUND_UPPER           0x1e
++#define ADNS3080_SROM_ID               0x1f
++#define ADNS3080_OBSERVATION           0x3d
++#define ADNS3080_INVERSE_PRODUCT_ID    0x3f
++#define ADNS3080_PIXEL_BURST           0x40
++#define ADNS3080_MOTION_BURST          0x50
++#define ADNS3080_SROM_LOAD             0x60
++
++// Configuration Bits
++#define ADNS3080_LED_MODE_ALWAYS_ON        0x00
++#define ADNS3080_LED_MODE_WHEN_REQUIRED    0x01
++
++#define ADNS3080_RESOLUTION_400                 400
++#define ADNS3080_RESOLUTION_1600                1600
++
++// Extended Configuration bits
++#define ADNS3080_SERIALNPU_OFF  0x02
++
++#define ADNS3080_FRAME_RATE_MAX         6469
++#define ADNS3080_FRAME_RATE_MIN         2000
++
++// SPI bus definitions
++#define ADNS3080_SPI_UNKNOWN         0
++#define ADNS3080_SPIBUS_1            1  // standard SPI bus
++#define ADNS3080_SPIBUS_3            3  // SPI3
++
++class AP_OpticalFlow_ADNS3080 : public AP_OpticalFlow
++{
++public:
++    AP_OpticalFlow_ADNS3080(int16_t cs_pin = ADNS3080_CHIP_SELECT, int16_t reset_pin = ADNS3080_RESET);
++    bool        init(bool initCommAPI, AP_PeriodicProcess *scheduler, AP_Semaphore* spi_semaphore = NULL, AP_Semaphore* spi3_semaphore = NULL); // parameter controls whether SPI interface is initialised (set to false if other devices are on the I2C/SPI bus and have already initialised the interface)
++    uint8_t     read_register(uint8_t address);
++    void        write_register(uint8_t address, uint8_t value);
++    void        reset();      // reset sensor by holding a pin high (or is it low?) for 10us.
++    void        update(uint32_t now);     // read latest values from sensor and fill in x,y and totals, return true on successful read
++
++    // ADNS3080 specific features
++
++    // return true if there has been motion since the last time this was called
++    bool                motion() { if( _motion ) { _motion = false; return true; }else{ return false; } }                                                                       
++
++    bool                overflow() { return _overflow; }    // true if there has been an overflow
++
++    void                disable_serial_pullup();
++
++    bool                get_led_always_on();         // returns true if LED is always on, false if only on when required
++    void                set_led_always_on( bool alwaysOn ); // set parameter to true if you want LED always on, otherwise false for only when required
++
++    int16_t             get_resolution();                                       // returns resolution (either 400 or 1600 counts per inch)
++    void                set_resolution(uint16_t resolution); // set parameter to 400 or 1600 counts per inch
++
++    bool                get_frame_rate_auto();           // get_frame_rate_auto - return true if frame rate is set to "auto", false if manual
++    void                set_frame_rate_auto(bool auto_frame_rate); // set_frame_rate_auto(bool) - set frame rate to auto (true), or manual (false)
++
++    uint16_t            get_frame_period();                                     // get_frame_period
++    void                set_frame_period(uint16_t period);
++
++    uint16_t            get_frame_rate();
++    void                set_frame_rate(uint16_t rate);
++
++    bool                get_shutter_speed_auto();                       // get_shutter_speed_auto - returns true if shutter speed is adjusted automatically, false if manual
++    void                set_shutter_speed_auto(bool auto_shutter_speed); // set_shutter_speed_auto - set shutter speed to auto (true), or manual (false)
++
++    uint16_t            get_shutter_speed();
++    void                set_shutter_speed(uint16_t shutter_speed);
++
++    void                clear_motion(); // will cause the x,y, dx, dy, and the sensor's motion registers to be cleared
++
++    void                print_pixel_data(); // dumps a 30x30 image to the Serial port
++
++private:
++    // bytes to store SPI settings
++    uint8_t     orig_spi_settings_spcr;     // spi1's mode
++    uint8_t     orig_spi3_settings_ucsr3c;  // spi3's mode
++    uint8_t     orig_spi3_settings_ubrr3;   // spi3's speed
++
++    // save and restore SPI settings
++    void        backup_spi_settings();
++    void        restore_spi_settings();
++
++    int16_t     _cs_pin; // pin used for chip select
++    int16_t     _reset_pin; // pin used for chip reset
++    bool        _motion; // true if there has been motion
++    bool        _overflow; // true if the x or y data buffers overflowed
++    uint8_t     _spi_bus;   // 0 = unknown, 1 = using SPI, 3 = using SPI3
++    AP_Semaphore* _spi_semaphore;
++};
++
++#endif
+
+Zmiany atrybutów dla: libraries/AP_OpticalFlow/AP_OpticalFlow_ADNS3080.h
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/AP_OpticalFlow_test.pde
+===================================================================
+--- libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/AP_OpticalFlow_test.pde	(wersja 0)
++++ libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/AP_OpticalFlow_test.pde	(wersja 0)
+@@ -0,0 +1,421 @@
++/*
++ *  Example of AP_OpticalFlow library.
++ *  Code by Randy Mackay. DIYDrones.com
++ */
++
++#include <FastSerial.h>
++#include <AP_Common.h>
++#include <AP_Param.h>
++#include <AP_Math.h>            // ArduPilot Mega Vector/Matrix math Library
++#include <SPI.h>                // Arduino SPI library
++#include <SPI3.h>               // SPI3 library
++#include <Arduino_Mega_ISR_Registry.h>
++#include <AP_PeriodicProcess.h>
++#include <AP_Semaphore.h>       // for removing conflict with dataflash on SPI3 bus
++#include "AP_OpticalFlow.h" // ArduCopter OpticalFlow Library
++
++////////////////////////////////////////////////////////////////////////////////
++// Serial ports
++////////////////////////////////////////////////////////////////////////////////
++//
++// Note that FastSerial port buffers are allocated at ::begin time,
++// so there is not much of a penalty to defining ports that we don't
++// use.
++//
++FastSerialPort0(Serial);        // FTDI/console
++
++#define MS5611_CS   40          // barometer chip select pin
++#define CONFIG_MPU6000_CHIP_SELECT_PIN 53   // MPU600 chip select pin
++
++//AP_OpticalFlow_ADNS3080 flowSensor;             // for APM1
++AP_OpticalFlow_ADNS3080 flowSensor(A3);  // override chip select pin to use A3 if using APM2 or APM2.5
++
++Arduino_Mega_ISR_Registry isr_registry;
++AP_TimerProcess scheduler;
++
++void setup()
++{
++    Serial.begin(115200);
++    Serial.println("ArduPilot Mega OpticalFlow library test ver 1.5");
++
++    delay(1000);
++
++    // disable other devices on this bus
++    pinMode(MS5611_CS,OUTPUT);
++    pinMode(CONFIG_MPU6000_CHIP_SELECT_PIN,OUTPUT);
++    digitalWrite(MS5611_CS, HIGH);
++    digitalWrite(CONFIG_MPU6000_CHIP_SELECT_PIN, HIGH);
++
++    // initialise timer
++    isr_registry.init();
++    scheduler.init(&isr_registry);
++
++    // flowSensor initialization
++    if( flowSensor.init(true, &scheduler) == false ) {
++        Serial.print("Failed to initialise ADNS3080 ");
++    }
++
++    flowSensor.set_orientation(AP_OPTICALFLOW_ADNS3080_PINS_FORWARD);
++    flowSensor.set_field_of_view(AP_OPTICALFLOW_ADNS3080_08_FOV);
++
++    delay(1000);
++}
++
++//
++// display menu
++//
++void display_menu()
++{
++    Serial.println();
++    Serial.println("please choose from the following options:");
++    Serial.println("     c - display all config");
++    Serial.println("     f - set frame rate");
++    Serial.println("     i - display image");
++    Serial.println("     I - display image continuously");
++    Serial.println("     m - display motion");
++    Serial.println("     r - set resolution");
++    Serial.println("     s - set shutter speed");
++    Serial.println("     z - clear all motion");
++    Serial.println("     a - frame rate auto/manual");
++    Serial.println();
++}
++
++//
++// display config
++//
++void display_config()
++{
++    Serial.print("Config: ");
++    Serial.print(flowSensor.read_register(ADNS3080_CONFIGURATION_BITS),BIN);
++    delayMicroseconds(50);
++    Serial.print(",");
++    Serial.print(flowSensor.read_register(ADNS3080_EXTENDED_CONFIG),BIN);
++    delayMicroseconds(50);
++    Serial.println();
++
++    // product id
++    Serial.print("\tproduct id:     ");
++    Serial.print(flowSensor.read_register(ADNS3080_PRODUCT_ID),HEX);
++    delayMicroseconds(50);
++    Serial.print(" (hex)");
++    Serial.println();
++
++    // frame rate
++    Serial.print("\tframe rate:     ");
++    Serial.print(flowSensor.get_frame_rate());
++    if( flowSensor.get_frame_rate_auto() == true ) {
++        Serial.print(" (auto)");
++    }else{
++        Serial.print(" (manual)");
++    }
++    Serial.println();
++
++    // resolution
++    Serial.print("\tresolution:     ");
++    Serial.print(flowSensor.get_resolution());
++    Serial.println();
++
++    // shutter speed
++    Serial.print("\tshutter speed:  ");
++    Serial.print(flowSensor.get_shutter_speed());
++    if( flowSensor.get_shutter_speed_auto() ) {
++        Serial.print(" (auto)");
++    }else{
++        Serial.print(" (manual)");
++    }
++    Serial.println();
++}
++
++//
++// set frame rate
++//
++void set_frame_rate()
++{
++    int value;
++
++    // frame rate
++    Serial.print("frame rate:     ");
++    Serial.print(flowSensor.get_frame_rate());
++    if( flowSensor.get_frame_rate_auto() == true ) {
++        Serial.print(" (auto)");
++    }else{
++        Serial.print(" (manual)");
++    }
++    Serial.println();
++
++    Serial.println("Choose new frame rate:");
++    Serial.println("\ta) auto");
++    Serial.println("\t2) 2000 f/s");
++    Serial.println("\t3) 3000 f/s");
++    Serial.println("\t4) 4000 f/s");
++    Serial.println("\t5) 5000 f/s");
++    Serial.println("\t6) 6400 f/s");
++    Serial.println("\tx) exit (leave unchanged)");
++
++    // get user input
++    Serial.flush();
++    while( !Serial.available() ) {
++        delay(20);
++    }
++    value = Serial.read();
++
++    if( value == 'a' || value == 'A')
++        flowSensor.set_frame_rate_auto(true);
++    if( value == '2' )
++        flowSensor.set_frame_rate(2000);
++    if( value == '3' )
++        flowSensor.set_frame_rate(3000);
++    if( value == '4' )
++        flowSensor.set_frame_rate(4000);
++    if( value == '5' )
++        flowSensor.set_frame_rate(5000);
++    if( value == '6' )
++        flowSensor.set_frame_rate(6469);
++
++    // display new frame rate
++    Serial.print("frame rate:     ");
++    Serial.print(flowSensor.get_frame_rate());
++    if( flowSensor.get_frame_rate_auto() == true ) {
++        Serial.print(" (auto)");
++    }else{
++        Serial.print(" (manual)");
++    }
++    Serial.println();
++}
++
++// display_image - captures and displays image from flowSensor flowSensor
++void display_image()
++{
++    Serial.println("image data --------------");
++    flowSensor.print_pixel_data();
++    Serial.println("-------------------------");
++}
++
++// display_image - captures and displays image from flowSensor flowSensor
++void display_image_continuously()
++{
++    int i;
++    Serial.println("press any key to return to menu");
++
++    Serial.flush();
++
++    while( !Serial.available() ) {
++        display_image();
++        i=0;
++        while( i<20 && !Serial.available() ) {
++            delay(100);          // give the viewer a bit of time to catchup
++            i++;
++        }
++    }
++
++    Serial.flush();
++}
++
++//
++// set resolutiojn
++//
++void set_resolution()
++{
++    int value;
++    int resolution = flowSensor.get_resolution();
++    Serial.print("resolution: ");
++    Serial.println(resolution);
++    Serial.println("Choose new value:");
++    Serial.println("    1) 1600");
++    Serial.println("    4) 400");
++    Serial.println("    x) exit");
++    Serial.println();
++
++    // get user input
++    Serial.flush();
++    while( !Serial.available() ) {
++        delay(20);
++    }
++    value = Serial.read();
++
++    // update resolution
++    if( value == '1' ) {
++        flowSensor.set_resolution(ADNS3080_RESOLUTION_1600);
++    }
++    if( value == '4' ) {
++        flowSensor.set_resolution(ADNS3080_RESOLUTION_400);
++    }
++
++    Serial.print("new resolution: ");
++    Serial.println(flowSensor.get_resolution());
++}
++
++//
++// set shutter speed
++//
++void set_shutter_speed()
++{
++    int value;
++
++    // shutter speed
++    Serial.print("shutter speed:     ");
++    Serial.print(flowSensor.get_shutter_speed());
++    if( flowSensor.get_shutter_speed_auto() == true ) {
++        Serial.print(" (auto)");
++    }else{
++        Serial.print(" (manual)");
++    }
++    Serial.println();
++
++    Serial.println("Choose new shutter speed:");
++    Serial.println("\ta) auto");
++    Serial.println("\t1) 1000 clock cycles");
++    Serial.println("\t2) 2000 clock cycles");
++    Serial.println("\t3) 3000 clock cycles");
++    Serial.println("\t4) 4000 clock cycles");
++    Serial.println("\t5) 5000 clock cycles");
++    Serial.println("\t6) 6000 clock cycles");
++    Serial.println("\t7) 7000 clock cycles");
++    Serial.println("\t8) 8000 clock cycles");
++    Serial.println("\t9) 9000 clock cycles");
++    Serial.println("\tx) exit (leave unchanged)");
++
++    // get user input
++    Serial.flush();
++    while( !Serial.available() ) {
++        delay(20);
++    }
++    value = Serial.read();
++
++    if( value == 'a' || value == 'A')
++        flowSensor.set_shutter_speed_auto(true);
++    if( value == '1' )
++        flowSensor.set_shutter_speed(1000);
++    if( value == '2' )
++        flowSensor.set_shutter_speed(2000);
++    if( value == '3' )
++        flowSensor.set_shutter_speed(3000);
++    if( value == '4' )
++        flowSensor.set_shutter_speed(4000);
++    if( value == '5' )
++        flowSensor.set_shutter_speed(5000);
++    if( value == '6' )
++        flowSensor.set_shutter_speed(6000);
++    if( value == '7' )
++        flowSensor.set_shutter_speed(7000);
++    if( value == '8' )
++        flowSensor.set_shutter_speed(8000);
++    if( value == '9' )
++        flowSensor.set_shutter_speed(9000);
++
++    // display new shutter speed
++    Serial.print("shutter speed:     ");
++    Serial.print(flowSensor.get_shutter_speed());
++    if( flowSensor.get_shutter_speed_auto() == true ) {
++        Serial.print(" (auto)");
++    }else{
++        Serial.print(" (manual)");
++    }
++    Serial.println();
++}
++
++//
++// display motion - show x,y and squal values constantly until user presses a key
++//
++void display_motion()
++{
++    boolean first_time = true;
++    Serial.flush();
++
++    // display instructions on how to exit
++    Serial.println("press x to return to menu..");
++    delay(1000);
++
++    while( !Serial.available() ) {
++        //flowSensor.update();
++        flowSensor.update_position(0,0,0,1,100);
++
++        // check for errors
++        if( flowSensor.overflow() )
++            Serial.println("overflow!!");
++
++        // x,y,squal
++        Serial.print("x/dx: ");
++        Serial.print(flowSensor.x,DEC);
++        Serial.print("/");
++        Serial.print(flowSensor.dx,DEC);
++        Serial.print("\ty/dy: ");
++        Serial.print(flowSensor.y,DEC);
++        Serial.print("/");
++        Serial.print(flowSensor.dy,DEC);
++        Serial.print("\tsqual:");
++        Serial.print(flowSensor.surface_quality,DEC);
++        Serial.println();
++        first_time = false;
++
++        // short delay
++        delay(100);
++    }
++
++    // flush the serial
++    Serial.flush();
++}
++
++void loop()
++{
++    int value;
++
++    // display menu to user
++    display_menu();
++
++    // wait for user to enter something
++    while( !Serial.available() ) {
++        delay(20);
++    }
++
++    // get character from user
++    value = Serial.read();
++
++    switch( value ) {
++
++    case 'c':
++        // display all config
++        display_config();
++        break;
++
++    case 'f':
++        // set frame rate
++        set_frame_rate();
++        break;
++
++    case 'i':
++        // display image
++        display_image();
++        break;
++
++    case 'I':
++        // display image continuously
++        display_image_continuously();
++        break;
++
++    case 'm':
++        // display motion
++        display_motion();
++        break;
++
++    case 'r':
++        // set resolution
++        set_resolution();
++        break;
++
++    case 's':
++        // set shutter speed
++        set_shutter_speed();
++        break;
++
++    case 'z':
++        // clear and reset everything
++        flowSensor.clear_motion();
++        break;
++
++    default:
++        Serial.println("unrecognised command");
++        Serial.println();
++        break;
++    }
++}
+Index: libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/Makefile
+===================================================================
+--- libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/Makefile	(wersja 0)
++++ libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/Makefile	(wersja 0)
+@@ -0,0 +1,2 @@
++BOARD	=	mega2560
++include ../../../AP_Common/Arduino.mk
+
+Zmiany atrybutów dla: libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/Makefile
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/AP_OpticalFlow/examples/ADNS3080ImageGrabber/ADNS3080ImageGrabber.py
+===================================================================
+--- libraries/AP_OpticalFlow/examples/ADNS3080ImageGrabber/ADNS3080ImageGrabber.py	(wersja 0)
++++ libraries/AP_OpticalFlow/examples/ADNS3080ImageGrabber/ADNS3080ImageGrabber.py	(wersja 0)
+@@ -0,0 +1,180 @@
++# File: ADNS3080ImageGrabber.py
++
++import serial
++import string
++import math
++import time
++from Tkinter import *
++from threading import Timer
++
++comPort = 'COM8'  #default com port
++comPortBaud = 115200
++
++class App:
++    grid_size = 15
++    num_pixels = 30
++    image_started = FALSE
++    image_current_row = 0;
++    ser = serial.Serial()
++    pixel_dictionary = {}
++        
++    def __init__(self, master):
++
++        # set main window's title
++        master.title("ADNS3080ImageGrabber")
++
++        frame = Frame(master)
++        frame.grid(row=0,column=0)
++
++        self.comPortStr = StringVar()
++        self.comPort = Entry(frame,textvariable=self.comPortStr)
++        self.comPort.grid(row=0,column=0)
++        self.comPort.delete(0, END)
++        self.comPort.insert(0,comPort)
++
++        self.button = Button(frame, text="Open", fg="red", command=self.open_serial)
++        self.button.grid(row=0,column=1)
++
++        self.entryStr = StringVar()
++        self.entry = Entry(frame,textvariable=self.entryStr)
++        self.entry.grid(row=0,column=2)
++        self.entry.delete(0, END)
++        self.entry.insert(0,"I")
++
++        self.send_button = Button(frame, text="Send", command=self.send_to_serial)
++        self.send_button.grid(row=0,column=3)
++
++        self.canvas = Canvas(master, width=self.grid_size*self.num_pixels, height=self.grid_size*self.num_pixels)
++        self.canvas.grid(row=1)
++
++        ## start attempts to read from serial port
++        self.read_loop()
++
++    def __del__(self):
++        self.stop_read_loop()
++
++    def open_serial(self):
++        # close the serial port
++        if( self.ser.isOpen() ):
++            try:
++                self.ser.close()
++            except:
++                i=i  # do nothing
++        # open the serial port
++        try:
++            self.ser = serial.Serial(port=self.comPortStr.get(),baudrate=comPortBaud, timeout=1)
++            print("serial port '" + self.comPortStr.get() + "' opened!")
++        except:
++            print("failed to open serial port '" + self.comPortStr.get() + "'")
++
++    def send_to_serial(self):
++        if self.ser.isOpen():
++            self.ser.write(self.entryStr.get())
++            print "sent '" + self.entryStr.get() + "' to " + self.ser.portstr
++        else:
++            print "Serial port not open!"
++
++    def read_loop(self):
++        try:
++            self.t.cancel()
++        except:
++            aVar = 1  # do nothing
++        #print("reading")
++        if( self.ser.isOpen() ) :
++            self.read_from_serial();
++
++        self.t = Timer(0.0,self.read_loop)
++        self.t.start()
++
++    def stop_read_loop(self):
++        try:
++            self.t.cancel()
++        except:
++            print("failed to cancel timer")
++            # do nothing
++
++    def read_from_serial(self):
++        if( self.ser.isOpen() ):
++            while( self.ser.inWaiting() > 0 ):
++
++                self.line_processed = FALSE
++                line = self.ser.readline()
++                    
++                # process the line read
++
++                if( line.find("-------------------------") == 0 ):
++                    self.line_processed = TRUE
++                    self.image_started = FALSE
++                    self.image_current_row = 0
++                
++                if( self.image_started == TRUE ):
++                    if( self.image_current_row >= self.num_pixels ):
++                        self.image_started == FALSE
++                    else:
++                        words = string.split(line,",")
++                        if len(words) >= 30:
++                            self.line_processed = TRUE
++                            x = 0
++                            for v in words:
++                                try:
++                                    colour = int(v)
++                                except:
++                                    colour = 0;
++                                #self.display_pixel(x,self.image_current_row,colour)
++                                self.display_pixel(self.num_pixels-1-self.image_current_row,self.num_pixels-1-x,colour)
++                                x += 1
++                            self.image_current_row += 1
++                        else:
++                            print("line " + str(self.image_current_row) + "incomplete (" + str(len(words)) + " of " + str(self.num_pixels) + "), ignoring")
++                            #print("bad line: " + line);
++
++                if( line.find("image data") >= 0 ):
++                    self.line_processed = TRUE
++                    self.image_started = TRUE
++                    self.image_current_row = 0
++                    # clear canvas
++                    #self.canvas.delete(ALL) # remove all items
++
++                #display the line if we couldn't understand it
++                if( self.line_processed == FALSE ):
++                    print( line )
++            
++    def display_default_image(self):
++        # display the grid
++        for x in range(0, self.num_pixels-1):
++            for y in range(0, self.num_pixels-1):
++                colour = x * y / 3.53
++                self.display_pixel(x,y,colour)
++
++    def display_pixel(self, x, y, colour):
++        if( x >= 0 and x < self.num_pixels and y >= 0 and y < self.num_pixels ) :
++            
++            #find the old pixel if it exists and delete it
++            if self.pixel_dictionary.has_key(x+y*self.num_pixels) :
++                self.old_pixel = self.pixel_dictionary[x+y*self.num_pixels]
++                self.canvas.delete(self.old_pixel)
++                del(self.old_pixel)
++                
++            fillColour = "#%02x%02x%02x" % (colour, colour, colour)
++            #draw a new pixel and add to pixel_array
++            self.new_pixel = self.canvas.create_rectangle(x*self.grid_size, y*self.grid_size, (x+1)*self.grid_size, (y+1)*self.grid_size, fill=fillColour)
++            self.pixel_dictionary[x+y*self.num_pixels] = self.new_pixel
++
++
++## main loop ##
++
++root = Tk()
++#root.withdraw()
++#serPort = SerialHandler(comPort,comPortBaud)
++
++# create main display
++app = App(root)
++app.display_default_image()
++
++print("entering main loop!")
++
++root.mainloop()
++
++app.stop_read_loop()
++
++print("exiting")
+
+Zmiany atrybutów dla: libraries/AP_OpticalFlow/examples/ADNS3080ImageGrabber/ADNS3080ImageGrabber.py
+___________________________________________________________________
+Dodane: svn:executable
+   + *
+Dodane: svn:mime-type
+   + text/x-python
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+
+Index: libraries/AP_OpticalFlow/examples/ADNS3080ImageGrabber/README.txt
+===================================================================
+--- libraries/AP_OpticalFlow/examples/ADNS3080ImageGrabber/README.txt	(wersja 0)
++++ libraries/AP_OpticalFlow/examples/ADNS3080ImageGrabber/README.txt	(wersja 0)
+@@ -0,0 +1,11 @@
++Instructions for running the ADNS3080ImageGrabber.py
++
++1. Start Arduino and upload the AP_OpticalFlow_test.pde to the APM
++2. Install Python 2.7 from http://www.python.org/getit/
++3. Start the Python IDLE editor
++4. File, Open, .../arduino-0022/libraries/AP_OpticalFlow/examples/ADNS3080ImageGrabber/ADNS3080ImageGrabber.py
++5. Run, Run Module - the Python Shell and then ADNS3080ImageGrabber applications should appear
++6. on the ADNS3080ImageGrabber screen, change the default com port, "COM8" to the correct port (sorry, doesn't auto detect)
++7. wait a few moments, then push the Send button to start/stop grabbing images from the sensor (a new image should appear every 2 seconds)
++
++Note: you should see the the AP_OpticalFlow_ADNS3080's menu and any errors appear in the Python Shell
+\ Brak znaku nowej linii na końcu pliku
+
+Zmiany atrybutów dla: libraries/AP_OpticalFlow/examples/ADNS3080ImageGrabber/README.txt
+___________________________________________________________________
+Dodane: svn:mime-type
+   + text/plain
+Dodane: svn:keywords
+   + Author Date Id Rev URL
+Dodane: svn:eol-style
+   + native
+

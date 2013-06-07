@@ -1,0 +1,1245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="84">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df name="MegaPirateNG_2.9_R7" root=".">
+      <df name="ArduCopter">
+        <in>APM_Config.h</in>
+        <in>APM_Config_mavlink_hil.h</in>
+        <in>AP_State.pde</in>
+        <in>ArduCopter.pde</in>
+        <in>Attitude.pde</in>
+        <in>GCS.h</in>
+        <in>GCS.pde</in>
+        <in>GCS_Mavlink.pde</in>
+        <in>Log.pde</in>
+        <in>OSD_FrSky.pde</in>
+        <in>OSD_Remzibi.pde</in>
+        <in>OSD_Syberian.pde</in>
+        <in>Parameters.h</in>
+        <in>Parameters.pde</in>
+        <in>UserCode.pde</in>
+        <in>UserVariables.h</in>
+        <in>commands.pde</in>
+        <in>commands_logic.pde</in>
+        <in>commands_process.pde</in>
+        <in>config.h</in>
+        <in>config_channels.h</in>
+        <in>control_modes.pde</in>
+        <in>defines.h</in>
+        <in>events.pde</in>
+        <in>failsafe.pde</in>
+        <in>flip.pde</in>
+        <in>inertia.pde</in>
+        <in>led.pde</in>
+        <in>leds.pde</in>
+        <in>limits.pde</in>
+        <in>motors.pde</in>
+        <in>navigation.pde</in>
+        <in>perf_info.pde</in>
+        <in>radio.pde</in>
+        <in>sensors.pde</in>
+        <in>setup.pde</in>
+        <in>system.pde</in>
+        <in>test.pde</in>
+        <in>toy.pde</in>
+      </df>
+      <df name="libraries">
+        <df name="AC_PID">
+          <in>AC_PID.cpp</in>
+          <in>AC_PID.h</in>
+        </df>
+        <df name="AP_AHRS">
+          <in>AP_AHRS.cpp</in>
+          <in>AP_AHRS.h</in>
+          <in>AP_AHRS_DCM.cpp</in>
+          <in>AP_AHRS_DCM.h</in>
+          <in>AP_AHRS_HIL.cpp</in>
+          <in>AP_AHRS_HIL.h</in>
+        </df>
+        <df name="AP_Airspeed">
+          <in>AP_Airspeed.cpp</in>
+          <in>AP_Airspeed.h</in>
+        </df>
+        <df name="AP_AnalogSource">
+          <in>AP_AnalogSource.h</in>
+          <in>AP_AnalogSource_Arduino.cpp</in>
+          <in>AP_AnalogSource_Arduino.h</in>
+          <in>AP_AnalogSource_PIRATES.cpp</in>
+          <in>AP_AnalogSource_PIRATES.h</in>
+          <in>AnalogSource.h</in>
+        </df>
+        <df name="AP_Baro">
+          <in>AP_Baro.cpp</in>
+          <in>AP_Baro.h</in>
+          <in>AP_Baro_BMP085_Pirates.cpp</in>
+          <in>AP_Baro_BMP085_Pirates.h</in>
+          <in>AP_Baro_MS5611_I2C.cpp</in>
+          <in>AP_Baro_MS5611_I2C.h</in>
+        </df>
+        <df name="AP_Buffer">
+          <in>AP_Buffer.h</in>
+        </df>
+        <df name="AP_Camera">
+          <in>AP_Camera.cpp</in>
+          <in>AP_Camera.h</in>
+        </df>
+        <df name="AP_Common">
+          <df name="tools">
+            <in>eedump.c</in>
+            <in>eedump_apparam.c</in>
+          </df>
+          <in>AP_Common.cpp</in>
+          <in>AP_Common.h</in>
+          <in>AP_Curve.h</in>
+          <in>AP_Loop.cpp</in>
+          <in>AP_Loop.h</in>
+          <in>AP_Param.cpp</in>
+          <in>AP_Param.h</in>
+          <in>AP_Test.h</in>
+          <in>AP_Var_menufuncs.cpp</in>
+          <in>AP_Vector.h</in>
+          <in>c++.cpp</in>
+          <in>c++.h</in>
+        </df>
+        <df name="AP_Compass">
+          <in>AP_Compass.h</in>
+          <in>AP_Compass_HMC5843_Pirates.cpp</in>
+          <in>AP_Compass_HMC5843_Pirates.h</in>
+          <in>Compass.cpp</in>
+          <in>Compass.h</in>
+        </df>
+        <df name="AP_Declination">
+          <in>AP_Declination.cpp</in>
+          <in>AP_Declination.h</in>
+        </df>
+        <df name="AP_GPS">
+          <in>AP_GPS.h</in>
+          <in>AP_GPS_Auto.cpp</in>
+          <in>AP_GPS_Auto.h</in>
+          <in>AP_GPS_BlackVortex.cpp</in>
+          <in>AP_GPS_BlackVortex.h</in>
+          <in>AP_GPS_MTK19.cpp</in>
+          <in>AP_GPS_MTK19.h</in>
+          <in>AP_GPS_MTK_Common.h</in>
+          <in>AP_GPS_NMEA.cpp</in>
+          <in>AP_GPS_NMEA.h</in>
+          <in>AP_GPS_None.h</in>
+          <in>AP_GPS_SIRF.cpp</in>
+          <in>AP_GPS_SIRF.h</in>
+          <in>AP_GPS_UBLOX.cpp</in>
+          <in>AP_GPS_UBLOX.h</in>
+          <in>GPS.cpp</in>
+          <in>GPS.h</in>
+        </df>
+        <df name="AP_InertialNav">
+          <in>AP_InertialNav.cpp</in>
+          <in>AP_InertialNav.h</in>
+        </df>
+        <df name="AP_InertialSensor">
+          <in>AP_InertialSensor.cpp</in>
+          <in>AP_InertialSensor.h</in>
+          <in>AP_InertialSensor_MPU6000_I2C.cpp</in>
+          <in>AP_InertialSensor_MPU6000_I2C.h</in>
+          <in>AP_InertialSensor_Pirates.cpp</in>
+          <in>AP_InertialSensor_Pirates.h</in>
+        </df>
+        <df name="AP_LeadFilter">
+          <in>AP_LeadFilter.cpp</in>
+          <in>AP_LeadFilter.h</in>
+        </df>
+        <df name="AP_Limits">
+          <in>AP_Limit_Altitude.cpp</in>
+          <in>AP_Limit_Altitude.h</in>
+          <in>AP_Limit_GPSLock.cpp</in>
+          <in>AP_Limit_GPSLock.h</in>
+          <in>AP_Limit_Geofence.cpp</in>
+          <in>AP_Limit_Geofence.h</in>
+          <in>AP_Limit_Module.cpp</in>
+          <in>AP_Limit_Module.h</in>
+          <in>AP_Limits.cpp</in>
+          <in>AP_Limits.h</in>
+        </df>
+        <df name="AP_Math">
+          <in>AP_Math.cpp</in>
+          <in>AP_Math.h</in>
+          <in>location.cpp</in>
+          <in>matrix3.cpp</in>
+          <in>matrix3.h</in>
+          <in>polygon.cpp</in>
+          <in>polygon.h</in>
+          <in>quaternion.cpp</in>
+          <in>quaternion.h</in>
+          <in>rotations.h</in>
+          <in>vector2.h</in>
+          <in>vector3.cpp</in>
+          <in>vector3.h</in>
+        </df>
+        <df name="AP_Menu">
+          <in>AP_Menu.cpp</in>
+          <in>AP_Menu.h</in>
+        </df>
+        <df name="AP_Motors">
+          <in>AP_Motors.cpp</in>
+          <in>AP_Motors.h</in>
+          <in>AP_MotorsHeli.cpp</in>
+          <in>AP_MotorsHeli.h</in>
+          <in>AP_MotorsHexa.cpp</in>
+          <in>AP_MotorsHexa.h</in>
+          <in>AP_MotorsMatrix.cpp</in>
+          <in>AP_MotorsMatrix.h</in>
+          <in>AP_MotorsOcta.cpp</in>
+          <in>AP_MotorsOcta.h</in>
+          <in>AP_MotorsOctaQuad.cpp</in>
+          <in>AP_MotorsOctaQuad.h</in>
+          <in>AP_MotorsQuad.cpp</in>
+          <in>AP_MotorsQuad.h</in>
+          <in>AP_MotorsTri.cpp</in>
+          <in>AP_MotorsTri.h</in>
+          <in>AP_MotorsY6.cpp</in>
+          <in>AP_MotorsY6.h</in>
+        </df>
+        <df name="AP_Mount">
+          <in>AP_Mount.cpp</in>
+          <in>AP_Mount.h</in>
+        </df>
+        <df name="AP_OpticalFlow">
+          <df name="examples">
+            <df name="ADNS3080ImageGrabber">
+            </df>
+            <df name="AP_OpticalFlow_test">
+              <in>AP_OpticalFlow_test.pde</in>
+            </df>
+          </df>
+          <in>AP_OpticalFlow.cpp</in>
+          <in>AP_OpticalFlow.h</in>
+          <in>AP_OpticalFlow_ADNS3080.cpp</in>
+          <in>AP_OpticalFlow_ADNS3080.h</in>
+        </df>
+        <df name="AP_PeriodicProcess">
+          <in>AP_PeriodicProcess.h</in>
+          <in>AP_PeriodicProcessStub.cpp</in>
+          <in>AP_PeriodicProcessStub.h</in>
+          <in>AP_TimerProcess.cpp</in>
+          <in>AP_TimerProcess.h</in>
+          <in>PeriodicProcess.h</in>
+        </df>
+        <df name="AP_RangeFinder">
+          <in>AP_RangeFinder.h</in>
+          <in>AP_RangeFinder_ME007.cpp</in>
+          <in>AP_RangeFinder_ME007.h</in>
+          <in>AP_RangeFinder_MaxsonarXL.cpp</in>
+          <in>AP_RangeFinder_MaxsonarXL.h</in>
+          <in>RangeFinder.cpp</in>
+          <in>RangeFinder.h</in>
+        </df>
+        <df name="AP_Relay">
+          <in>AP_Relay.cpp</in>
+          <in>AP_Relay.h</in>
+        </df>
+        <df name="AP_Semaphore">
+          <df name="examples">
+            <df name="AP_Semaphore_test">
+              <in>AP_Semaphore_test.pde</in>
+            </df>
+          </df>
+          <in>AP_Semaphore.cpp</in>
+          <in>AP_Semaphore.h</in>
+        </df>
+        <df name="AP_Var">
+          <in>AP_MetaClass.cpp</in>
+          <in>AP_MetaClass.h</in>
+          <in>AP_Var.cpp</in>
+          <in>AP_Var.h</in>
+        </df>
+        <df name="APM_Control">
+          <in>APM_Control.h</in>
+          <in>AP_PitchController.cpp</in>
+          <in>AP_PitchController.h</in>
+          <in>AP_RollController.cpp</in>
+          <in>AP_RollController.h</in>
+          <in>AP_YawController.cpp</in>
+          <in>AP_YawController.h</in>
+        </df>
+        <df name="APM_PI">
+          <in>APM_PI.cpp</in>
+          <in>APM_PI.h</in>
+        </df>
+        <df name="APM_RC">
+          <in>APM_RC.h</in>
+          <in>APM_RC_PIRATES.cpp</in>
+          <in>APM_RC_PIRATES.h</in>
+        </df>
+        <df name="Arduino_Mega_ISR_Registry">
+          <in>Arduino_Mega_ISR_Registry.cpp</in>
+          <in>Arduino_Mega_ISR_Registry.h</in>
+        </df>
+        <df name="DataFlash">
+          <in>DataFlash.cpp</in>
+          <in>DataFlash.h</in>
+          <in>DataFlash_CRIUS_AIOP2.cpp</in>
+          <in>DataFlash_CRIUS_AIOP2.h</in>
+        </df>
+        <df name="DigitalWriteFast">
+          <in>DigitalWriteFast.h</in>
+        </df>
+        <df name="FastSerial">
+          <in>BetterStream.cpp</in>
+          <in>BetterStream.h</in>
+          <in>FastSerial.cpp</in>
+          <in>FastSerial.h</in>
+          <in>ftoa_engine.S</in>
+          <in>ftoa_engine.h</in>
+          <in>ntz.h</in>
+          <in>ultoa_invert.S</in>
+          <in>vprintf.cpp</in>
+          <in>xtoa_fast.h</in>
+        </df>
+        <df name="Filter">
+          <in>AverageFilter.h</in>
+          <in>DerivativeFilter.cpp</in>
+          <in>DerivativeFilter.h</in>
+          <in>Filter.h</in>
+          <in>FilterWithBuffer.h</in>
+          <in>LowPassFilter.h</in>
+          <in>ModeFilter.h</in>
+        </df>
+        <df name="GCS_MAVLink">
+          <df name="include">
+            <df name="mavlink">
+              <df name="v0.9">
+                <df name="ardupilotmega">
+                  <in>ardupilotmega.h</in>
+                  <in>mavlink.h</in>
+                  <in>mavlink_msg_ahrs.h</in>
+                  <in>mavlink_msg_ap_adc.h</in>
+                  <in>mavlink_msg_digicam_configure.h</in>
+                  <in>mavlink_msg_digicam_control.h</in>
+                  <in>mavlink_msg_fence_fetch_point.h</in>
+                  <in>mavlink_msg_fence_point.h</in>
+                  <in>mavlink_msg_fence_status.h</in>
+                  <in>mavlink_msg_hwstatus.h</in>
+                  <in>mavlink_msg_limits_status.h</in>
+                  <in>mavlink_msg_meminfo.h</in>
+                  <in>mavlink_msg_mount_configure.h</in>
+                  <in>mavlink_msg_mount_control.h</in>
+                  <in>mavlink_msg_mount_status.h</in>
+                  <in>mavlink_msg_radio.h</in>
+                  <in>mavlink_msg_sensor_offsets.h</in>
+                  <in>mavlink_msg_set_mag_offsets.h</in>
+                  <in>mavlink_msg_simstate.h</in>
+                  <in>testsuite.h</in>
+                  <in>version.h</in>
+                </df>
+                <df name="common">
+                  <in>common.h</in>
+                  <in>mavlink.h</in>
+                  <in>mavlink_msg_action.h</in>
+                  <in>mavlink_msg_action_ack.h</in>
+                  <in>mavlink_msg_attitude.h</in>
+                  <in>mavlink_msg_auth_key.h</in>
+                  <in>mavlink_msg_boot.h</in>
+                  <in>mavlink_msg_change_operator_control.h</in>
+                  <in>mavlink_msg_change_operator_control_ack.h</in>
+                  <in>mavlink_msg_command.h</in>
+                  <in>mavlink_msg_command_ack.h</in>
+                  <in>mavlink_msg_control_status.h</in>
+                  <in>mavlink_msg_debug.h</in>
+                  <in>mavlink_msg_debug_vect.h</in>
+                  <in>mavlink_msg_global_position.h</in>
+                  <in>mavlink_msg_global_position_int.h</in>
+                  <in>mavlink_msg_gps_local_origin_set.h</in>
+                  <in>mavlink_msg_gps_raw.h</in>
+                  <in>mavlink_msg_gps_raw_int.h</in>
+                  <in>mavlink_msg_gps_set_global_origin.h</in>
+                  <in>mavlink_msg_gps_status.h</in>
+                  <in>mavlink_msg_heartbeat.h</in>
+                  <in>mavlink_msg_hil_controls.h</in>
+                  <in>mavlink_msg_hil_state.h</in>
+                  <in>mavlink_msg_local_position.h</in>
+                  <in>mavlink_msg_local_position_setpoint.h</in>
+                  <in>mavlink_msg_local_position_setpoint_set.h</in>
+                  <in>mavlink_msg_manual_control.h</in>
+                  <in>mavlink_msg_named_value_float.h</in>
+                  <in>mavlink_msg_named_value_int.h</in>
+                  <in>mavlink_msg_nav_controller_output.h</in>
+                  <in>mavlink_msg_object_detection_event.h</in>
+                  <in>mavlink_msg_optical_flow.h</in>
+                  <in>mavlink_msg_param_request_list.h</in>
+                  <in>mavlink_msg_param_request_read.h</in>
+                  <in>mavlink_msg_param_set.h</in>
+                  <in>mavlink_msg_param_value.h</in>
+                  <in>mavlink_msg_ping.h</in>
+                  <in>mavlink_msg_position_target.h</in>
+                  <in>mavlink_msg_raw_imu.h</in>
+                  <in>mavlink_msg_raw_pressure.h</in>
+                  <in>mavlink_msg_rc_channels_override.h</in>
+                  <in>mavlink_msg_rc_channels_raw.h</in>
+                  <in>mavlink_msg_rc_channels_scaled.h</in>
+                  <in>mavlink_msg_request_data_stream.h</in>
+                  <in>mavlink_msg_roll_pitch_yaw_speed_thrust_setpoint.h</in>
+                  <in>mavlink_msg_roll_pitch_yaw_thrust_setpoint.h</in>
+                  <in>mavlink_msg_safety_allowed_area.h</in>
+                  <in>mavlink_msg_safety_set_allowed_area.h</in>
+                  <in>mavlink_msg_scaled_imu.h</in>
+                  <in>mavlink_msg_scaled_pressure.h</in>
+                  <in>mavlink_msg_servo_output_raw.h</in>
+                  <in>mavlink_msg_set_altitude.h</in>
+                  <in>mavlink_msg_set_mode.h</in>
+                  <in>mavlink_msg_set_nav_mode.h</in>
+                  <in>mavlink_msg_set_roll_pitch_yaw_speed_thrust.h</in>
+                  <in>mavlink_msg_set_roll_pitch_yaw_thrust.h</in>
+                  <in>mavlink_msg_state_correction.h</in>
+                  <in>mavlink_msg_statustext.h</in>
+                  <in>mavlink_msg_sys_status.h</in>
+                  <in>mavlink_msg_system_time.h</in>
+                  <in>mavlink_msg_system_time_utc.h</in>
+                  <in>mavlink_msg_vfr_hud.h</in>
+                  <in>mavlink_msg_waypoint.h</in>
+                  <in>mavlink_msg_waypoint_ack.h</in>
+                  <in>mavlink_msg_waypoint_clear_all.h</in>
+                  <in>mavlink_msg_waypoint_count.h</in>
+                  <in>mavlink_msg_waypoint_current.h</in>
+                  <in>mavlink_msg_waypoint_reached.h</in>
+                  <in>mavlink_msg_waypoint_request.h</in>
+                  <in>mavlink_msg_waypoint_request_list.h</in>
+                  <in>mavlink_msg_waypoint_set_current.h</in>
+                  <in>testsuite.h</in>
+                  <in>version.h</in>
+                </df>
+                <in>checksum.h</in>
+                <in>mavlink_helpers.h</in>
+                <in>mavlink_types.h</in>
+                <in>protocol.h</in>
+              </df>
+              <df name="v1.0">
+                <df name="ardupilotmega">
+                  <in>ardupilotmega.h</in>
+                  <in>mavlink.h</in>
+                  <in>mavlink_msg_ahrs.h</in>
+                  <in>mavlink_msg_ap_adc.h</in>
+                  <in>mavlink_msg_digicam_configure.h</in>
+                  <in>mavlink_msg_digicam_control.h</in>
+                  <in>mavlink_msg_fence_fetch_point.h</in>
+                  <in>mavlink_msg_fence_point.h</in>
+                  <in>mavlink_msg_fence_status.h</in>
+                  <in>mavlink_msg_hwstatus.h</in>
+                  <in>mavlink_msg_limits_status.h</in>
+                  <in>mavlink_msg_meminfo.h</in>
+                  <in>mavlink_msg_mount_configure.h</in>
+                  <in>mavlink_msg_mount_control.h</in>
+                  <in>mavlink_msg_mount_status.h</in>
+                  <in>mavlink_msg_radio.h</in>
+                  <in>mavlink_msg_sensor_offsets.h</in>
+                  <in>mavlink_msg_set_mag_offsets.h</in>
+                  <in>mavlink_msg_simstate.h</in>
+                  <in>mavlink_msg_wind.h</in>
+                  <in>testsuite.h</in>
+                  <in>version.h</in>
+                </df>
+                <df name="common">
+                  <in>common.h</in>
+                  <in>mavlink.h</in>
+                  <in>mavlink_msg_attitude.h</in>
+                  <in>mavlink_msg_attitude_quaternion.h</in>
+                  <in>mavlink_msg_auth_key.h</in>
+                  <in>mavlink_msg_change_operator_control.h</in>
+                  <in>mavlink_msg_change_operator_control_ack.h</in>
+                  <in>mavlink_msg_command_ack.h</in>
+                  <in>mavlink_msg_command_long.h</in>
+                  <in>mavlink_msg_data_stream.h</in>
+                  <in>mavlink_msg_debug.h</in>
+                  <in>mavlink_msg_debug_vect.h</in>
+                  <in>mavlink_msg_global_position_int.h</in>
+                  <in>mavlink_msg_global_position_setpoint_int.h</in>
+                  <in>mavlink_msg_global_vision_position_estimate.h</in>
+                  <in>mavlink_msg_gps_global_origin.h</in>
+                  <in>mavlink_msg_gps_raw_int.h</in>
+                  <in>mavlink_msg_gps_status.h</in>
+                  <in>mavlink_msg_heartbeat.h</in>
+                  <in>mavlink_msg_hil_controls.h</in>
+                  <in>mavlink_msg_hil_rc_inputs_raw.h</in>
+                  <in>mavlink_msg_hil_state.h</in>
+                  <in>mavlink_msg_local_position_ned.h</in>
+                  <in>mavlink_msg_local_position_ned_system_global_offset.h</in>
+                  <in>mavlink_msg_local_position_setpoint.h</in>
+                  <in>mavlink_msg_manual_control.h</in>
+                  <in>mavlink_msg_memory_vect.h</in>
+                  <in>mavlink_msg_mission_ack.h</in>
+                  <in>mavlink_msg_mission_clear_all.h</in>
+                  <in>mavlink_msg_mission_count.h</in>
+                  <in>mavlink_msg_mission_current.h</in>
+                  <in>mavlink_msg_mission_item.h</in>
+                  <in>mavlink_msg_mission_item_reached.h</in>
+                  <in>mavlink_msg_mission_request.h</in>
+                  <in>mavlink_msg_mission_request_list.h</in>
+                  <in>mavlink_msg_mission_request_partial_list.h</in>
+                  <in>mavlink_msg_mission_set_current.h</in>
+                  <in>mavlink_msg_mission_write_partial_list.h</in>
+                  <in>mavlink_msg_named_value_float.h</in>
+                  <in>mavlink_msg_named_value_int.h</in>
+                  <in>mavlink_msg_nav_controller_output.h</in>
+                  <in>mavlink_msg_optical_flow.h</in>
+                  <in>mavlink_msg_param_request_list.h</in>
+                  <in>mavlink_msg_param_request_read.h</in>
+                  <in>mavlink_msg_param_set.h</in>
+                  <in>mavlink_msg_param_value.h</in>
+                  <in>mavlink_msg_ping.h</in>
+                  <in>mavlink_msg_raw_imu.h</in>
+                  <in>mavlink_msg_raw_pressure.h</in>
+                  <in>mavlink_msg_rc_channels_override.h</in>
+                  <in>mavlink_msg_rc_channels_raw.h</in>
+                  <in>mavlink_msg_rc_channels_scaled.h</in>
+                  <in>mavlink_msg_request_data_stream.h</in>
+                  <in>mavlink_msg_roll_pitch_yaw_speed_thrust_setpoint.h</in>
+                  <in>mavlink_msg_roll_pitch_yaw_thrust_setpoint.h</in>
+                  <in>mavlink_msg_safety_allowed_area.h</in>
+                  <in>mavlink_msg_safety_set_allowed_area.h</in>
+                  <in>mavlink_msg_scaled_imu.h</in>
+                  <in>mavlink_msg_scaled_pressure.h</in>
+                  <in>mavlink_msg_servo_output_raw.h</in>
+                  <in>mavlink_msg_set_global_position_setpoint_int.h</in>
+                  <in>mavlink_msg_set_gps_global_origin.h</in>
+                  <in>mavlink_msg_set_local_position_setpoint.h</in>
+                  <in>mavlink_msg_set_mode.h</in>
+                  <in>mavlink_msg_set_quad_motors_setpoint.h</in>
+                  <in>mavlink_msg_set_quad_swarm_led_roll_pitch_yaw_thrust.h</in>
+                  <in>mavlink_msg_set_quad_swarm_roll_pitch_yaw_thrust.h</in>
+                  <in>mavlink_msg_set_roll_pitch_yaw_speed_thrust.h</in>
+                  <in>mavlink_msg_set_roll_pitch_yaw_thrust.h</in>
+                  <in>mavlink_msg_state_correction.h</in>
+                  <in>mavlink_msg_statustext.h</in>
+                  <in>mavlink_msg_sys_status.h</in>
+                  <in>mavlink_msg_system_time.h</in>
+                  <in>mavlink_msg_vfr_hud.h</in>
+                  <in>mavlink_msg_vicon_position_estimate.h</in>
+                  <in>mavlink_msg_vision_position_estimate.h</in>
+                  <in>mavlink_msg_vision_speed_estimate.h</in>
+                  <in>testsuite.h</in>
+                  <in>version.h</in>
+                </df>
+                <in>checksum.h</in>
+                <in>mavlink_helpers.h</in>
+                <in>mavlink_protobuf_manager.hpp</in>
+                <in>mavlink_types.h</in>
+                <in>protocol.h</in>
+              </df>
+            </df>
+          </df>
+          <df name="message_definitions">
+          </df>
+          <in>GCS_MAVLink.cpp</in>
+          <in>GCS_MAVLink.h</in>
+        </df>
+        <df name="I2C">
+          <in>I2C.cpp</in>
+          <in>I2C.h</in>
+        </df>
+        <df name="memcheck">
+          <in>memcheck.cpp</in>
+          <in>memcheck.h</in>
+        </df>
+        <df name="PID">
+          <in>PID.cpp</in>
+          <in>PID.h</in>
+        </df>
+        <df name="RC_Channel">
+          <in>RC_Channel.cpp</in>
+          <in>RC_Channel.h</in>
+          <in>RC_Channel_aux.cpp</in>
+          <in>RC_Channel_aux.h</in>
+        </df>
+        <df name="SPI">
+          <in>SPI.cpp</in>
+          <in>SPI.h</in>
+        </df>
+        <df name="SPI3">
+          <df name="examples">
+            <df name="SPI3_test">
+              <in>SPI3_test.pde</in>
+            </df>
+          </df>
+          <in>SPI3.cpp</in>
+          <in>SPI3.h</in>
+        </df>
+      </df>
+      <df name="tools">
+        <df name="i2c_spy">
+          <in>i2c_spy.pde</in>
+        </df>
+        <df name="ppm_gen">
+          <in>ppm_gen.pde</in>
+        </df>
+        <df name="SerialPassthrough">
+          <in>SerialPassthrough.pde</in>
+        </df>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>ArduCopter/Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>ArduCopter/Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>Arduino|GNU</compilerSet>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>ArduCopter</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+        </makeTool>
+      </makefileType>
+      <item path="ArduCopter/AP_State.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/ArduCopter.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/Attitude.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/GCS.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/GCS_Mavlink.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/Log.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/OSD_FrSky.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/OSD_Remzibi.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/OSD_Syberian.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/Parameters.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/UserCode.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/commands.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/commands_logic.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/commands_process.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/control_modes.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/events.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/failsafe.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/flip.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/inertia.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/led.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/leds.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/limits.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/motors.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/navigation.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/perf_info.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/radio.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/sensors.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/setup.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/system.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/test.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="ArduCopter/toy.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libraries/AC_PID/AC_PID.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/APM_Control/AP_PitchController.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/APM_Control/AP_RollController.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/APM_Control/AP_YawController.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/APM_PI/APM_PI.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/APM_RC/APM_RC_PIRATES.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_AHRS/AP_AHRS.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_AHRS/AP_AHRS_DCM.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_AHRS/AP_AHRS_HIL.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Airspeed/AP_Airspeed.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_AnalogSource/AP_AnalogSource_Arduino.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_AnalogSource/AP_AnalogSource_PIRATES.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Baro/AP_Baro.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Baro/AP_Baro_BMP085_Pirates.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Baro/AP_Baro_MS5611_I2C.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Camera/AP_Camera.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Common/AP_Common.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Common/AP_Loop.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Common/AP_Param.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Common/AP_Var_menufuncs.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Common/c++.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Common/tools/eedump.c" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libraries/AP_Common/tools/eedump_apparam.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libraries/AP_Compass/AP_Compass_HMC5843_Pirates.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Compass/Compass.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Declination/AP_Declination.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS_Auto.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS_BlackVortex.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS_MTK19.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS_NMEA.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS_SIRF.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS_UBLOX.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GPS/GPS.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_InertialNav/AP_InertialNav.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_InertialSensor/AP_InertialSensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_InertialSensor/AP_InertialSensor_MPU6000_I2C.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_InertialSensor/AP_InertialSensor_Pirates.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_LeadFilter/AP_LeadFilter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Limits/AP_Limit_Altitude.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Limits/AP_Limit_GPSLock.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Limits/AP_Limit_Geofence.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Limits/AP_Limit_Module.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Limits/AP_Limits.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Math/AP_Math.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Math/location.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Math/matrix3.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Math/polygon.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Math/quaternion.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Math/vector3.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Menu/AP_Menu.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_Motors.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_MotorsHeli.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_MotorsHexa.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_MotorsMatrix.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_MotorsOcta.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_MotorsOctaQuad.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_MotorsQuad.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_MotorsTri.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_MotorsY6.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Mount/AP_Mount.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_OpticalFlow/AP_OpticalFlow.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_OpticalFlow/AP_OpticalFlow_ADNS3080.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/AP_OpticalFlow_test.pde"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libraries/AP_PeriodicProcess/AP_PeriodicProcessStub.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_PeriodicProcess/AP_TimerProcess.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_RangeFinder/AP_RangeFinder_ME007.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_RangeFinder/RangeFinder.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Relay/AP_Relay.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Semaphore/AP_Semaphore.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Semaphore/examples/AP_Semaphore_test/AP_Semaphore_test.pde"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libraries/AP_Var/AP_MetaClass.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_Var/AP_Var.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/Arduino_Mega_ISR_Registry/Arduino_Mega_ISR_Registry.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/DataFlash/DataFlash.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/DataFlash/DataFlash_CRIUS_AIOP2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/FastSerial/BetterStream.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/FastSerial/FastSerial.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/FastSerial/vprintf.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/Filter/DerivativeFilter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/GCS_MAVLink/GCS_MAVLink.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/I2C/I2C.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/PID/PID.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/RC_Channel/RC_Channel.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/RC_Channel/RC_Channel_aux.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/SPI/SPI.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/SPI3/SPI3.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/SPI3/examples/SPI3_test/SPI3_test.pde"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="libraries/memcheck/memcheck.cpp" ex="false" tool="1" flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="tools/SerialPassthrough/SerialPassthrough.pde"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="tools/i2c_spy/i2c_spy.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="tools/ppm_gen/ppm_gen.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
