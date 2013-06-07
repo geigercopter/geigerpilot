@@ -70,7 +70,7 @@ const AP_Param::Info var_info[] PROGMEM = {
     // @Description: Used to adjust scaling to match the sonar used (only Maxbotix sonars are supported at this time)
     // @Values: 0:XL-EZ0,1:LV-EZ0,2:XLL-EZ0,3:HRLV
     // @User: Standard
-    GSCALAR(sonar_type,     "SONAR_TYPE",           0),
+    GSCALAR(sonar_type,     "SONAR_TYPE",           AP_RANGEFINDER_MAXSONARXL),
 
     // @Param: BATT_MONITOR
     // @DisplayName: Battery monitoring

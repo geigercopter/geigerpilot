@@ -91,7 +91,9 @@ static void init_compass()
 static void init_optflow()
 {
 #if OPTFLOW == ENABLED
-    if( optflow.init(false, &timer_scheduler, &spi_semaphore, &spi3_semaphore) == false ) {
+// crasher .. backup of megapirateng + optflow patch
+//    if( optflow.init(false, &timer_scheduler, &spi_semaphore, &spi3_semaphore) == false ) {
+    if( optflow.init(true, &timer_scheduler) == false ) {
 	    g.optflow_enabled = false;
         cliSerial->print_P(PSTR("\nFailed to Init OptFlow "));
         Log_Write_Error(ERROR_SUBSYSTEM_OPTFLOW,ERROR_CODE_FAILED_TO_INITIALISE);

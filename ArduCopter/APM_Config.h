@@ -3,7 +3,7 @@
 #define __ARDUCOPTER_APMCONFIG_H__ 
 
 // Select your sensor board
-#define PIRATES_SENSOR_BOARD PIRATES_CRIUS_AIO_PRO_V2
+#define PIRATES_SENSOR_BOARD PIRATES_CRIUS_AIO_PRO_V1
 /*
 	PIRATES_ALLINONE
 	PIRATES_FFIMU
@@ -46,10 +46,22 @@
 //#define COPTER_LEDS ENABLED				// Native ArduCopter LEDs
 //#define LED_SEQUENCER ENABLED		// Old Syberian's LED Sequencer, see leds.pde for more info
 
+//#define CONFIG_SONAR DISABLED
+/*
 #define MAX_SONAR_RANGE 400
 
+// Added Maxbotix SONAR support
+#define SONAR_TYPE MAX_SONAR_XL
+#define CONFIG_SONAR_SOURCE SONAR_SOURCE_ANALOG_PIN
+#define CONFIG_SONAR_SOURCE_ANALOG_PIN A0
+*/
+/*
+#define OPTFLOW ENABLED
+#define OPTFLOW_CS_PIN A9
+#define OPTFLOW_ORIENTATION AP_OPTICALFLOW_ADNS3080_PINS_BACK_RIGHT
+*/
 // This OSD works on the Serial1 port
-#define OSD_PROTOCOL OSD_PROTOCOL_NONE
+//#define OSD_PROTOCOL OSD_PROTOCOL_NONE
 /*
 	OSD_PROTOCOL_NONE
 	OSD_PROTOCOL_SYBERIAN
@@ -58,7 +70,10 @@
 */
 
 // For BlackVortex, just set PIRATES_SENSOR_BOARD as PIRATES_BLACKVORTEX, GPS will be selected automatically
-#define GPS_PROTOCOL GPS_PROTOCOL_UBLOX 
+//#define GPS_PROTOCOL GPS_PROTOCOL_NONE 
+// JPB, GPS_PROTOCOL_MTK16 était défini quand ça marchait sur les versions antérieures
+//#define GPS_PROTOCOL GPS_PROTOCOL_MTK16
+
 //GPS_PROTOCOL_NONE
 /*
 	GPS_PROTOCOL_NONE 	without GPS

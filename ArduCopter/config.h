@@ -97,9 +97,15 @@
 	
 	#define CONFIG_PUSHBUTTON ENABLED
 	#define CONFIG_RELAY      DISABLED
-	#define CONFIG_SONAR_SOURCE SONAR_SOURCE_PIRATES
-	#define SONAR_TYPE		SONAR_ME007
-	
+
+        #ifndef CONFIG_SONAR_SOURCE
+        	#define CONFIG_SONAR_SOURCE SONAR_SOURCE_PIRATES
+	#endif
+
+        #ifndef SONAR_TYPE
+        	#define SONAR_TYPE		SONAR_ME007
+	#endif
+		
 	#ifndef CONFIG_BARO
 		#define CONFIG_BARO     AP_BARO_BMP085_PIRATES
 	#endif

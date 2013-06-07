@@ -70,11 +70,13 @@
 // Libraries
 #include <FastSerial.h>
 #include <AP_Common.h>
+#include <AP_Semaphore.h>
 #include <AP_Menu.h>
 #include <Arduino_Mega_ISR_Registry.h>
 #include <APM_RC.h>         // ArduPilot Mega RC Library
 #include <AP_GPS.h>         // ArduPilot GPS library
 #include <I2C.h>			// Arduino I2C lib
+#include <SPI3.h>
 #include <AP_AnalogSource.h>
 #include <AP_Baro.h>
 #include <AP_Compass.h>     // ArduPilot Mega Magnetometer Library
@@ -99,6 +101,7 @@
 #include <AP_MotorsHeli.h>	// AP Motors library for Heli
 #include <AP_MotorsMatrix.h>	// AP Motors library for Heli
 #include <AP_RangeFinder.h>	// Range finder library
+#include <AP_OpticalFlow.h>     // Optical flow library
 #include <Filter.h>			// Filter library
 #include <AP_Buffer.h>          // APM FIFO Buffer
 #include <ModeFilter.h>		// Mode Filter from Filter library
@@ -273,7 +276,7 @@ static AP_Int8                *flight_modes = &g.flight_mode1;
 	#endif
 
  #if OPTFLOW == ENABLED
-    AP_OpticalFlow_ADNS3080 optflow;
+    AP_OpticalFlow_ADNS3080 optflow(OPTFLOW_CS_PIN);
  #endif
 
 	// real GPS selection
@@ -335,6 +338,10 @@ AP_AHRS_HIL             ahrs(&ins, g_gps);
 	AP_GPS_HIL              g_gps_driver(NULL);
 	AP_Compass_HIL          compass; // never used
     AP_Baro_BMP085_HIL      barometer;
+
+#if OPTFLOW == ENABLED
+    AP_OpticalFlow_ADNS3080 optflow(OPTFLOW_CS_PIN);
+#endif
 
 #ifdef DESKTOP_BUILD
 #include <SITL.h>

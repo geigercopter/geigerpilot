@@ -872,6 +872,7 @@ test_mag(uint8_t argc, const Menu::arg *argv)
 /*
  *  test the sonar
  */
+
 static int8_t
 test_sonar(uint8_t argc, const Menu::arg *argv)
 {
@@ -888,7 +889,32 @@ test_sonar(uint8_t argc, const Menu::arg *argv)
 		delay(100);
 
 		cliSerial->printf_P(PSTR("Sonar: %d cm\n"), sonar.read());
-		//cliSerial->printf_P(PSTR("Sonar, %d, %d\n"), sonar.read(), sonar.raw_value);
+		cliSerial->printf_P(PSTR("Sonar, %d, %d\n"), sonar.read(), sonar.raw_value);
+
+		if(cliSerial->available() > 0){
+			return (0);
+		}
+	}
+	return (0);
+}
+/*
+static int8_t
+test_sonarBACKUP_JPB(uint8_t argc, const Menu::arg *argv)
+{
+	if(g.sonar_enabled == false){
+		cliSerial->printf_P(PSTR("Sonar disabled\n"));
+		return (0);
+	}
+
+	// make sure sonar is initialised
+	init_sonar();
+
+	print_hit_enter();
+	while(1) {
+		delay(100);
+
+		cliSerial->printf_P(PSTR("Sonar: %d cm\n"), sonar.read());
+		cliSerial->printf_P(PSTR("Sonar, %d, %d\n"), sonar.read(), sonar.raw_value);
 
 		if(cliSerial->available() > 0){
 			return (0);
@@ -897,6 +923,7 @@ test_sonar(uint8_t argc, const Menu::arg *argv)
 
 	return (0);
 }
+*/
 #endif
 
 

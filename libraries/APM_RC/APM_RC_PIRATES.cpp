@@ -39,7 +39,9 @@
 // Used to count missed packets (to detect signal loss)
 #define WATCHDOG_THRESHOLD 3
 
-#if !defined(__AVR_ATmega1280__) && !defined(__AVR_ATmega2560__)
+
+//#if !defined(__AVR_ATmega1280__) && !defined(__AVR_ATmega2560__)
+#if 1 == 0
 # error Please check the Tools/Board menu to ensure you have selected Arduino Mega as your target.
 #else
 
