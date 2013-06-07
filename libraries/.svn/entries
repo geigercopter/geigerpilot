@@ -1,0 +1,139 @@
+10
+
+dir
+303
+http://megapirateng.googlecode.com/svn/beta/2.9.1/libraries
+http://megapirateng.googlecode.com/svn
+
+
+
+2013-03-22T00:38:10.908907Z
+300
+Alexey.Kharlanov@gmail.com
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+6bc91d6b-28a9-cc5f-efa9-c9988b34bfd3
+
+APM_PI
+dir
+
+DigitalWriteFast
+dir
+
+AP_Math
+dir
+
+AP_Declination
+dir
+
+AP_GPS
+dir
+
+AP_Airspeed
+dir
+
+memcheck
+dir
+
+AP_PeriodicProcess
+dir
+
+AC_PID
+dir
+
+AP_Mount
+dir
+
+AP_Menu
+dir
+
+AP_Buffer
+dir
+
+SPI
+dir
+
+RC_Channel
+dir
+
+AP_Relay
+dir
+
+AP_AnalogSource
+dir
+
+AP_Baro
+dir
+
+AP_Var
+dir
+
+AP_Common
+dir
+
+AP_Camera
+dir
+
+PID
+dir
+
+APM_Control
+dir
+
+AP_AHRS
+dir
+
+I2C
+dir
+
+AP_Limits
+dir
+
+AP_InertialSensor
+dir
+
+AP_Compass
+dir
+
+Filter
+dir
+
+DataFlash
+dir
+
+AP_LeadFilter
+dir
+
+AP_InertialNav
+dir
+
+GCS_MAVLink
+dir
+
+FastSerial
+dir
+
+Arduino_Mega_ISR_Registry
+dir
+
+APM_RC
+dir
+
+AP_Motors
+dir
+
+AP_RangeFinder
+dir
+

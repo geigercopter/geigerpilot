@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_InertialSensor
+END
+AP_InertialSensor.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_InertialSensor/AP_InertialSensor.cpp
+END
+AP_InertialSensor_MPU6000_I2C.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_InertialSensor/AP_InertialSensor_MPU6000_I2C.cpp
+END
+AP_InertialSensor.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_InertialSensor/AP_InertialSensor.h
+END
+AP_InertialSensor_Pirates.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_InertialSensor/AP_InertialSensor_Pirates.cpp
+END
+AP_InertialSensor_MPU6000_I2C.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_InertialSensor/AP_InertialSensor_MPU6000_I2C.h
+END
+AP_InertialSensor_Pirates.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_InertialSensor/AP_InertialSensor_Pirates.h
+END

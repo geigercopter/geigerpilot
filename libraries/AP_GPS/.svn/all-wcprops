@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS
+END
+AP_GPS_NMEA.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_NMEA.cpp
+END
+AP_GPS_BlackVortex.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_BlackVortex.cpp
+END
+AP_GPS_NMEA.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_NMEA.h
+END
+AP_GPS.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS.h
+END
+AP_GPS_BlackVortex.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_BlackVortex.h
+END
+AP_GPS_UBLOX.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_UBLOX.cpp
+END
+AP_GPS_UBLOX.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_UBLOX.h
+END
+GPS.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/GPS.cpp
+END
+AP_GPS_SIRF.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_SIRF.cpp
+END
+AP_GPS_None.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_None.h
+END
+AP_GPS_MTK19.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_MTK19.cpp
+END
+GPS.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/GPS.h
+END
+AP_GPS_MTK_Common.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_MTK_Common.h
+END
+AP_GPS_Auto.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_Auto.cpp
+END
+AP_GPS_SIRF.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_SIRF.h
+END
+AP_GPS_MTK19.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_MTK19.h
+END
+AP_GPS_Auto.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_GPS/AP_GPS_Auto.h
+END

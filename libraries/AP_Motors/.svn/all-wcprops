@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors
+END
+AP_MotorsQuad.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsQuad.cpp
+END
+AP_MotorsHexa.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsHexa.h
+END
+AP_MotorsOcta.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsOcta.h
+END
+AP_MotorsTri.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsTri.cpp
+END
+AP_MotorsY6.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsY6.cpp
+END
+AP_MotorsQuad.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsQuad.h
+END
+AP_MotorsOctaQuad.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsOctaQuad.cpp
+END
+AP_MotorsTri.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsTri.h
+END
+AP_MotorsY6.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsY6.h
+END
+AP_MotorsMatrix.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsMatrix.cpp
+END
+AP_MotorsOctaQuad.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsOctaQuad.h
+END
+AP_MotorsMatrix.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsMatrix.h
+END
+AP_Motors.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_Motors.cpp
+END
+AP_MotorsHeli.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsHeli.cpp
+END
+AP_Motors.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_Motors.h
+END
+AP_MotorsHexa.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsHexa.cpp
+END
+AP_MotorsHeli.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsHeli.h
+END
+AP_MotorsOcta.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Motors/AP_MotorsOcta.cpp
+END

@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial
+END
+BetterStream.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/BetterStream.cpp
+END
+FastSerial.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/FastSerial.h
+END
+ftoa_engine.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/ftoa_engine.h
+END
+keywords.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/keywords.txt
+END
+BetterStream.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/BetterStream.h
+END
+vprintf.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/vprintf.cpp
+END
+ultoa_invert.S
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/ultoa_invert.S
+END
+macros.inc
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/macros.inc
+END
+FastSerial.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/FastSerial.cpp
+END
+xtoa_fast.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/xtoa_fast.h
+END
+ftoa_engine.S
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/ftoa_engine.S
+END
+ntz.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/294/beta/2.9.1/libraries/FastSerial/ntz.h
+END

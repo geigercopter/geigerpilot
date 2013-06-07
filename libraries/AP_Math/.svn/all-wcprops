@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math
+END
+keywords.txt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/keywords.txt
+END
+vector3.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/vector3.cpp
+END
+quaternion.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/quaternion.cpp
+END
+polygon.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/polygon.cpp
+END
+matrix3.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/matrix3.cpp
+END
+rotations.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/rotations.h
+END
+location.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/location.cpp
+END
+vector2.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/vector2.h
+END
+AP_Math.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/AP_Math.cpp
+END
+vector3.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/vector3.h
+END
+quaternion.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/quaternion.h
+END
+polygon.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/polygon.h
+END
+matrix3.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/matrix3.h
+END
+AP_Math.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Math/AP_Math.h
+END

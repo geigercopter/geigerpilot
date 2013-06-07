@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/297/beta/2.9.1/libraries/AP_AnalogSource
+END
+AP_AnalogSource_PIRATES.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_AnalogSource/AP_AnalogSource_PIRATES.h
+END
+AP_AnalogSource_Arduino.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_AnalogSource/AP_AnalogSource_Arduino.cpp
+END
+AnalogSource.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_AnalogSource/AnalogSource.h
+END
+AP_AnalogSource.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_AnalogSource/AP_AnalogSource.h
+END
+AP_AnalogSource_Arduino.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_AnalogSource/AP_AnalogSource_Arduino.h
+END
+AP_AnalogSource_PIRATES.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/297/beta/2.9.1/libraries/AP_AnalogSource/AP_AnalogSource_PIRATES.cpp
+END

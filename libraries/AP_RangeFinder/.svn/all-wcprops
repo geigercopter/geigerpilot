@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_RangeFinder
+END
+RangeFinder.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_RangeFinder/RangeFinder.h
+END
+AP_RangeFinder.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_RangeFinder/AP_RangeFinder.h
+END
+AP_RangeFinder_ME007.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_RangeFinder/AP_RangeFinder_ME007.cpp
+END
+AP_RangeFinder_ME007.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_RangeFinder/AP_RangeFinder_ME007.h
+END
+keywords.txt
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_RangeFinder/keywords.txt
+END
+RangeFinder.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_RangeFinder/RangeFinder.cpp
+END

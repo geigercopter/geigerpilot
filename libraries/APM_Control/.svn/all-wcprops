@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/294/beta/2.9.1/libraries/APM_Control
+END
+AP_PitchController.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/294/beta/2.9.1/libraries/APM_Control/AP_PitchController.h
+END
+AP_RollController.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/294/beta/2.9.1/libraries/APM_Control/AP_RollController.h
+END
+APM_Control.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/APM_Control/APM_Control.h
+END
+AP_YawController.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/294/beta/2.9.1/libraries/APM_Control/AP_YawController.cpp
+END
+AP_YawController.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/294/beta/2.9.1/libraries/APM_Control/AP_YawController.h
+END
+AP_PitchController.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/294/beta/2.9.1/libraries/APM_Control/AP_PitchController.cpp
+END
+AP_RollController.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/294/beta/2.9.1/libraries/APM_Control/AP_RollController.cpp
+END

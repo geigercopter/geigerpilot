@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/294/beta/2.9.1/libraries/GCS_MAVLink
+END
+GCS_MAVLink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/GCS_MAVLink/GCS_MAVLink.cpp
+END
+generate.sh
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/294/beta/2.9.1/libraries/GCS_MAVLink/generate.sh
+END
+GCS_MAVLink.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/GCS_MAVLink/GCS_MAVLink.h
+END
+.gitignore
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/294/beta/2.9.1/libraries/GCS_MAVLink/.gitignore
+END

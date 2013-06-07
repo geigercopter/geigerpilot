@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/294/beta/2.9.1/libraries/Filter
+END
+DerivativeFilter.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/Filter/DerivativeFilter.h
+END
+ModeFilter.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/294/beta/2.9.1/libraries/Filter/ModeFilter.h
+END
+FilterWithBuffer.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/Filter/FilterWithBuffer.h
+END
+LowPassFilter.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/294/beta/2.9.1/libraries/Filter/LowPassFilter.h
+END
+keywords.txt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/294/beta/2.9.1/libraries/Filter/keywords.txt
+END
+AverageFilter.h
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/294/beta/2.9.1/libraries/Filter/AverageFilter.h
+END
+DerivativeFilter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/Filter/DerivativeFilter.cpp
+END
+Filter.h
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/294/beta/2.9.1/libraries/Filter/Filter.h
+END

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Baro
+END
+AP_Baro.h
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Baro/AP_Baro.h
+END
+AP_Baro_BMP085_Pirates.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Baro/AP_Baro_BMP085_Pirates.h
+END
+AP_Baro_MS5611_I2C.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Baro/AP_Baro_MS5611_I2C.cpp
+END
+AP_Baro_MS5611_I2C.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Baro/AP_Baro_MS5611_I2C.h
+END
+AP_Baro.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Baro/AP_Baro.cpp
+END
+AP_Baro_BMP085_Pirates.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Baro/AP_Baro_BMP085_Pirates.cpp
+END

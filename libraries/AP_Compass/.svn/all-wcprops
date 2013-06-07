@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Compass
+END
+keywords.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Compass/keywords.txt
+END
+Compass.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Compass/Compass.cpp
+END
+AP_Compass_HMC5843_Pirates.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Compass/AP_Compass_HMC5843_Pirates.cpp
+END
+Compass.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Compass/Compass.h
+END
+AP_Compass.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Compass/AP_Compass.h
+END
+AP_Compass_HMC5843_Pirates.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Compass/AP_Compass_HMC5843_Pirates.h
+END

@@ -1,0 +1,269 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/300/beta/2.9.1/ArduCopter
+END
+control_modes.pde
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/control_modes.pde
+END
+ArduCopter.pde
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/300/beta/2.9.1/ArduCopter/ArduCopter.pde
+END
+test.pde
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/test.pde
+END
+OSD_Syberian.pde
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/OSD_Syberian.pde
+END
+Parameters.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/Parameters.h
+END
+Attitude.pde
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/Attitude.pde
+END
+config.h
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/config.h
+END
+UserVariables.h
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/UserVariables.h
+END
+leds.pde
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/leds.pde
+END
+GCS.h
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/GCS.h
+END
+defines.h
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/298/beta/2.9.1/ArduCopter/defines.h
+END
+GCS_Mavlink.pde
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/GCS_Mavlink.pde
+END
+APM_Config_mavlink_hil.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/APM_Config_mavlink_hil.h
+END
+commands_process.pde
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/commands_process.pde
+END
+navigation.pde
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/navigation.pde
+END
+ReleaseNotes.txt
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/ReleaseNotes.txt
+END
+AP_State.pde
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/AP_State.pde
+END
+setup.pde
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/setup.pde
+END
+commands.pde
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/commands.pde
+END
+limits.pde
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/limits.pde
+END
+options.cmake
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/options.cmake
+END
+Parameters.pde
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/Parameters.pde
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/Makefile
+END
+OSD_Remzibi.pde
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/OSD_Remzibi.pde
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/CMakeLists.txt
+END
+perf_info.pde
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/perf_info.pde
+END
+UserCode.pde
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/UserCode.pde
+END
+failsafe.pde
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/failsafe.pde
+END
+toy.pde
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/toy.pde
+END
+GCS.pde
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/GCS.pde
+END
+commands_logic.pde
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/commands_logic.pde
+END
+APM_Config.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/300/beta/2.9.1/ArduCopter/APM_Config.h
+END
+Log.pde
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/Log.pde
+END
+motors.pde
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/299/beta/2.9.1/ArduCopter/motors.pde
+END
+system.pde
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/system.pde
+END
+flip.pde
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/flip.pde
+END
+inertia.pde
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/inertia.pde
+END
+sensors.pde
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/sensors.pde
+END
+radio.pde
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/298/beta/2.9.1/ArduCopter/radio.pde
+END
+.gitignore
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/.gitignore
+END
+config_channels.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/config_channels.h
+END
+OSD_FrSky.pde
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/OSD_FrSky.pde
+END
+led.pde
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/led.pde
+END
+events.pde
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/294/beta/2.9.1/ArduCopter/events.pde
+END

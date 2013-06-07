@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Airspeed
+END
+AP_Airspeed.h
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Airspeed/AP_Airspeed.h
+END
+AP_Airspeed.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Airspeed/AP_Airspeed.cpp
+END

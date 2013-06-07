@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Limits
+END
+AP_Limit_Altitude.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Limits/AP_Limit_Altitude.h
+END
+AP_Limit_Geofence.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Limits/AP_Limit_Geofence.h
+END
+AP_Limit_GPSLock.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Limits/AP_Limit_GPSLock.cpp
+END
+AP_Limits.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Limits/AP_Limits.cpp
+END
+AP_Limit_Module.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Limits/AP_Limit_Module.cpp
+END
+AP_Limit_GPSLock.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Limits/AP_Limit_GPSLock.h
+END
+AP_Limits.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Limits/AP_Limits.h
+END
+AP_Limit_Module.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Limits/AP_Limit_Module.h
+END
+AP_Limit_Altitude.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Limits/AP_Limit_Altitude.cpp
+END
+AP_Limit_Geofence.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/294/beta/2.9.1/libraries/AP_Limits/AP_Limit_Geofence.cpp
+END
