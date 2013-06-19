@@ -1,4 +1,4 @@
-#include "GC_GeigerCounter.h"
+#include "AP_GeigerCounter.h"
 
 extern "C" {
   // AVR LibC Includes
@@ -19,7 +19,7 @@ ISR(PCINT0_vect)
     }
 }
 
-GC_GeigerCounter::GC_GeigerCounter(int16_t tube1, int16_t tube2) :
+AP_GeigerCounter::AP_GeigerCounter(int16_t tube1, int16_t tube2) :
     _tube1(tube1),
     _tube2(tube2)
 {
@@ -34,12 +34,12 @@ GC_GeigerCounter::GC_GeigerCounter(int16_t tube1, int16_t tube2) :
         */
         
 }
-void GC_GeigerCounter::init()
+void AP_GeigerCounter::init()
 {
 
 }
 
-int GC_GeigerCounter::read()
+int AP_GeigerCounter::read()
 {
     return 0;
 }

@@ -5,7 +5,7 @@
 
 #include <FastSerial.h>
 #include <AP_Common.h>
-#include <GC_GeigerCounter.h>
+#include "AP_GeigerCounter.h"
 
 // includes
 /*
@@ -21,7 +21,7 @@
 #include <AP_Buffer.h>
 */
 
-GC_GeigerCounter geigerCounter(A11,A12);       // use AN0 analog pin for APM2 on left
+AP_GeigerCounter geigerCounter(A11,A12);       // use AN0 analog pin for APM2 on left
 
 
 void setup()

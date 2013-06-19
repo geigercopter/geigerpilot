@@ -10,10 +10,10 @@
 
 #include "GeigerCounter.h"
 
-class GC_GeigerCounter : public GeigerCounter
+class AP_GeigerCounter : public GeigerCounter
 {
 public:
-    GC_GeigerCounter(int16_t tube1, int16_t tube2);
+    AP_GeigerCounter(int16_t tube1, int16_t tube2);
     void init();
     int read();
   public:
