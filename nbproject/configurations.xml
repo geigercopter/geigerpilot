@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="84">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <df name="MegaPirateNG_2.9_R7" root=".">
+    <df name="geigerpilot" root=".">
       <df name="ArduCopter">
         <in>APM_Config.h</in>
         <in>APM_Config_mavlink_hil.h</in>
@@ -42,6 +42,8 @@
         <in>system.pde</in>
         <in>test.pde</in>
         <in>toy.pde</in>
+      </df>
+      <df name="doc">
       </df>
       <df name="libraries">
         <df name="AC_PID">
@@ -303,6 +305,17 @@
           <in>LowPassFilter.h</in>
           <in>ModeFilter.h</in>
         </df>
+        <df name="GC_GeigerCounter">
+          <df name="examples">
+            <df name="GC_GeigerCounter_test">
+              <in>GC_GeigerCounter_test.pde</in>
+            </df>
+          </df>
+          <in>GC_GeigerCounter.cpp</in>
+          <in>GC_GeigerCounter.h</in>
+          <in>GeigerCounter.cpp</in>
+          <in>GeigerCounter.h</in>
+        </df>
         <df name="GCS_MAVLink">
           <df name="include">
             <df name="mavlink">
@@ -562,12 +575,14 @@
           <in>SPI3.h</in>
         </df>
       </df>
-      <df name="tools">
+      <df name="Tools">
         <df name="i2c_spy">
           <in>i2c_spy.pde</in>
         </df>
         <df name="ppm_gen">
           <in>ppm_gen.pde</in>
+        </df>
+        <df name="scripts">
         </df>
         <df name="SerialPassthrough">
           <in>SerialPassthrough.pde</in>
@@ -600,6 +615,24 @@
           <buildCommand>${MAKE} -f Makefile</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
           <executablePath></executablePath>
+          <cTool>
+            <incDir>
+              <pElem>/usr/lib/avr/include</pElem>
+              <pElem>../arduino-1.0.5/hardware/arduino/cores/arduino</pElem>
+            </incDir>
+            <preprocessorList>
+              <Elem>ARDUINO=100</Elem>
+            </preprocessorList>
+          </cTool>
+          <ccTool>
+            <incDir>
+              <pElem>/usr/lib/avr/include</pElem>
+              <pElem>../arduino-1.0.5/hardware/arduino/cores/arduino</pElem>
+            </incDir>
+            <preprocessorList>
+              <Elem>ARDUINO=100</Elem>
+            </preprocessorList>
+          </ccTool>
         </makeTool>
       </makefileType>
       <item path="ArduCopter/AP_State.pde" ex="false" tool="0" flavor2="2">
@@ -726,6 +759,18 @@
         <cTool>
         </cTool>
       </item>
+      <folder path="geigerpilot">
+        <cTool>
+          <incDir>
+            <pElem>/usr/lib/avr/include</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>/usr/lib/avr/include</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
       <item path="libraries/AC_PID/AC_PID.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
@@ -1224,21 +1269,6 @@
       <item path="libraries/memcheck/memcheck.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
-      </item>
-      <item path="tools/SerialPassthrough/SerialPassthrough.pde"
-            ex="false"
-            tool="0"
-            flavor2="2">
-        <cTool>
-        </cTool>
-      </item>
-      <item path="tools/i2c_spy/i2c_spy.pde" ex="false" tool="0" flavor2="2">
-        <cTool>
-        </cTool>
-      </item>
-      <item path="tools/ppm_gen/ppm_gen.pde" ex="false" tool="0" flavor2="2">
-        <cTool>
-        </cTool>
       </item>
     </conf>
   </confs>

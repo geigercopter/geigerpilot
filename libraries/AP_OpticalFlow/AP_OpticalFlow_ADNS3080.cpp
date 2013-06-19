@@ -60,6 +60,7 @@ AP_OpticalFlow_ADNS3080::init(bool initCommAPI, AP_PeriodicProcess *scheduler, A
 {
     int8_t retry = 0;
     bool retvalue = false;
+byte register_value;
 
     // suspend timer while we set-up SPI communication
     scheduler->suspend_timer();
@@ -82,13 +83,23 @@ AP_OpticalFlow_ADNS3080::init(bool initCommAPI, AP_PeriodicProcess *scheduler, A
         SPI.setClockDivider(SPI_CLOCK_DIV8); // 2MHZ SPI rate
     }
 
+Serial.printf("ADNS3080_SPI_MOSI : %d\n", ADNS3080_SPI_MOSI);
+Serial.printf("ADNS3080_SPI_MISO : %d\n", ADNS3080_SPI_MISO);
+Serial.printf("ADNS3080_SPI_SCK : %d\n", ADNS3080_SPI_SCK);
+Serial.printf("_cs_pin : %d\n", _cs_pin);
+
+Serial.printf("Starting read_register ");
     // check 3 times for the sensor on standard SPI bus
     _spi_bus = ADNS3080_SPIBUS_1;
     _spi_semaphore = spi_semaphore;
     while( retvalue == false && retry < 3 ) {
-        if( read_register(ADNS3080_PRODUCT_ID) == 0x17 ) {
+        register_value = read_register(ADNS3080_PRODUCT_ID);
+Serial.printf("register value : %d\n", register_value);
+        //if( read_register(ADNS3080_PRODUCT_ID) == 0x17 ) {
+        if( register_value == 0x17 ) {
             retvalue = true;
         }
+Serial.printf("Failed reading_register\n");
         retry++;
     }
 
@@ -109,6 +120,7 @@ AP_OpticalFlow_ADNS3080::init(bool initCommAPI, AP_PeriodicProcess *scheduler, A
             if( read_register(ADNS3080_PRODUCT_ID) == 0x17 ) {
                 retvalue = true;
             }
+            
             retry++;
         }
     }

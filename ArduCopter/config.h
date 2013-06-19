@@ -227,7 +227,6 @@
 # define PUSHBUTTON_PIN   (-1)
 # define USB_MUX_PIN      (-1)
 # define CLI_SLIDER_ENABLED DISABLED
-# define OPTFLOW_CS_PIN   34
 # define BATTERY_VOLT_PIN      0      // Battery voltage on A0
 # define BATTERY_CURR_PIN      1      // Battery current on A1
 #elif CONFIG_APM_HARDWARE == APM_HARDWARE_APM2

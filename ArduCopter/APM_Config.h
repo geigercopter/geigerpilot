@@ -47,19 +47,18 @@
 //#define LED_SEQUENCER ENABLED		// Old Syberian's LED Sequencer, see leds.pde for more info
 
 //#define CONFIG_SONAR DISABLED
-/*
+
 #define MAX_SONAR_RANGE 400
 
 // Added Maxbotix SONAR support
 #define SONAR_TYPE MAX_SONAR_XL
 #define CONFIG_SONAR_SOURCE SONAR_SOURCE_ANALOG_PIN
-#define CONFIG_SONAR_SOURCE_ANALOG_PIN A0
-*/
-/*
+#define CONFIG_SONAR_SOURCE_ANALOG_PIN A10
+
 #define OPTFLOW ENABLED
 #define OPTFLOW_CS_PIN A9
 #define OPTFLOW_ORIENTATION AP_OPTICALFLOW_ADNS3080_PINS_BACK_RIGHT
-*/
+
 // This OSD works on the Serial1 port
 //#define OSD_PROTOCOL OSD_PROTOCOL_NONE
 /*

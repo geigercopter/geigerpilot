@@ -1430,11 +1430,11 @@ static void update_optical_flow(void)
         of_log_counter++;
         if( of_log_counter >= 4 ) {
             of_log_counter = 0;
-	if (g.log_bitmask & MASK_LOG_OPTFLOW){
-		Log_Write_Optflow();
+            if (g.log_bitmask & MASK_LOG_OPTFLOW) {
+                    Log_Write_Optflow();
+            }
 	}
-	}
-		}
+    }
 }
 #endif  // OPTFLOW == ENABLED
 

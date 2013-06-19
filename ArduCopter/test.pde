@@ -931,34 +931,36 @@ static int8_t
 test_optflow(uint8_t argc, const Menu::arg *argv)
 {
 #if OPTFLOW == ENABLED
-	if(g.optflow_enabled) {
-		cliSerial->printf_P(PSTR("man id: %d\t"),optflow.read_register(ADNS3080_PRODUCT_ID));
-		print_hit_enter();
+    cliSerial->printf_P(PSTR("g.optflow_enabled: %d\n"), g.optflow_enabled);
+    
+    if(g.optflow_enabled) {
+        cliSerial->printf_P(PSTR("man id: %d\t"),optflow.read_register(ADNS3080_PRODUCT_ID));
+        print_hit_enter();
 
-		while(1){
-			delay(200);
+        while(1) {
+            delay(200);
             optflow.update(millis());
-			Log_Write_Optflow();
-			cliSerial->printf_P(PSTR("x/dx: %d/%d\t y/dy %d/%d\t squal:%d\n"),
-						optflow.x,
-						optflow.dx,
-						optflow.y,
-						optflow.dy,
-						optflow.surface_quality);
+            Log_Write_Optflow();
+            cliSerial->printf_P(PSTR("x/dx: %d/%d\t y/dy %d/%d\t squal:%d\n"),
+                                    optflow.x,
+                                    optflow.dx,
+                                    optflow.y,
+                                    optflow.dy,
+                                    optflow.surface_quality);
 
-			if(cliSerial->available() > 0){
-				return (0);
-			}
-		}
-	} else {
-		cliSerial->printf_P(PSTR("OptFlow: "));
-		print_enabled(false);
-	}
-	return (0);
+            if(cliSerial->available() > 0){
+                return (0);
+            }
+        }
+    } else {
+        cliSerial->printf_P(PSTR("OptFlow: "));
+        print_enabled(false);
+    }
+    return (0);
 
-	#else
-		print_test_disabled();
-		return (0);
+#else
+        print_test_disabled();
+        return (0);
 #endif      // OPTFLOW == ENABLED
 }
 

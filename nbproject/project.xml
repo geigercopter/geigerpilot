@@ -3,7 +3,7 @@
     <type>org.netbeans.modules.cnd.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>MegaPirateNG_2.9_R7</name>
+            <name>geigerpilot</name>
             <c-extensions>c,pde</c-extensions>
             <cpp-extensions>cpp</cpp-extensions>
             <header-extensions>h,hpp</header-extensions>
