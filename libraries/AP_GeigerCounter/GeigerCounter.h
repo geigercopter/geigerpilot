@@ -5,10 +5,11 @@
  * Created on 7 juin 2013, 15:21
  */
 
-#ifndef GEIGERCOUNTER_H
-#define	GEIGERCOUNTER_H
+#ifndef GeigerCounter_h
+#define	GeigerCounter_h
 
-class GeigerCounter {
+class GeigerCounter
+{
 public:
     GeigerCounter();
     virtual ~GeigerCounter();
@@ -16,5 +17,5 @@ private:
 
 };
 
-#endif	/* GEIGERCOUNTER_H */
+#endif	/* GeigerCounter_h */
 

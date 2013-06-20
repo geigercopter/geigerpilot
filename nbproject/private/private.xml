@@ -13,7 +13,7 @@
             <property name="rootFolder" value="/home/crasher/Bureau/geigercopter/geigerpilot*/home/crasher/Bureau/geigercopter/MegaPirateNG/geigerpilot"/>
             <property name="libraries" value=""/>
             <property name="executable" value="/home/crasher/Bureau/geigercopter/geigerpilot*/home/crasher/Bureau/geigercopter/MegaPirateNG/geigerpilot"/>
-            <property name="folder" value="/home/crasher/Bureau/geigercopter/MegaPirateNG/geigerpilot"/>
+            <property name="folder" value="/home/crasher/Bureau/geigercopter/geigerpilot*/home/crasher/Bureau/geigercopter/MegaPirateNG/geigerpilot"/>
         </module>
     </preferences>
 </project-private>

@@ -5,8 +5,8 @@
  * Created on 7 juin 2013, 15:18
  */
 
-#ifndef GC_GEIGERCOUNTER_H
-#define	GC_GEIGERCOUNTER_H
+#ifndef AP_GeigerCounter_h
+#define	AP_GeigerCounter_h
 
 #include "GeigerCounter.h"
 
@@ -19,7 +19,7 @@ public:
   public:
 private:      
     // geigertube click pins
-    int16_t _tube1; 
-    int16_t _tube2; // 
+    int16_t _tube1 = 0; 
+    int16_t _tube2 = 0; // 
 };
 #endif

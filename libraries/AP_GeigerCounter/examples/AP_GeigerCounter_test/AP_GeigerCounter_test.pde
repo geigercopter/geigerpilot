@@ -1,11 +1,10 @@
 /*
- *  AP_RangeFinder_test
- *  Code by DIYDrones.com
+ *  AP_Geigercounter_test
  */
 
 #include <FastSerial.h>
 #include <AP_Common.h>
-#include "AP_GeigerCounter.h"
+#include "GeigerCounter.h"
 
 // includes
 /*
@@ -21,49 +20,21 @@
 #include <AP_Buffer.h>
 */
 
-AP_GeigerCounter geigerCounter(A11,A12);       // use AN0 analog pin for APM2 on left
-
+AP_GeigerCounter geigerCounter(A11,A12);
 
 void setup()
 {
     Serial.begin(115200);
     Serial.println("GeigerCounter Test");
-    Serial.print("Sonar Type: ");
-    Serial.println(SONAR_TYPE);
-
-    isr_registry.init();
-    timer_scheduler.init(&isr_registry);
-
-    // initialise communication method (analog read or i2c)
-#if SONAR_TYPE == AP_RANGEFINDER_MAXSONARI2CXL
-    I2c.begin();
-    I2c.timeOut(5);
-    I2c.setSpeed(true); // initially set a fast I2c speed, and drop it on first failures
-#else
-# ifdef USE_ADC_ADS7844
-    adc.Init(&timer_scheduler);   // APM ADC initialization
-    aRF.calculate_scaler(SONAR_TYPE,3.3);   // setup scaling for sonar
-# else
-    // initialise the analog port reader
-    AP_AnalogSource_Arduino::init_timer(&timer_scheduler);
-    aRF.calculate_scaler(SONAR_TYPE,5.0);   // setup scaling for sonar
-# endif
-#endif
+    geigerCounter.init();
 }
 
 void loop()
 {
-    Serial.print("dist:");
-    Serial.print(aRF.read());
-    Serial.print("\traw:");
-    Serial.print(aRF.raw_value);
+    Serial.print("count A :");
+    Serial.print(geigerCounter.read());
+    Serial.print("\tcount B :");
+    Serial.print(geigerCounter.read());
     Serial.println();
-
-#if SONAR_TYPE == AP_RANGEFINDER_MAXSONARI2CXL
-    if( !aRF.healthy ) {
-        Serial.println("not healthy!");
-    }
-    aRF.take_reading();
-#endif
     delay(100);
 }

@@ -114,6 +114,17 @@
           <in>AP_Declination.cpp</in>
           <in>AP_Declination.h</in>
         </df>
+        <df name="AP_GeigerCounter">
+          <df name="examples">
+            <df name="AP_GeigerCounter_test">
+              <in>AP_GeigerCounter_test.pde</in>
+            </df>
+          </df>
+          <in>AP_GeigerCounter.cpp</in>
+          <in>AP_GeigerCounter.h</in>
+          <in>GeigerCounter.cpp</in>
+          <in>GeigerCounter.h</in>
+        </df>
         <df name="AP_GPS">
           <in>AP_GPS.h</in>
           <in>AP_GPS_Auto.cpp</in>
@@ -304,17 +315,6 @@
           <in>FilterWithBuffer.h</in>
           <in>LowPassFilter.h</in>
           <in>ModeFilter.h</in>
-        </df>
-        <df name="GC_GeigerCounter">
-          <df name="examples">
-            <df name="GC_GeigerCounter_test">
-              <in>GC_GeigerCounter_test.pde</in>
-            </df>
-          </df>
-          <in>GC_GeigerCounter.cpp</in>
-          <in>GC_GeigerCounter.h</in>
-          <in>GeigerCounter.cpp</in>
-          <in>GeigerCounter.h</in>
         </df>
         <df name="GCS_MAVLink">
           <df name="include">
@@ -617,20 +617,24 @@
           <executablePath></executablePath>
           <cTool>
             <incDir>
-              <pElem>/usr/lib/avr/include</pElem>
               <pElem>../arduino-1.0.5/hardware/arduino/cores/arduino</pElem>
+              <pElem>../arduino-1.0.5/hardware/arduino/variants/mega</pElem>
+              <pElem>../arduino-1.0.5/hardware/tools/avr/lib/avr/include</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ARDUINO=100</Elem>
+              <Elem>__AVR_ATmega2560__</Elem>
             </preprocessorList>
           </cTool>
           <ccTool>
             <incDir>
-              <pElem>/usr/lib/avr/include</pElem>
               <pElem>../arduino-1.0.5/hardware/arduino/cores/arduino</pElem>
+              <pElem>../arduino-1.0.5/hardware/arduino/variants/mega</pElem>
+              <pElem>../arduino-1.0.5/hardware/tools/avr/lib/avr/include</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ARDUINO=100</Elem>
+              <Elem>__AVR_ATmega2560__</Elem>
             </preprocessorList>
           </ccTool>
         </makeTool>
