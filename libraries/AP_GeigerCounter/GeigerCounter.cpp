@@ -8,5 +8,5 @@
 #include "GeigerCounter.h"
 
 GeigerCounter::GeigerCounter() {
-    int uSvh = 0;
+
 }

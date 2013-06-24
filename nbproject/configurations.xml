@@ -237,6 +237,12 @@
           <in>PeriodicProcess.h</in>
         </df>
         <df name="AP_RangeFinder">
+          <df name="examples">
+            <df name="AP_RangeFinder_test">
+              <in>AP_RangeFinder_test.pde</in>
+              <in>Makefile</in>
+            </df>
+          </df>
           <in>AP_RangeFinder.h</in>
           <in>AP_RangeFinder_ME007.cpp</in>
           <in>AP_RangeFinder_ME007.h</in>
@@ -599,6 +605,7 @@
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
     <Elem>.</Elem>
+    <Elem>libraries</Elem>
   </sourceRootList>
   <projectmakefile>ArduCopter/Makefile</projectmakefile>
   <confs>

@@ -34,7 +34,8 @@ ISR(TIMER5_OVF_vect) // Counter overflowed, 12us elapsed
 {
 	PORTH&=B10111111; // set TX pin to 0, and wait for 1 on Echo pin (below) 
 }
-
+// Commented because of AP_GeigerCounter.cpp ISR incompatibility
+/*
 ISR(PCINT0_vect)
 {
 	if (sonar_meas==0) {
@@ -46,6 +47,8 @@ ISR(PCINT0_vect)
 		}
 	}
 }
+*/
+
 void AP_AnalogSource_PIRATES::init(void)
 {
 	// Sonar INIT

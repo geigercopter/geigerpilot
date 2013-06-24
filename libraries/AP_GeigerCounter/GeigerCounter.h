@@ -10,11 +10,10 @@
 
 class GeigerCounter
 {
+
 public:
     GeigerCounter();
-    virtual ~GeigerCounter();
-private:
-
+    virtual ~GeigerCounter() {};
 };
 
 #endif	/* GeigerCounter_h */
