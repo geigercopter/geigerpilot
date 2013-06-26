@@ -44,6 +44,8 @@
         <in>toy.pde</in>
       </df>
       <df name="doc">
+        <df name="img">
+        </df>
       </df>
       <df name="libraries">
         <df name="AC_PID">
@@ -240,7 +242,6 @@
           <df name="examples">
             <df name="AP_RangeFinder_test">
               <in>AP_RangeFinder_test.pde</in>
-              <in>Makefile</in>
             </df>
           </df>
           <in>AP_RangeFinder.h</in>

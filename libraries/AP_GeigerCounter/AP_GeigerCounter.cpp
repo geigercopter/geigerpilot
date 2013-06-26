@@ -64,13 +64,15 @@ AP_GeigerCounter::AP_GeigerCounter(int16_t tube1, int16_t tube2) :
      */
     
     // prepare geiger counter pins for interruptions handling
-    
+/*
     // activate internal pullup active
     PORTB |= (1<<PB5) | (1<<PB6);
-
     // set directions to INPUT
     DDRB |= (1<<DDB5) | (1<<DDB6);
-
+*/
+    PORTB&=B11001111;
+    DDRB &=B11001111;
+    
     EIMSK &= ~(1 << INT0); // Disabling interrupts
 
     // Enable interrupt for : B5 - D11 and B6 - D12
