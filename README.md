@@ -27,5 +27,5 @@ One thing MegaPirateNG doesnt support on CRIUS AIOP V2 is mixing optical flow se
 
 GeigerCounter library is intended to be portable and will be proposed for update on the original ArduPilot project repository.
 
-Also, il will be modified to support a wider range of radiation measurement sensors, not only the actual SafeCast "AllanL" High Voltage Power Supply (HPVS) on SMB-20 geiger-müller tube.
+Also, il will be modified to support a wider range of radiation measurement sensors, not only the current SafeCast "AllanL" High Voltage Power Supply (HPVS) on SMB-20 geiger-müller tube.
 
