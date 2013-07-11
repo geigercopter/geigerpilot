@@ -5,10 +5,8 @@
 #include <FastSerial.h>
 #include "AP_GeigerCounter.h"
 
-
 extern "C" {
   // AVR LibC Includes
-  #include <inttypes.h>
   #include <avr/interrupt.h>
   #include <avr/io.h>
 }
@@ -19,65 +17,33 @@ extern "C" {
 	#include "WConstants.h"
 #endif
 
-volatile uint16_t tube_count_1=0;
-volatile uint16_t tube_count_2=0;
-
-ISR(PCINT0_vect)
+AP_GeigerCounter::AP_GeigerCounter(InterruptDispatcher & dispatcher, uint8_t pins[GEIGER_COUNTER_PINS]):  _dispatcher(dispatcher)
 {
-    tube_count_1++;
-    tube_count_2++;
-
-    Serial.println("Interrupt");    
-    if (PINB & B00011000) {
-       tube_count_1++;
-       tube_count_2++;
-       // click_count++; // We got 1 on Echo pin, remeber current counter value
-    }
-}
-
-/**
- * 
- * @param tube1
- * @param tube2
- */
-AP_GeigerCounter::AP_GeigerCounter(int16_t tube1, int16_t tube2) :
-    _tube1(tube1),
-    _tube2(tube2)
-{
-    Serial.printf("Tube 1 : %d\n", _tube1);
-    Serial.printf("Tube 2 : %d\n", _tube2);
-    
-    Serial.println("Instanciate");
-    if ((_tube1 == NOT_A_PIN) || (_tube2 == NOT_A_PIN)) 
+    int i;
+    for(i=0;i<GEIGER_COUNTER_PINS;i++)
     {
-        Serial.println("Error : not a pin");
-        return;
+//        dispatcher.Register(pins[i], notify);
     }
-    /*
-    pinMode(_tube1, INPUT);
-    pinMode(_tube2, INPUT);
-    digitalWrite(_tube1, HIGH);   // Configure internal pull-up resistor
-    digitalWrite(_tube2, HIGH);   // Configure internal pull-up resistor
-
-    PORTB&=B11001111;
-    DDRB &=B11001111;
-     */
-    
-    // prepare geiger counter pins for interruptions handling
-/*
-    // activate internal pullup active
-    PORTB |= (1<<PB5) | (1<<PB6);
-    // set directions to INPUT
-    DDRB |= (1<<DDB5) | (1<<DDB6);
-*/
-    PORTB&=B11001111;
-    DDRB &=B11001111;
+    Serial.println("Instanciate AP_GeigerCounter");
     
     EIMSK &= ~(1 << INT0); // Disabling interrupts
 
-    // Enable interrupt for : B5 - D11 and B6 - D12
-    PCMSK0 |= (1 << PCINT5) | (1 << PCINT6);
-    
+    // prepare geiger counter pins for interruptions handling
+    for(i=0;i<GEIGER_COUNTER_PINS;i++)
+    {
+        Serial.printf("Tube %d : %d\n", i, pins[i]);
+        if (pins[i] == NOT_A_PIN) 
+        {
+            Serial.printf("Error pin %d is not a pin\n", pins[i]);
+            return;
+        }
+        // activate internal pullup
+        PORTB &= ~(1<<pins[i]);
+        // set directions to INPUT
+        DDRB &= ~(1<<pins[i]);
+        // Enable interrupt for digital pins
+        PCMSK0 |= (1 << pins[i]);
+    }
     PCICR |= (1 << PCIE0); // PCINT0 Interrupt enabled for PORTB
     
     /*
@@ -97,23 +63,32 @@ AP_GeigerCounter::AP_GeigerCounter(int16_t tube1, int16_t tube2) :
     EIMSK |= (1 << INT0);// Re-enable interrupts
 }
 
-void AP_GeigerCounter::init()
-{
-    Serial.println("Initialise");
-}
-
 uint16_t AP_GeigerCounter::read(int channel)
 {
-    	Serial.println("-rd-");
-        switch(channel)
-        {
-            case 1:
-                return tube_count_1;
-                break;
-            case 2:
-                return tube_count_2;
-                break;
-            default:
-                return tube_count_1 + tube_count_2;
+    return _tubes[channel].count;
+}
+
+double AP_GeigerCounter::measure(int channel)
+{
+    return 0.0;
+}
+
+void AP_GeigerCounter::beat()
+{
+/*
+    shift_reg[reg_index] = cpb;     // put the count in the correct bin
+    reg_index = (reg_index+1) % NX; // increment register index
+*/
+}
+
+void AP_GeigerCounter::notify()
+{
+    int i=0;
+    while(i<GEIGER_COUNTER_PINS)
+    {
+        if (PINB & _tubes[i].pin){
+            _tubes[i].count++;
         }
+        i++;
+    }
 }

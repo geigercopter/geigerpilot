@@ -68,8 +68,6 @@
           <in>AP_AnalogSource.h</in>
           <in>AP_AnalogSource_Arduino.cpp</in>
           <in>AP_AnalogSource_Arduino.h</in>
-          <in>AP_AnalogSource_PIRATES.cpp</in>
-          <in>AP_AnalogSource_PIRATES.h</in>
           <in>AnalogSource.h</in>
         </df>
         <df name="AP_Baro">
@@ -126,6 +124,11 @@
           <in>AP_GeigerCounter.h</in>
           <in>GeigerCounter.cpp</in>
           <in>GeigerCounter.h</in>
+          <in>INotifiable.h</in>
+          <in>InterruptDispatcher.cpp</in>
+          <in>InterruptDispatcher.h</in>
+          <in>InterruptDispatcher_PCINT0_vect.cpp</in>
+          <in>InterruptDispatcher_PCINT0_vect.h</in>
         </df>
         <df name="AP_GPS">
           <in>AP_GPS.h</in>
@@ -245,8 +248,6 @@
             </df>
           </df>
           <in>AP_RangeFinder.h</in>
-          <in>AP_RangeFinder_ME007.cpp</in>
-          <in>AP_RangeFinder_ME007.h</in>
           <in>AP_RangeFinder_MaxsonarXL.cpp</in>
           <in>AP_RangeFinder_MaxsonarXL.h</in>
           <in>RangeFinder.cpp</in>
@@ -845,13 +846,6 @@
         <ccTool>
         </ccTool>
       </item>
-      <item path="libraries/AP_AnalogSource/AP_AnalogSource_PIRATES.cpp"
-            ex="false"
-            tool="1"
-            flavor2="4">
-        <ccTool>
-        </ccTool>
-      </item>
       <item path="libraries/AP_Baro/AP_Baro.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
@@ -1145,13 +1139,6 @@
         </ccTool>
       </item>
       <item path="libraries/AP_PeriodicProcess/AP_TimerProcess.cpp"
-            ex="false"
-            tool="1"
-            flavor2="4">
-        <ccTool>
-        </ccTool>
-      </item>
-      <item path="libraries/AP_RangeFinder/AP_RangeFinder_ME007.cpp"
             ex="false"
             tool="1"
             flavor2="4">

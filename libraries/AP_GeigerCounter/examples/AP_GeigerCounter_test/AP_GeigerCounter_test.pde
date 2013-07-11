@@ -2,13 +2,14 @@
  *  AP_Geigercounter_test
  */
 
-/*
 #include <FastSerial.h>
 #include <AP_Common.h>
-//#include "../../AP_GeigerCounter.h"
-*/
+
+#include "InterruptDispatcher.h"
 #include "AP_GeigerCounter.h"
 
+
+#define GEIGER_COUNTER_PINS 2
 // includes
 /*
 #include <AP_Math.h>
@@ -23,23 +24,28 @@
 #include <AP_Buffer.h>
 */
 
-AP_GeigerCounter geigerCounter(A11,A12);
-//AP_GeigerCounter geigerCounter(A1,A2);
+uint8_t pins[GEIGER_COUNTER_PINS] = {PINB5,PINB6};
+
+InterruptDispatcher_PCINT0_vect interruptDispatcher = InterruptDispatcher_PCINT0_vect::GetInstance();
+
+AP_GeigerCounter geigerCounter(interruptDispatcher, pins);
 
 void setup()
 {
+
     Serial.begin(115200);
     Serial.println("GeigerCounter Test");
-    geigerCounter.init();
+//    geigerCounter.init();
+
 }
 
 void loop()
 {
     Serial.print("count A :");
-    Serial.print(geigerCounter.read());
+    //Serial.print(geigerCounter.read());
 
     Serial.print("\tcount B :");
-    Serial.print(geigerCounter.read());
+    //Serial.print(geigerCounter.read());
 
     Serial.println();
     delay(1000);

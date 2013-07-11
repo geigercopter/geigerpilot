@@ -367,21 +367,17 @@ GCS_MAVLINK	gcs3;
 //
 ModeFilterInt16_Size3 sonar_mode_filter(1);
 #if CONFIG_SONAR == ENABLED
-	#if CONFIG_SONAR_SOURCE == SONAR_SOURCE_ADC
-		AP_AnalogSource_ADC sonar_analog_source( &adc, CONFIG_SONAR_SOURCE_ADC_CHANNEL, 0.25);
-	#elif CONFIG_SONAR_SOURCE == SONAR_SOURCE_PIRATES
-		AP_AnalogSource_PIRATES sonar_analog_source;
-	#elif CONFIG_SONAR_SOURCE == SONAR_SOURCE_ANALOG_PIN
-		AP_AnalogSource_Arduino sonar_analog_source(CONFIG_SONAR_SOURCE_ANALOG_PIN);
-	#endif
-		
-	#if SONAR_TYPE == MAX_SONAR_XL
-			AP_RangeFinder_MaxsonarXL sonar(&sonar_analog_source, &sonar_mode_filter);
-	#elif SONAR_TYPE == SONAR_ME007
-			AP_RangeFinder_ME007 sonar(&sonar_analog_source, &sonar_mode_filter);
-	#else
-	    #error Unrecognised SONAR_TYPE setting.
-	#endif
+    #if CONFIG_SONAR_SOURCE == SONAR_SOURCE_ADC
+        AP_AnalogSource_ADC sonar_analog_source( &adc, CONFIG_SONAR_SOURCE_ADC_CHANNEL, 0.25);
+    #elif CONFIG_SONAR_SOURCE == SONAR_SOURCE_ANALOG_PIN
+        AP_AnalogSource_Arduino sonar_analog_source(CONFIG_SONAR_SOURCE_ANALOG_PIN);
+    #endif
+
+    #if SONAR_TYPE == MAX_SONAR_XL
+        AP_RangeFinder_MaxsonarXL sonar(&sonar_analog_source, &sonar_mode_filter);
+    #else
+        #error Unrecognised SONAR_TYPE setting.
+    #endif
 #endif
 
 // agmatthews USERHOOKS

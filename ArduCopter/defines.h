@@ -48,7 +48,6 @@
 
 #define SONAR_SOURCE_ADC 1
 #define SONAR_SOURCE_ANALOG_PIN 2
-#define SONAR_SOURCE_PIRATES 3
 
 // CH 7 control
 #define CH7_PWM_TRIGGER 1800    // pwm value above which the channel 7 option will be invoked
@@ -117,7 +116,6 @@
 // SONAR types:
 #define MAX_SONAR_UNKNOWN	0
 #define MAX_SONAR_XL		1
-#define SONAR_ME007		2
 
 // OSD Types
 #define	OSD_PROTOCOL_NONE 0

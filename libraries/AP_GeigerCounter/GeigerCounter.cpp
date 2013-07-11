@@ -6,7 +6,3 @@
  */
 
 #include "GeigerCounter.h"
-
-GeigerCounter::GeigerCounter() {
-
-}
