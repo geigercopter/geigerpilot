@@ -5,8 +5,6 @@
  * Created on 28 juin 2013, 15:21
  */
 
-#include <AP_Common.h>
-
 #ifndef InterruptDispatcher_h
 #define	InterruptDispatcher_h
 
@@ -20,18 +18,32 @@
     __attribute__ ((signal, __INTR_ATTRS))
 #endif
 
-#ifndef IRQ_DISPATCHER_MAX_PINS
-#define IRQ_DISPATCHER_MAX_PINS 2
-#endif
+// not implemented for AVR, MCU would never "exit", so atexit can be dummy 
+// see http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&p=535303#535303
+// and http://www.embeddedrelated.com/usenet/embedded/show/88449-1.php
+// perhaps this declaration should find a better declaration on a more general (common) header
+// but I decided to left it in this place as it resolves a linking error
+//extern "C" void atexit( void ) { } 
+
+#include "IrqNotifiable.h"
 
 class InterruptDispatcher
 {
 public:
-    virtual int8_t Register(uint8_t pin, void * func) = 0;
-    virtual int8_t UnRegister(uint8_t pin) = 0;
-    InterruptDispatcher() {};
-    ~InterruptDispatcher() {};
+    int8_t Register(IrqNotifiable * notifiable);
+    int8_t UnRegister(IrqNotifiable * notifiable); 
+
+protected:
+    void dispatch(unsigned char mask);
+    uint8_t _pins;
+    
+    IrqNotifiable * _notifiables; // list of notifiables
+
+    volatile uint8_t * _port;
+    volatile uint8_t * _ddr;
+    volatile uint8_t * _pcmsk;
 };
 
 #include "InterruptDispatcher_PCINT0_vect.h"
+
 #endif	/* InterruptDispatcher_h */

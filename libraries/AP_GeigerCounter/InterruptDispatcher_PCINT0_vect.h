@@ -16,23 +16,23 @@ extern "C" {
 #ifndef INTERRUPTDISPATCHER_PCINT0_VECT_H
 #define	INTERRUPTDISPATCHER_PCINT0_VECT_H
 
-#ifndef IRQ_DISPATCHER_MAX_PINS
-#define IRQ_DISPATCHER_MAX_PINS 2
-#endif
-
 class InterruptDispatcher_PCINT0_vect : public InterruptDispatcher
 {
-
 public:
-    //static void Init();
-    static InterruptDispatcher_PCINT0_vect & GetInstance();
-    int8_t Register(uint8_t pin, void * func);
-    int8_t UnRegister(uint8_t pin);
+    static InterruptDispatcher_PCINT0_vect & GetInstance(void){
+        static InterruptDispatcher_PCINT0_vect _singleton; // singleton instance
+        return _singleton;
+    };
 
-    InterruptDispatcher_PCINT0_vect() {};
-    ~InterruptDispatcher_PCINT0_vect() {};
-    
 private:
+    InterruptDispatcher_PCINT0_vect() {
+        _port = &PORTB;
+        _ddr = &DDRB;
+        _pcmsk = &PCMSK0;
+
+        //Enable IRQ on PCINT0
+        PCICR |= (1 << PCIE0);
+    };
     CLASS_IRQ(dispatcher, PCINT0_vect);
 };
 #endif	/* INTERRUPTDISPATCHER_PCINT0_VECT_H */

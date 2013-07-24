@@ -1,52 +1,49 @@
 /*
  *  AP_Geigercounter_test
  */
+//#define USE_AP_VAR
 
 #include <FastSerial.h>
 #include <AP_Common.h>
-
-#include "InterruptDispatcher.h"
-#include "AP_GeigerCounter.h"
-
-
-#define GEIGER_COUNTER_PINS 2
-// includes
-/*
 #include <AP_Math.h>
-#include <Filter.h>
-#include <I2C.h>                // Arduino I2C lib
-#include <AP_RangeFinder.h>     // Range finder library
-#include <Arduino_Mega_ISR_Registry.h>
-#include <AP_PeriodicProcess.h>
-#include <AP_ADC.h>                             // ArduPilot Mega Analog to Digital Converter Library
-#include <AP_AnalogSource.h>
-#include <ModeFilter.h>                 // mode filter
-#include <AP_Buffer.h>
+/*
+#include <AP_GeigerCounter/GeigerTube.h>
+#include <AP_GeigerCounter/InterruptDispatcher.h>
 */
+#include "AP_GeigerCounter.h"
+#include "../../InterruptDispatcher.h"
 
-uint8_t pins[GEIGER_COUNTER_PINS] = {PINB5,PINB6};
+extern "C" void atexit( void ) { } 
 
-InterruptDispatcher_PCINT0_vect interruptDispatcher = InterruptDispatcher_PCINT0_vect::GetInstance();
+//GeigerTube tube1(PINB5);
+//GeigerTube tube2(PINB6);
+#define GEIGER_NUM_TUBES 2
 
-AP_GeigerCounter geigerCounter(interruptDispatcher, pins);
+GeigerTube tubes[GEIGER_NUM_TUBES] = {(PCINT5), (PCINT6)};
+
+InterruptDispatcher_PCINT0_vect & dispatcher = InterruptDispatcher_PCINT0_vect::GetInstance();
+
+AP_GeigerCounter geigerCounter(tubes, GEIGER_NUM_TUBES);
 
 void setup()
 {
-
-    Serial.begin(115200);
-    Serial.println("GeigerCounter Test");
+    for(int i=0; i< GEIGER_NUM_TUBES; i++)
+    {
+        dispatcher.Register(&tubes[0]);
+    }
+    //Serial.begin(115200);
+    //Serial.println("GeigerCounter Test");
 //    geigerCounter.init();
-
 }
 
 void loop()
 {
-    Serial.print("count A :");
+    //Serial.print("count A :");
     //Serial.print(geigerCounter.read());
 
-    Serial.print("\tcount B :");
+    //Serial.print("\tcount B :");
     //Serial.print(geigerCounter.read());
 
-    Serial.println();
-    delay(1000);
+    //Serial.println();
+    //delay(1000);
 }

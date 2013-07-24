@@ -118,17 +118,20 @@
           <df name="examples">
             <df name="AP_GeigerCounter_test">
               <in>AP_GeigerCounter_test.pde</in>
+              <in>Makefile</in>
             </df>
           </df>
           <in>AP_GeigerCounter.cpp</in>
           <in>AP_GeigerCounter.h</in>
           <in>GeigerCounter.cpp</in>
           <in>GeigerCounter.h</in>
-          <in>INotifiable.h</in>
+          <in>GeigerTube.cpp</in>
+          <in>GeigerTube.h</in>
           <in>InterruptDispatcher.cpp</in>
           <in>InterruptDispatcher.h</in>
           <in>InterruptDispatcher_PCINT0_vect.cpp</in>
           <in>InterruptDispatcher_PCINT0_vect.h</in>
+          <in>IrqNotifiable.h</in>
         </df>
         <df name="AP_GPS">
           <in>AP_GPS.h</in>
@@ -559,6 +562,20 @@
           <in>memcheck.cpp</in>
           <in>memcheck.h</in>
         </df>
+        <df name="pcimanager">
+          <df name="examples">
+            <df name="PciManager1Basic">
+              <in>PciManager1Basic.ino</in>
+            </df>
+          </df>
+          <in>PciListener.h</in>
+          <in>PciListenerImp.cpp</in>
+          <in>PciListenerImp.h</in>
+          <in>PciManager.cpp</in>
+          <in>PciManager.h</in>
+          <in>gpl.txt</in>
+          <in>keywords.txt</in>
+        </df>
         <df name="PID">
           <in>PID.cpp</in>
           <in>PID.h</in>
@@ -607,7 +624,6 @@
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
     <Elem>.</Elem>
-    <Elem>libraries</Elem>
   </sourceRootList>
   <projectmakefile>ArduCopter/Makefile</projectmakefile>
   <confs>
@@ -772,17 +788,10 @@
         <cTool>
         </cTool>
       </item>
-      <folder path="geigerpilot">
+      <folder path="geigerpilot/libraries/AP_GeigerCounter">
         <cTool>
-          <incDir>
-            <pElem>/usr/lib/avr/include</pElem>
-          </incDir>
+          <standard>9</standard>
         </cTool>
-        <ccTool>
-          <incDir>
-            <pElem>/usr/lib/avr/include</pElem>
-          </incDir>
-        </ccTool>
       </folder>
       <item path="libraries/AC_PID/AC_PID.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
