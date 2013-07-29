@@ -30,15 +30,19 @@
 class InterruptDispatcher
 {
 public:
-    int8_t Register(IrqNotifiable * notifiable);
-    int8_t UnRegister(IrqNotifiable * notifiable); 
+    void Register(IrqNotifiable * notifiable);
+    void UnRegister(IrqNotifiable * notifiable); 
 
 protected:
-    void dispatch(unsigned char mask);
-    uint8_t _pins;
+    void dispatch();
+    //uint8_t _pins;
     
     IrqNotifiable * _notifiables; // list of notifiables
 
+    //uint8_t _mask;
+
+    static volatile uint8_t * _test;
+    
     volatile uint8_t * _port;
     volatile uint8_t * _ddr;
     volatile uint8_t * _pcmsk;

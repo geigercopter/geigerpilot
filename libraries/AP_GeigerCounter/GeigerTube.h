@@ -13,7 +13,8 @@ extern "C" {
 #ifndef GeigerTube_h
 #define	GeigerTube_h
 
-#define GEIGER_TUBE_HISTORY_LEN 12
+#define GEIGER_TUBE_HISTORY_LEN 15  // size of measure array
+#define GEIGER_TUBE_MEASURE_DELAY 4 // delay between 2 measurements (in seconds)
 #define GEIGER_TUBE_CPM 175
 
 #include "IrqNotifiable.h"
@@ -25,16 +26,18 @@ public:
     uint16_t read();
     double measure();
     void beat();
-    /*inline*/ void notify();
+    
+    void notify();
 protected:
         struct Measure {
             uint32_t timestamp;
             uint8_t count;
         };
-        uint8_t count;
-        uint8_t lastpoint;
-        Measure measures[GEIGER_TUBE_HISTORY_LEN];
         
+        Measure measures[GEIGER_TUBE_HISTORY_LEN];
+        uint8_t count;
+        uint8_t beatcount;
+        uint8_t lastpoint;
 };
 
 #endif	/* GeigerTube_h */

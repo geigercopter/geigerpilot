@@ -2,5 +2,5 @@
 
 void InterruptDispatcher_PCINT0_vect::dispatcher(void)
 {
-    InterruptDispatcher_PCINT0_vect::GetInstance().dispatch(PORTB);
+    InterruptDispatcher_PCINT0_vect::GetInstance().dispatch();
 }

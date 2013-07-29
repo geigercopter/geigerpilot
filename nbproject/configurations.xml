@@ -1,10 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="84">
+<configurationDescriptor version="89">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <df name="geigerpilot" root=".">
+    <logicalFolder name="ArduCopter.build"
+                   displayName="ArduCopter.build"
+                   projectFiles="true"
+                   root="/tmp/ArduCopter.build">
+      <itemPath>/tmp/ArduCopter.build/ArduCopter.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="arduino"
+                   displayName="arduino"
+                   projectFiles="true"
+                   root="../arduino-1.0.5/hardware/arduino/cores/arduino">
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/Arduino.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/CDC.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/HID.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/HardwareSerial.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/HardwareSerial.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/IPAddress.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/IPAddress.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/Platform.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/Print.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/Print.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/Printable.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/Stream.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/Stream.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/Tone.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/USBAPI.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/USBCore.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/USBDesc.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/WCharacter.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/WInterrupts.c</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/WMath.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/WString.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/WString.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/binary.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/main.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/new.cpp</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/new.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/wiring.c</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/wiring_analog.c</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/wiring_digital.c</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/wiring_private.h</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/wiring_pulse.c</itemPath>
+      <itemPath>../arduino-1.0.5/hardware/arduino/cores/arduino/wiring_shift.c</itemPath>
+    </logicalFolder>
+    <df root="." name="geigerpilot">
       <df name="ArduCopter">
         <in>APM_Config.h</in>
-        <in>APM_Config_mavlink_hil.h</in>
         <in>AP_State.pde</in>
         <in>ArduCopter.pde</in>
         <in>Attitude.pde</in>
@@ -42,10 +84,6 @@
         <in>system.pde</in>
         <in>test.pde</in>
         <in>toy.pde</in>
-      </df>
-      <df name="doc">
-        <df name="img">
-        </df>
       </df>
       <df name="libraries">
         <df name="AC_PID">
@@ -97,7 +135,6 @@
           <in>AP_Loop.h</in>
           <in>AP_Param.cpp</in>
           <in>AP_Param.h</in>
-          <in>AP_Test.h</in>
           <in>AP_Var_menufuncs.cpp</in>
           <in>AP_Vector.h</in>
           <in>c++.cpp</in>
@@ -118,7 +155,6 @@
           <df name="examples">
             <df name="AP_GeigerCounter_test">
               <in>AP_GeigerCounter_test.pde</in>
-              <in>Makefile</in>
             </df>
           </df>
           <in>AP_GeigerCounter.cpp</in>
@@ -225,8 +261,6 @@
         </df>
         <df name="AP_OpticalFlow">
           <df name="examples">
-            <df name="ADNS3080ImageGrabber">
-            </df>
             <df name="AP_OpticalFlow_test">
               <in>AP_OpticalFlow_test.pde</in>
             </df>
@@ -276,7 +310,6 @@
           <in>AP_Var.h</in>
         </df>
         <df name="APM_Control">
-          <in>APM_Control.h</in>
           <in>AP_PitchController.cpp</in>
           <in>AP_PitchController.h</in>
           <in>AP_RollController.cpp</in>
@@ -311,10 +344,8 @@
           <in>BetterStream.h</in>
           <in>FastSerial.cpp</in>
           <in>FastSerial.h</in>
-          <in>ftoa_engine.S</in>
           <in>ftoa_engine.h</in>
           <in>ntz.h</in>
-          <in>ultoa_invert.S</in>
           <in>vprintf.cpp</in>
           <in>xtoa_fast.h</in>
         </df>
@@ -333,7 +364,6 @@
               <df name="v0.9">
                 <df name="ardupilotmega">
                   <in>ardupilotmega.h</in>
-                  <in>mavlink.h</in>
                   <in>mavlink_msg_ahrs.h</in>
                   <in>mavlink_msg_ap_adc.h</in>
                   <in>mavlink_msg_digicam_configure.h</in>
@@ -342,7 +372,6 @@
                   <in>mavlink_msg_fence_point.h</in>
                   <in>mavlink_msg_fence_status.h</in>
                   <in>mavlink_msg_hwstatus.h</in>
-                  <in>mavlink_msg_limits_status.h</in>
                   <in>mavlink_msg_meminfo.h</in>
                   <in>mavlink_msg_mount_configure.h</in>
                   <in>mavlink_msg_mount_control.h</in>
@@ -351,12 +380,10 @@
                   <in>mavlink_msg_sensor_offsets.h</in>
                   <in>mavlink_msg_set_mag_offsets.h</in>
                   <in>mavlink_msg_simstate.h</in>
-                  <in>testsuite.h</in>
                   <in>version.h</in>
                 </df>
                 <df name="common">
                   <in>common.h</in>
-                  <in>mavlink.h</in>
                   <in>mavlink_msg_action.h</in>
                   <in>mavlink_msg_action_ack.h</in>
                   <in>mavlink_msg_attitude.h</in>
@@ -457,7 +484,6 @@
                   <in>mavlink_msg_set_mag_offsets.h</in>
                   <in>mavlink_msg_simstate.h</in>
                   <in>mavlink_msg_wind.h</in>
-                  <in>testsuite.h</in>
                   <in>version.h</in>
                 </df>
                 <df name="common">
@@ -543,13 +569,10 @@
                 </df>
                 <in>checksum.h</in>
                 <in>mavlink_helpers.h</in>
-                <in>mavlink_protobuf_manager.hpp</in>
                 <in>mavlink_types.h</in>
                 <in>protocol.h</in>
               </df>
             </df>
-          </df>
-          <df name="message_definitions">
           </df>
           <in>GCS_MAVLink.cpp</in>
           <in>GCS_MAVLink.h</in>
@@ -561,20 +584,6 @@
         <df name="memcheck">
           <in>memcheck.cpp</in>
           <in>memcheck.h</in>
-        </df>
-        <df name="pcimanager">
-          <df name="examples">
-            <df name="PciManager1Basic">
-              <in>PciManager1Basic.ino</in>
-            </df>
-          </df>
-          <in>PciListener.h</in>
-          <in>PciListenerImp.cpp</in>
-          <in>PciListenerImp.h</in>
-          <in>PciManager.cpp</in>
-          <in>PciManager.h</in>
-          <in>gpl.txt</in>
-          <in>keywords.txt</in>
         </df>
         <df name="PID">
           <in>PID.cpp</in>
@@ -607,8 +616,6 @@
         <df name="ppm_gen">
           <in>ppm_gen.pde</in>
         </df>
-        <df name="scripts">
-        </df>
         <df name="SerialPassthrough">
           <in>SerialPassthrough.pde</in>
         </df>
@@ -631,6 +638,8 @@
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
         <compilerSet>Arduino|GNU</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <codeAssistance>
       </codeAssistance>
@@ -642,28 +651,316 @@
           <executablePath></executablePath>
           <cTool>
             <incDir>
+              <pElem>../arduino-1.0.5/hardware/tools/avr/lib/avr/include</pElem>
               <pElem>../arduino-1.0.5/hardware/arduino/cores/arduino</pElem>
               <pElem>../arduino-1.0.5/hardware/arduino/variants/mega</pElem>
-              <pElem>../arduino-1.0.5/hardware/tools/avr/lib/avr/include</pElem>
+              <pElem>../CriusAIO/src/ardupilot-mega/libraries/AP_ADC</pElem>
+              <pElem>ArduCopter</pElem>
+              <pElem>../ardupilot/libraries/Desktop/include</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ARDUINO=100</Elem>
+              <Elem>F_CPU=16000000L</Elem>
               <Elem>__AVR_ATmega2560__</Elem>
+              <Elem>__PROG_TYPES_COMPAT__</Elem>
             </preprocessorList>
           </cTool>
           <ccTool>
             <incDir>
-              <pElem>../arduino-1.0.5/hardware/arduino/cores/arduino</pElem>
+              <pElem>libraries/AP_LeadFilter/utility</pElem>
+              <pElem>libraries/Filter/utility</pElem>
+              <pElem>libraries/SPI3/utility</pElem>
+              <pElem>libraries/AP_Motors/utility</pElem>
+              <pElem>libraries/GCS_MAVLink</pElem>
+              <pElem>libraries/AP_Semaphore</pElem>
               <pElem>../arduino-1.0.5/hardware/arduino/variants/mega</pElem>
+              <pElem>libraries/AP_RangeFinder/utility</pElem>
+              <pElem>libraries/memcheck</pElem>
+              <pElem>ArduCopter</pElem>
+              <pElem>libraries/AP_Limits</pElem>
+              <pElem>libraries/AP_Common</pElem>
+              <pElem>libraries/RC_Channel/utility</pElem>
+              <pElem>libraries/FastSerial</pElem>
+              <pElem>libraries/Arduino_Mega_ISR_Registry/utility</pElem>
+              <pElem>libraries/AP_OpticalFlow</pElem>
+              <pElem>libraries/AP_InertialSensor</pElem>
+              <pElem>libraries/DigitalWriteFast</pElem>
+              <pElem>libraries/AP_Mount</pElem>
+              <pElem>libraries/APM_RC/utility</pElem>
+              <pElem>libraries/AP_GPS/utility</pElem>
+              <pElem>libraries/AP_Baro</pElem>
+              <pElem>libraries/AP_Camera/utility</pElem>
+              <pElem>libraries/AC_PID/utility</pElem>
+              <pElem>libraries/AP_RangeFinder</pElem>
               <pElem>../arduino-1.0.5/hardware/tools/avr/lib/avr/include</pElem>
+              <pElem>libraries/AP_AnalogSource/utility</pElem>
+              <pElem>libraries/AP_Buffer</pElem>
+              <pElem>libraries/AP_AHRS/utility</pElem>
+              <pElem>libraries/AP_AHRS</pElem>
+              <pElem>libraries/AP_PeriodicProcess/utility</pElem>
+              <pElem>libraries/APM_PI</pElem>
+              <pElem>libraries/AP_AnalogSource</pElem>
+              <pElem>libraries/AP_Baro/utility</pElem>
+              <pElem>libraries/AP_Menu/utility</pElem>
+              <pElem>libraries/AP_InertialSensor/utility</pElem>
+              <pElem>libraries/SPI</pElem>
+              <pElem>libraries/memcheck/utility</pElem>
+              <pElem>libraries/AP_Math/utility</pElem>
+              <pElem>libraries/Arduino_Mega_ISR_Registry</pElem>
+              <pElem>libraries/SPI3</pElem>
+              <pElem>libraries/AP_OpticalFlow/utility</pElem>
+              <pElem>libraries/AP_Motors</pElem>
+              <pElem>libraries/AP_Limits/utility</pElem>
+              <pElem>libraries/AP_Relay</pElem>
+              <pElem>libraries/AP_Math</pElem>
+              <pElem>libraries/RC_Channel</pElem>
+              <pElem>libraries/AP_Semaphore/utility</pElem>
+              <pElem>libraries/Filter</pElem>
+              <pElem>libraries/AP_Declination/utility</pElem>
+              <pElem>libraries/AP_Camera</pElem>
+              <pElem>libraries/DataFlash</pElem>
+              <pElem>libraries/AP_InertialNav/utility</pElem>
+              <pElem>libraries/AP_Airspeed</pElem>
+              <pElem>libraries/I2C/utility</pElem>
+              <pElem>libraries/AP_Declination</pElem>
+              <pElem>libraries/AP_Common/utility</pElem>
+              <pElem>libraries/APM_RC</pElem>
+              <pElem>libraries/AP_InertialNav</pElem>
+              <pElem>libraries/AP_Compass</pElem>
+              <pElem>libraries/APM_PI/utility</pElem>
+              <pElem>libraries/AP_LeadFilter</pElem>
+              <pElem>libraries/AP_Menu</pElem>
+              <pElem>libraries/SPI/utility</pElem>
+              <pElem>libraries/AP_Airspeed/utility</pElem>
+              <pElem>libraries/GCS_MAVLink/utility</pElem>
+              <pElem>libraries/AP_PeriodicProcess</pElem>
+              <pElem>libraries/AP_Mount/utility</pElem>
+              <pElem>libraries/DataFlash/utility</pElem>
+              <pElem>libraries/AC_PID</pElem>
+              <pElem>../arduino-1.0.5/hardware/arduino/cores/arduino</pElem>
+              <pElem>libraries/I2C</pElem>
+              <pElem>libraries/AP_Relay/utility</pElem>
+              <pElem>libraries/FastSerial/utility</pElem>
+              <pElem>libraries/AP_GPS</pElem>
+              <pElem>libraries/AP_Compass/utility</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ARDUINO=100</Elem>
+              <Elem>F_CPU=16000000L</Elem>
               <Elem>__AVR_ATmega2560__</Elem>
+              <Elem>__PROG_TYPES_COMPAT__</Elem>
             </preprocessorList>
+            <undefinedList>
+              <Elem>__EXCEPTIONS</Elem>
+            </undefinedList>
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/Arduino.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/CDC.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/HID.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/HardwareSerial.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/HardwareSerial.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/IPAddress.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/IPAddress.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/Platform.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/Print.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/Print.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/Printable.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/Stream.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/Stream.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/Tone.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/USBAPI.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/USBCore.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/USBDesc.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/WCharacter.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/WInterrupts.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/WMath.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/WString.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/WString.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/binary.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/new.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/new.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/wiring.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/wiring_analog.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/wiring_digital.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/wiring_private.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/wiring_pulse.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="../arduino-1.0.5/hardware/arduino/cores/arduino/wiring_shift.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="/tmp/ArduCopter.build/ArduCopter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="ArduCopter/APM_Config.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ArduCopter/AP_State.pde" ex="false" tool="0" flavor2="2">
         <cTool>
         </cTool>
@@ -675,6 +972,8 @@
       <item path="ArduCopter/Attitude.pde" ex="false" tool="0" flavor2="2">
         <cTool>
         </cTool>
+      </item>
+      <item path="ArduCopter/GCS.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ArduCopter/GCS.pde" ex="false" tool="0" flavor2="2">
         <cTool>
@@ -700,6 +999,8 @@
         <cTool>
         </cTool>
       </item>
+      <item path="ArduCopter/Parameters.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ArduCopter/Parameters.pde" ex="false" tool="0" flavor2="2">
         <cTool>
         </cTool>
@@ -707,6 +1008,8 @@
       <item path="ArduCopter/UserCode.pde" ex="false" tool="0" flavor2="2">
         <cTool>
         </cTool>
+      </item>
+      <item path="ArduCopter/UserVariables.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ArduCopter/commands.pde" ex="false" tool="0" flavor2="2">
         <cTool>
@@ -720,9 +1023,15 @@
         <cTool>
         </cTool>
       </item>
+      <item path="ArduCopter/config.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ArduCopter/config_channels.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="ArduCopter/control_modes.pde" ex="false" tool="0" flavor2="2">
         <cTool>
         </cTool>
+      </item>
+      <item path="ArduCopter/defines.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="ArduCopter/events.pde" ex="false" tool="0" flavor2="2">
         <cTool>
@@ -788,6 +1097,31 @@
         <cTool>
         </cTool>
       </item>
+      <item path="Tools/SerialPassthrough/SerialPassthrough.pde"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Tools/i2c_spy/i2c_spy.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <item path="Tools/ppm_gen/ppm_gen.pde" ex="false" tool="0" flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
+      <folder path="geigerpilot">
+        <cTool>
+          <incDir>
+            <pElem>../arduino-1.0.5/hardware/tools/avr/lib/avr/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>__AVR_ATmega2560__</Elem>
+          </preprocessorList>
+        </cTool>
+      </folder>
       <folder path="geigerpilot/libraries/AP_GeigerCounter">
         <cTool>
           <standard>9</standard>
@@ -797,12 +1131,19 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AC_PID/AC_PID.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/APM_Control/AP_PitchController.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/APM_Control/AP_PitchController.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/APM_Control/AP_RollController.cpp"
             ex="false"
@@ -811,6 +1152,11 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/APM_Control/AP_RollController.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/APM_Control/AP_YawController.cpp"
             ex="false"
             tool="1"
@@ -818,9 +1164,18 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/APM_Control/AP_YawController.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/APM_PI/APM_PI.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/APM_PI/APM_PI.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/APM_RC/APM_RC.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/APM_RC/APM_RC_PIRATES.cpp"
             ex="false"
@@ -829,17 +1184,25 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/APM_RC/APM_RC_PIRATES.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_AHRS/AP_AHRS.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_AHRS/AP_AHRS.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_AHRS/AP_AHRS_DCM.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_AHRS/AP_AHRS_DCM.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_AHRS/AP_AHRS_HIL.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_AHRS/AP_AHRS_HIL.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_Airspeed/AP_Airspeed.cpp"
             ex="false"
@@ -848,6 +1211,16 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Airspeed/AP_Airspeed.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_AnalogSource/AP_AnalogSource.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_AnalogSource/AP_AnalogSource_Arduino.cpp"
             ex="false"
             tool="1"
@@ -855,9 +1228,21 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_AnalogSource/AP_AnalogSource_Arduino.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_AnalogSource/AnalogSource.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_Baro/AP_Baro.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Baro/AP_Baro.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_Baro/AP_Baro_BMP085_Pirates.cpp"
             ex="false"
@@ -866,6 +1251,11 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Baro/AP_Baro_BMP085_Pirates.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_Baro/AP_Baro_MS5611_I2C.cpp"
             ex="false"
             tool="1"
@@ -873,21 +1263,38 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Baro/AP_Baro_MS5611_I2C.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_Buffer/AP_Buffer.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Camera/AP_Camera.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Camera/AP_Camera.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_Common/AP_Common.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Common/AP_Common.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/AP_Common/AP_Curve.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Common/AP_Loop.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Common/AP_Loop.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Common/AP_Param.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Common/AP_Param.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_Common/AP_Var_menufuncs.cpp"
             ex="false"
@@ -896,9 +1303,13 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Common/AP_Vector.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Common/c++.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Common/c++.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_Common/tools/eedump.c" ex="false" tool="0" flavor2="2">
         <cTool>
@@ -911,6 +1322,8 @@
         <cTool>
         </cTool>
       </item>
+      <item path="libraries/AP_Compass/AP_Compass.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Compass/AP_Compass_HMC5843_Pirates.cpp"
             ex="false"
             tool="1"
@@ -918,9 +1331,16 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Compass/AP_Compass_HMC5843_Pirates.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_Compass/Compass.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Compass/Compass.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_Declination/AP_Declination.cpp"
             ex="false"
@@ -929,9 +1349,18 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Declination/AP_Declination.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_GPS/AP_GPS_Auto.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS_Auto.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_GPS/AP_GPS_BlackVortex.cpp"
             ex="false"
@@ -940,25 +1369,119 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_GPS/AP_GPS_BlackVortex.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_GPS/AP_GPS_MTK19.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS_MTK19.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS_MTK_Common.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/AP_GPS/AP_GPS_NMEA.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_GPS/AP_GPS_NMEA.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS_None.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_GPS/AP_GPS_SIRF.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_GPS/AP_GPS_SIRF.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_GPS/AP_GPS_UBLOX.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_GPS/AP_GPS_UBLOX.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_GPS/GPS.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_GPS/GPS.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/AP_GeigerCounter/AP_GeigerCounter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GeigerCounter/AP_GeigerCounter.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_GeigerCounter/GeigerCounter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GeigerCounter/GeigerCounter.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_GeigerCounter/GeigerTube.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GeigerCounter/GeigerTube.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_GeigerCounter/InterruptDispatcher.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GeigerCounter/InterruptDispatcher.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_GeigerCounter/InterruptDispatcher_PCINT0_vect.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_GeigerCounter/InterruptDispatcher_PCINT0_vect.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_GeigerCounter/IrqNotifiable.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_GeigerCounter/examples/AP_GeigerCounter_test/AP_GeigerCounter_test.pde"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
       </item>
       <item path="libraries/AP_InertialNav/AP_InertialNav.cpp"
             ex="false"
@@ -967,12 +1490,22 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_InertialNav/AP_InertialNav.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_InertialSensor/AP_InertialSensor.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_InertialSensor/AP_InertialSensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/AP_InertialSensor/AP_InertialSensor_MPU6000_I2C.cpp"
             ex="false"
@@ -981,12 +1514,22 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_InertialSensor/AP_InertialSensor_MPU6000_I2C.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_InertialSensor/AP_InertialSensor_Pirates.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_InertialSensor/AP_InertialSensor_Pirates.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/AP_LeadFilter/AP_LeadFilter.cpp"
             ex="false"
@@ -995,12 +1538,22 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_LeadFilter/AP_LeadFilter.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_Limits/AP_Limit_Altitude.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Limits/AP_Limit_Altitude.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/AP_Limits/AP_Limit_GPSLock.cpp"
             ex="false"
@@ -1009,12 +1562,22 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Limits/AP_Limit_GPSLock.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_Limits/AP_Limit_Geofence.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Limits/AP_Limit_Geofence.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/AP_Limits/AP_Limit_Module.cpp"
             ex="false"
@@ -1023,13 +1586,22 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Limits/AP_Limit_Module.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_Limits/AP_Limits.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Limits/AP_Limits.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Math/AP_Math.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Math/AP_Math.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_Math/location.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
@@ -1039,25 +1611,41 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Math/matrix3.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Math/polygon.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Math/polygon.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_Math/quaternion.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Math/quaternion.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/AP_Math/rotations.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/AP_Math/vector2.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Math/vector3.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Math/vector3.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_Menu/AP_Menu.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Menu/AP_Menu.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Motors/AP_Motors.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_Motors.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_Motors/AP_MotorsHeli.cpp"
             ex="false"
@@ -1066,12 +1654,22 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Motors/AP_MotorsHeli.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_Motors/AP_MotorsHexa.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_MotorsHexa.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/AP_Motors/AP_MotorsMatrix.cpp"
             ex="false"
@@ -1080,12 +1678,22 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Motors/AP_MotorsMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_Motors/AP_MotorsOcta.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_MotorsOcta.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/AP_Motors/AP_MotorsOctaQuad.cpp"
             ex="false"
@@ -1094,12 +1702,22 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Motors/AP_MotorsOctaQuad.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_Motors/AP_MotorsQuad.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Motors/AP_MotorsQuad.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/AP_Motors/AP_MotorsTri.cpp"
             ex="false"
@@ -1108,6 +1726,8 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Motors/AP_MotorsTri.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Motors/AP_MotorsY6.cpp"
             ex="false"
             tool="1"
@@ -1115,9 +1735,13 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Motors/AP_MotorsY6.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Mount/AP_Mount.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Mount/AP_Mount.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_OpticalFlow/AP_OpticalFlow.cpp"
             ex="false"
@@ -1126,12 +1750,22 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_OpticalFlow/AP_OpticalFlow.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_OpticalFlow/AP_OpticalFlow_ADNS3080.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_OpticalFlow/AP_OpticalFlow_ADNS3080.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/AP_OpticalFlow/examples/AP_OpticalFlow_test/AP_OpticalFlow_test.pde"
             ex="false"
@@ -1140,12 +1774,22 @@
         <cTool>
         </cTool>
       </item>
+      <item path="libraries/AP_PeriodicProcess/AP_PeriodicProcess.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_PeriodicProcess/AP_PeriodicProcessStub.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_PeriodicProcess/AP_PeriodicProcessStub.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/AP_PeriodicProcess/AP_TimerProcess.cpp"
             ex="false"
@@ -1154,6 +1798,33 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_PeriodicProcess/AP_TimerProcess.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_PeriodicProcess/PeriodicProcess.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_RangeFinder/AP_RangeFinder.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_RangeFinder/AP_RangeFinder_MaxsonarXL.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+        <ccTool>
+        </ccTool>
+      </item>
+      <item path="libraries/AP_RangeFinder/AP_RangeFinder_MaxsonarXL.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/AP_RangeFinder/RangeFinder.cpp"
             ex="false"
             tool="1"
@@ -1161,9 +1832,23 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_RangeFinder/RangeFinder.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/AP_RangeFinder/examples/AP_RangeFinder_test/AP_RangeFinder_test.pde"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool>
+        </cTool>
+      </item>
       <item path="libraries/AP_Relay/AP_Relay.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Relay/AP_Relay.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/AP_Semaphore/AP_Semaphore.cpp"
             ex="false"
@@ -1171,6 +1856,11 @@
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Semaphore/AP_Semaphore.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/AP_Semaphore/examples/AP_Semaphore_test/AP_Semaphore_test.pde"
             ex="false"
@@ -1183,9 +1873,13 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/AP_Var/AP_MetaClass.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/AP_Var/AP_Var.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/AP_Var/AP_Var.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/Arduino_Mega_ISR_Registry/Arduino_Mega_ISR_Registry.cpp"
             ex="false"
@@ -1194,9 +1888,16 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/Arduino_Mega_ISR_Registry/Arduino_Mega_ISR_Registry.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/DataFlash/DataFlash.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/DataFlash/DataFlash.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/DataFlash/DataFlash_CRIUS_AIOP2.cpp"
             ex="false"
@@ -1205,12 +1906,27 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/DataFlash/DataFlash_CRIUS_AIOP2.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/DigitalWriteFast/DigitalWriteFast.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/FastSerial/BetterStream.cpp"
             ex="false"
             tool="1"
             flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/FastSerial/BetterStream.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="libraries/FastSerial/FastSerial.cpp"
             ex="false"
@@ -1219,9 +1935,19 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/FastSerial/FastSerial.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/FastSerial/ftoa_engine.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/FastSerial/ntz.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/FastSerial/vprintf.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/FastSerial/xtoa_fast.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/Filter/AverageFilter.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/Filter/DerivativeFilter.cpp"
             ex="false"
@@ -1230,6 +1956,22 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/Filter/DerivativeFilter.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/Filter/Filter.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/Filter/FilterWithBuffer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/Filter/LowPassFilter.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="libraries/Filter/ModeFilter.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/GCS_MAVLink/GCS_MAVLink.cpp"
             ex="false"
             tool="1"
@@ -1237,13 +1979,1017 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/GCS_MAVLink/GCS_MAVLink.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/ardupilotmega.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_ahrs.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_ap_adc.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_digicam_configure.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_digicam_control.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_fence_fetch_point.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_fence_point.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_fence_status.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_hwstatus.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_meminfo.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_mount_configure.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_mount_control.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_mount_status.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_radio.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_sensor_offsets.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_set_mag_offsets.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/mavlink_msg_simstate.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/ardupilotmega/version.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/checksum.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/common.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_action.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_action_ack.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_attitude.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_auth_key.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_boot.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_change_operator_control.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_change_operator_control_ack.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_command.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_command_ack.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_control_status.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_debug.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_debug_vect.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_global_position.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_global_position_int.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_gps_local_origin_set.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_gps_raw.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_gps_raw_int.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_gps_set_global_origin.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_gps_status.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_heartbeat.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_hil_controls.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_hil_state.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_local_position.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_local_position_setpoint.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_local_position_setpoint_set.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_manual_control.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_named_value_float.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_named_value_int.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_nav_controller_output.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_object_detection_event.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_optical_flow.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_param_request_list.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_param_request_read.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_param_set.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_param_value.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_ping.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_position_target.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_raw_imu.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_raw_pressure.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_rc_channels_override.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_rc_channels_raw.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_rc_channels_scaled.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_request_data_stream.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_roll_pitch_yaw_speed_thrust_setpoint.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_roll_pitch_yaw_thrust_setpoint.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_safety_allowed_area.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_safety_set_allowed_area.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_scaled_imu.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_scaled_pressure.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_servo_output_raw.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_set_altitude.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_set_mode.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_set_nav_mode.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_set_roll_pitch_yaw_speed_thrust.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_set_roll_pitch_yaw_thrust.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_state_correction.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_statustext.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_sys_status.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_system_time.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_system_time_utc.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_vfr_hud.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_waypoint.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_waypoint_ack.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_waypoint_clear_all.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_waypoint_count.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_waypoint_current.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_waypoint_reached.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_waypoint_request.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_waypoint_request_list.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/mavlink_msg_waypoint_set_current.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/testsuite.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/common/version.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/mavlink_helpers.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/mavlink_types.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v0.9/protocol.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/ardupilotmega.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_ahrs.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_ap_adc.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_digicam_configure.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_digicam_control.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_fence_fetch_point.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_fence_point.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_fence_status.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_hwstatus.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_limits_status.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_meminfo.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_mount_configure.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_mount_control.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_mount_status.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_radio.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_sensor_offsets.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_set_mag_offsets.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_simstate.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/mavlink_msg_wind.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/ardupilotmega/version.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/checksum.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/common.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_attitude.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_attitude_quaternion.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_auth_key.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_change_operator_control.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_change_operator_control_ack.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_command_ack.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_command_long.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_data_stream.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_debug.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_debug_vect.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_global_position_int.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_global_position_setpoint_int.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_global_vision_position_estimate.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_gps_global_origin.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_gps_raw_int.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_gps_status.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_heartbeat.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_hil_controls.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_hil_rc_inputs_raw.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_hil_state.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_local_position_ned.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_local_position_ned_system_global_offset.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_local_position_setpoint.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_manual_control.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_memory_vect.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_mission_ack.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_mission_clear_all.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_mission_count.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_mission_current.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_mission_item.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_mission_item_reached.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_mission_request.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_mission_request_list.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_mission_request_partial_list.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_mission_set_current.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_mission_write_partial_list.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_named_value_float.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_named_value_int.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_nav_controller_output.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_optical_flow.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_param_request_list.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_param_request_read.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_param_set.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_param_value.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_ping.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_raw_imu.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_raw_pressure.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_rc_channels_override.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_rc_channels_raw.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_rc_channels_scaled.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_request_data_stream.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_roll_pitch_yaw_speed_thrust_setpoint.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_roll_pitch_yaw_thrust_setpoint.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_safety_allowed_area.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_safety_set_allowed_area.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_scaled_imu.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_scaled_pressure.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_servo_output_raw.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_set_global_position_setpoint_int.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_set_gps_global_origin.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_set_local_position_setpoint.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_set_mode.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_set_quad_motors_setpoint.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_set_quad_swarm_led_roll_pitch_yaw_thrust.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_set_quad_swarm_roll_pitch_yaw_thrust.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_set_roll_pitch_yaw_speed_thrust.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_set_roll_pitch_yaw_thrust.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_state_correction.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_statustext.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_sys_status.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_system_time.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_vfr_hud.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_vicon_position_estimate.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_vision_position_estimate.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/mavlink_msg_vision_speed_estimate.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/testsuite.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/common/version.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/mavlink_helpers.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/mavlink_types.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="libraries/GCS_MAVLink/include/mavlink/v1.0/protocol.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/I2C/I2C.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/I2C/I2C.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/PID/PID.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/PID/PID.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/RC_Channel/RC_Channel.cpp"
             ex="false"
@@ -1252,6 +2998,8 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/RC_Channel/RC_Channel.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/RC_Channel/RC_Channel_aux.cpp"
             ex="false"
             tool="1"
@@ -1259,13 +3007,22 @@
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/RC_Channel/RC_Channel_aux.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="libraries/SPI/SPI.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
       </item>
+      <item path="libraries/SPI/SPI.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="libraries/SPI3/SPI3.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/SPI3/SPI3.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="libraries/SPI3/examples/SPI3_test/SPI3_test.pde"
             ex="false"
@@ -1277,6 +3034,8 @@
       <item path="libraries/memcheck/memcheck.cpp" ex="false" tool="1" flavor2="4">
         <ccTool>
         </ccTool>
+      </item>
+      <item path="libraries/memcheck/memcheck.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

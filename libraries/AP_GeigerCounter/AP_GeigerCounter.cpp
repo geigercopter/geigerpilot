@@ -19,27 +19,41 @@ extern "C" {
 	#include "WConstants.h"
 #endif
 */
-AP_GeigerCounter::AP_GeigerCounter(GeigerTube * tubes, int size)
+AP_GeigerCounter::AP_GeigerCounter(GeigerTube * tubes, uint8_t nbtubes)
+    : _tubes(tubes), _nbtubes(nbtubes)
 {
+
     //Serial.println("Instanciate AP_GeigerCounter");
 }
 
-uint16_t AP_GeigerCounter::read(int channel)
+uint16_t AP_GeigerCounter::read()
 {
-    return _tubes->read();
+    uint16_t total = 0;
+
+    for(int i = 0; i < _nbtubes; i++)
+    {
+        total += _tubes[i]->read();
+    }
+    return total;
 }
 
-double AP_GeigerCounter::measure(int channel)
+double AP_GeigerCounter::measure()
 {
-    return 0.0;
+    double measure = 0;
+
+    for(int i = 0; i < _nbtubes; i++)
+    {
+        measure += _tubes[i]->measure();
+    }
+    return measure / _nbtubes;
 }
 
 void AP_GeigerCounter::beat()
 {
-/*
-    shift_reg[reg_index] = cpb;     // put the count in the correct bin
-    reg_index = (reg_index+1) % NX; // increment register index
-*/
+    for(int i = 0; i < _nbtubes; i++)
+    {
+        _tubes[i]->beat();
+    }
 }
 
 

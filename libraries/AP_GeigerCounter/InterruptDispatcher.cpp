@@ -7,7 +7,7 @@
 
 #include "InterruptDispatcher.h"
 
-int8_t InterruptDispatcher::Register(IrqNotifiable * notifiable)
+void InterruptDispatcher::Register(IrqNotifiable * notifiable)
 {
     int pin = notifiable->_pin;
     IrqNotifiable * tmpNotifiable;
@@ -21,77 +21,65 @@ int8_t InterruptDispatcher::Register(IrqNotifiable * notifiable)
     // Enable interrupt for digital pin
     *_pcmsk |= (1 << pin);
 
-    if(_notifiables == 0)
+    if((_notifiables == 0)||(notifiable == 0))
     {
        _notifiables = notifiable;
     }
     else
     {
         tmpNotifiable = _notifiables;
-        
         // find the last or 
         do
         {
-            //no way to register twice
+            //no way to register the same object twice !
             if((tmpNotifiable == notifiable))
             {
+                return;
+            }
+            
+            // if last element, add new notifiable on list
+            if(tmpNotifiable->next == 0)
+            {
+                tmpNotifiable->next = notifiable;
                 break;
             }
+            tmpNotifiable = tmpNotifiable->next;
         }
-        while(tmpNotifiable->next)
-        if(tmpNotifiable->next)
-        {
+        while(true);
+
+        // force notifiable as last
+        notifiable->next = 0;
+    }
+}
+
+void InterruptDispatcher::UnRegister(IrqNotifiable * notifiable)
+{   
+    IrqNotifiable * current = _notifiables;
+    IrqNotifiable * last = 0;
+    
+    if((_notifiables == 0)||(notifiable == 0))
+    {
+        return;
     }
     
-    lastNotifiable-> = 
-    /*
-    // prepare geiger counter pins for interruptions handling
-        
-    // activate internal pullup
-    PORTB &= ~(1<<pin);
-
-    // set directions to INPUT
-    DDRB &= ~(1<<pin);
-
-    // Enable interrupt for digital pins
-    PCMSK0 |= (1 << pin);
-    
-    // PCINT0 Interrupt enabled for PORTB
-    PCICR |= (1 << PCIE0); 
-    
-    /*
-    ISCX1     ISCX0    used for interrupt x
-     0          0      low
-     0          1      change
-     1          0      falling slope
-     1          1      rising slope
-    */
-    /*
-    // Define interrupt on rising edge 
-    EICRA |= (1 << ISC00) | (1 << ISC01);
-    // I dont really catch the difference between EICRA and MCUCR, but EICRA worked  
-    //MCUCR = (1<<ISC01) | (1<<ISC00);
-        
-    EIFR |= (1 << INTF0); // Clear Interrupt flag
-    EIMSK |= (1 << INT0);// Re-enable interrupts
-    
-    _notifiables[pin] = notifiable;
-    return _pins |= pin;
-     */
+    while(current)
+    {
+        // remove notifiable from list
+        if(current == notifiable)
+        {
+            last->next = current->next;
+            break;
+        }
+        last = current;
+        current = current->next;
+    }
 }
 
-int8_t InterruptDispatcher::UnRegister(IrqNotifiable * notifiable)
+void InterruptDispatcher::dispatch()
 {
-    _notifiables = 0;
-    return _pins;// &= ~pin;
-}
-
-void InterruptDispatcher::dispatch(unsigned char mask)
-{
-    IrqNotifiable * notifiable = this->_notifiables;
-    int8_t pin = 0;
-
-    if(!(mask & _pins)) return;
+    IrqNotifiable * notifiable = this->_notifiables;   
+    
+    uint8_t mask = *_port;
     
     while(notifiable)
     {
@@ -99,8 +87,6 @@ void InterruptDispatcher::dispatch(unsigned char mask)
         {
             notifiable->notify();
         }
-        pin++;
-        
         notifiable = notifiable->next;
     }
 }

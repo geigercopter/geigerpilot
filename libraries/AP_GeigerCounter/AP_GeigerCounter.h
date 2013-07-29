@@ -10,14 +10,15 @@
 
 #include "GeigerCounter.h"
 
-//#include <AP_Common.h>
-
-class AP_GeigerCounter: public GeigerCounter
+class AP_GeigerCounter : public GeigerCounter
 {
-    public:
-        AP_GeigerCounter(GeigerTube * tubes, int size);
-        uint16_t read(int channel = -1);
-        double measure(int channel = -1);
-        void beat();
+public:
+    AP_GeigerCounter(GeigerTube * tubes, uint8_t size);
+    uint16_t read(int channel = -1);
+    double measure(int channel = -1);
+    void beat();
+private:
+    GeigerTube * _tubes[];
+    uint8_t _nbtubes;
 };
 #endif

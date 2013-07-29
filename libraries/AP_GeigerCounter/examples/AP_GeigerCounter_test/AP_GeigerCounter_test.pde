@@ -11,7 +11,7 @@
 #include <AP_GeigerCounter/InterruptDispatcher.h>
 */
 #include "AP_GeigerCounter.h"
-#include "../../InterruptDispatcher.h"
+#include "InterruptDispatcher.h"
 
 extern "C" void atexit( void ) { } 
 
@@ -38,6 +38,9 @@ void setup()
 
 void loop()
 {
+    delay(1000);
+    geigerCounter.beat();
+            
     //Serial.print("count A :");
     //Serial.print(geigerCounter.read());
 
