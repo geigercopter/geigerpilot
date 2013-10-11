@@ -25,6 +25,8 @@
 // but I decided to left it in this place as it resolves a linking error
 //extern "C" void atexit( void ) { } 
 
+#include <FastSerial.h> // uncomment for debug
+
 #include "IrqNotifiable.h"
 
 class InterruptDispatcher
@@ -32,20 +34,22 @@ class InterruptDispatcher
 public:
     void Register(IrqNotifiable * notifiable);
     void UnRegister(IrqNotifiable * notifiable); 
-
+    void List();
+    volatile void dispatch();
+    volatile void dispatch(uint8_t states);
+    volatile int count;
+    volatile int dbg1; 
+    volatile int dbg2;
+    volatile int dbg3;
 protected:
-    void dispatch();
-    //uint8_t _pins;
-    
     IrqNotifiable * _notifiables; // list of notifiables
 
-    //uint8_t _mask;
-
-    static volatile uint8_t * _test;
-    
     volatile uint8_t * _port;
     volatile uint8_t * _ddr;
     volatile uint8_t * _pcmsk;
+    // used to keep last PORT values
+    volatile uint8_t _states;
+    InterruptDispatcher();
 };
 
 #include "InterruptDispatcher_PCINT0_vect.h"

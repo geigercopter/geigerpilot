@@ -13,12 +13,12 @@
 class AP_GeigerCounter : public GeigerCounter
 {
 public:
-    AP_GeigerCounter(GeigerTube * tubes, uint8_t size);
-    uint16_t read(int channel = -1);
-    double measure(int channel = -1);
+    AP_GeigerCounter(GeigerTube tubes[], uint8_t size);
+    uint16_t read();
+    double measure();
     void beat();
 private:
-    GeigerTube * _tubes[];
+    GeigerTube * _tubes;
     uint8_t _nbtubes;
 };
 #endif

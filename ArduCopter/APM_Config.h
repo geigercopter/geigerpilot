@@ -3,7 +3,7 @@
 #define __ARDUCOPTER_APMCONFIG_H__ 
 
 // Select your sensor board
-#define PIRATES_SENSOR_BOARD PIRATES_CRIUS_AIO_PRO_V1
+#define PIRATES_SENSOR_BOARD PIRATES_CRIUS_AIO_PRO_V2
 /*
 	PIRATES_ALLINONE
 	PIRATES_FFIMU
@@ -59,6 +59,10 @@
 #define OPTFLOW_CS_PIN A9
 #define OPTFLOW_ORIENTATION AP_OPTICALFLOW_ADNS3080_PINS_BACK_RIGHT
 
+// GeigerCopter's library for radiation measurement drivers support
+//#define GEIGERCOPTER ENABLED
+#define GEIGERCOPTER DISABLED
+
 // This OSD works on the Serial1 port
 //#define OSD_PROTOCOL OSD_PROTOCOL_NONE
 /*
@@ -83,7 +87,10 @@
 	GPS_PROTOCOL_BLACKVORTEX
 	GPS_PROTOCOL_AUTO	auto select GPS, may not work
 */
-	
+#define GPS_PROTOCOL GPS_PROTOCOL_MTK19
+
+
+// 4800, 9600, 14400, 19200, 28800, 38400, 57600, 115200
 #define SERIAL0_BAUD			 115200	// Console port 
 #define SERIAL2_BAUD			 38400	// GPS port
 #define SERIAL3_BAUD			 57600	// Telemetry (MAVLINK) port
@@ -146,6 +153,7 @@
 #else
 	#define LOGGING_ENABLED		DISABLED
 #endif
+#define LOGGING_ENABLED		DISABLED
 
 // ************** EXPERIMENTAL FEATURES *****************
 

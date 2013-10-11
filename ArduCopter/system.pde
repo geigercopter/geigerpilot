@@ -259,11 +259,16 @@ static void init_ardupilot()
 #endif
 #endif // CLI_ENABLED
 
-	// initialise sonar
-	#if CONFIG_SONAR == ENABLED
-		init_sonar();
-	#endif
+// initialise sonar
+#if CONFIG_SONAR == ENABLED
+    init_sonar();
+#endif
 
+
+#if GEIGERCOPTER == ENABLED
+    init_geigercounter();
+#endif
+    
 #if FRAME_CONIG == HELI_FRAME
 // initialise controller filters
 init_rate_controllers();

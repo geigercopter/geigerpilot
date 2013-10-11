@@ -17,8 +17,11 @@ class IrqNotifiable
 {
 public:
     uint8_t _pin;
+    enum Mode { RAISE = 1, FALL = 2, BOTH = 3 };
+    IrqNotifiable::Mode _mode;
     IrqNotifiable * next; 
-    virtual void notify() = 0;
+    virtual void notify();
+
 };
 
 #endif	/* IRQNOTIFIABLE_H */

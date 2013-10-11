@@ -1,6 +1,6 @@
 /// -*- tab-width: 4; Mode: C++; c-basic-offset: 4; indent-tabs-mode: nil -*-
 
-#define THISFIRMWARE "MegaPirateNG V2.9 r300"
+#define THISFIRMWARE "GeigerPilot V1.0"
 /*
  *  ArduCopter Version 2.9.1
  *
@@ -141,6 +141,13 @@
 #include <AP_Limit_Altitude.h> // a limits library module
 
 
+
+// added libraries for GeigerCopter's specific code 
+#if GEIGERCOPTER == ENABLED
+#include "InterruptDispatcher.h"     // PCINT dispatcher library
+#include <AP_GeigerCounter.h>     // Geiger counter library
+#endif
+
 ////////////////////////////////////////////////////////////////////////////////
 // Serial ports
 ////////////////////////////////////////////////////////////////////////////////
@@ -153,6 +160,10 @@ FastSerialPort0(Serial);        // FTDI/console
 #if OSD_PROTOCOL != OSD_PROTOCOL_NONE
 	FastSerialPort1(Serial1);        // OSD port
 #endif
+    
+// Swapped telemetry and GPS ports. GPS port is now TX3/RX3 which is more 
+// convenient on crius AIOP as they are near +5V/GND connectors, 
+// providing a cleaner way to regroup cables
 FastSerialPort2(Serial2);       // GPS port
 FastSerialPort3(Serial3);       // Telemetry port
 
@@ -211,11 +222,19 @@ static void update_events(void);
 ////////////////////////////////////////////////////////////////////////////////
 // Dataflash
 ////////////////////////////////////////////////////////////////////////////////
+/* old megapirateNG declaration, rewriting for optflow + DataFlash with SPI sharing
+#if PIRATES_SENSOR_BOARD == PIRATES_CRIUS_AIO_PRO_V2
+    DataFlash_CRIUS_AIOP2 DataFlash;
+#endif
+*/
+
+AP_Semaphore spi_semaphore;
+AP_Semaphore spi3_semaphore;
 #if PIRATES_SENSOR_BOARD == PIRATES_CRIUS_AIO_PRO_V2
     DataFlash_CRIUS_AIOP2 DataFlash;
 #endif
 
-
+    
 ////////////////////////////////////////////////////////////////////////////////
 // the rate we run the main loop at
 ////////////////////////////////////////////////////////////////////////////////
@@ -378,6 +397,15 @@ ModeFilterInt16_Size3 sonar_mode_filter(1);
     #else
         #error Unrecognised SONAR_TYPE setting.
     #endif
+#endif
+
+////////////////////////////////////////////////////////////////////////////////
+// GeigerCopter geiger counter drivers configuration 
+////////////////////////////////////////////////////////////////////////////////
+#if GEIGERCOPTER == ENABLED
+    #define GEIGER_TUBES_COUNT 2
+    GeigerTube tubes[GEIGER_TUBES_COUNT] = {(PCINT5, RISING), (PCINT6, RISING)};
+    InterruptDispatcher_PCINT0_vect & dispatcher = InterruptDispatcher_PCINT0_vect::GetInstance();
 #endif
 
 // agmatthews USERHOOKS

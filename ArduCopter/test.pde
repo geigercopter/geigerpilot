@@ -20,7 +20,7 @@ static int8_t	test_ins(uint8_t argc, 			const Menu::arg *argv);
 static int8_t	test_battery(uint8_t argc, 		const Menu::arg *argv);
 //static int8_t	test_toy(uint8_t argc, 		const Menu::arg *argv);
 static int8_t   test_wp_nav(uint8_t argc,               const Menu::arg *argv);
-//static int8_t	test_reverse(uint8_t argc, 		const Menu::arg *argv);
+//static int8_t	test_reverse(uint8_t argc, 		const Menu::arg *argv);op
 static int8_t	test_tuning(uint8_t argc, 		const Menu::arg *argv);
 static int8_t	test_relay(uint8_t argc,	 	const Menu::arg *argv);
 static int8_t	test_wp(uint8_t argc, 			const Menu::arg *argv);
@@ -876,6 +876,7 @@ test_mag(uint8_t argc, const Menu::arg *argv)
 static int8_t
 test_sonar(uint8_t argc, const Menu::arg *argv)
 {
+#if CONFIG_SONAR == ENABLED
 	if(g.sonar_enabled == false){
 		cliSerial->printf_P(PSTR("Sonar disabled\n"));
 		return (0);
@@ -896,6 +897,7 @@ test_sonar(uint8_t argc, const Menu::arg *argv)
 		}
 	}
 	return (0);
+#endif
 }
 /*
 static int8_t
@@ -931,6 +933,8 @@ static int8_t
 test_optflow(uint8_t argc, const Menu::arg *argv)
 {
 #if OPTFLOW == ENABLED
+    cliSerial->printf_P(PSTR("TESTING OPTFLOW\n"));
+    /*
     cliSerial->printf_P(PSTR("g.optflow_enabled: %d\n"), g.optflow_enabled);
     
     if(g.optflow_enabled) {
@@ -957,7 +961,7 @@ test_optflow(uint8_t argc, const Menu::arg *argv)
         print_enabled(false);
     }
     return (0);
-
+*/
 #else
         print_test_disabled();
         return (0);

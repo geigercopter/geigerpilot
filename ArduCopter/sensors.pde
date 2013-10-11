@@ -67,6 +67,18 @@ static int16_t read_sonar(void)
 
 #endif // HIL_MODE != HIL_MODE_ATTITUDE
 
+#if GEIGERCOPTER == ENABLED
+static void init_geigercounter()
+ {
+    cliSerial->print_P(PSTR("\nRegistering geiger tubes for IRQ dispatching\n"));
+    for(int i=0; i< GEIGER_TUBES_COUNT; i++)
+    {
+        dispatcher.Register(&tubes[i]);
+        cliSerial->printf_P(PSTR("Registered tube %d\n"), i);
+    }
+ }
+#endif
+
 static void init_compass()
 {
 	compass.set_orientation(MAG_ORIENTATION);						// set compass's orientation on aircraft
@@ -90,8 +102,10 @@ static void init_optflow()
 {
 #if OPTFLOW == ENABLED
 // crasher .. backup of megapirateng + optflow patch
-//    if( optflow.init(false, &timer_scheduler, &spi_semaphore, &spi3_semaphore) == false ) {
-    if( optflow.init(true, &timer_scheduler) == false ) {
+// Ardupilot version :
+    if( optflow.init(false, &timer_scheduler, &spi_semaphore, &spi3_semaphore) == false ) {
+// MegapirateNG version (no optflow + sd logging with SPI CS sharing) :
+//    if( optflow.init(true, &timer_scheduler) == false ) {
 	    g.optflow_enabled = false;
         cliSerial->print_P(PSTR("\nFailed to Init OptFlow "));
         Log_Write_Error(ERROR_SUBSYSTEM_OPTFLOW,ERROR_CODE_FAILED_TO_INITIALISE);

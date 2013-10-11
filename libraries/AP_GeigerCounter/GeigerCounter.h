@@ -14,8 +14,8 @@
 class GeigerCounter
 {
 public:
-    virtual uint16_t read(int channel) = 0;
-    virtual double measure(int channel) = 0;
+    virtual uint16_t read() = 0;
+    virtual double measure() = 0;
     virtual void beat() = 0;
     /*
 

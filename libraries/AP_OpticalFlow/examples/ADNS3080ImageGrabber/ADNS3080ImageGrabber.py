@@ -7,7 +7,7 @@ import time
 from Tkinter import *
 from threading import Timer
 
-comPort = 'COM8'  #default com port
+comPort = '/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A600IGS9-if00-port0'  #default com port
 comPortBaud = 115200
 
 class App:
